@@ -196,12 +196,14 @@ flowchart LR
   - [VLA（视觉-语言-动作模型）](depth-vla.md)
   - [WAM（世界–动作模型）](depth-wam.md)
   - [BFM（人形行为基础模型）](depth-bfm.md)
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md)
   - [人形足球（全向行走 → 感知踢球 → 多机战术）](depth-humanoid-soccer.md)
   - [人形群控展演（群舞同步 → 编队走位 → 群体特技）](depth-humanoid-swarm-performance.md)
   - [人形拳击（动作跟踪 → 潜空间技能 → 对抗自博弈）](depth-humanoid-boxing.md)
   - [Sim2Real（域差画像 → 执行器对齐 → 鲁棒训练 → 真机部署）](depth-sim2real.md)
   - [Real2Sim（真实世界 → 可仿真资产/场景/孪生）](depth-real2sim.md)
   - [人形整机硬件设计（指标预算 → 机械 → 电气 → 通信 → 整机验收）](depth-humanoid-hardware-design.md) — 质心高度、摆动惯量与力矩延迟这些模型参数由那条路线定
+  - [ICL（具身上下文学习）](depth-icl.md)
 - 关联知识页：
   - [Optimal Control](../wiki/concepts/optimal-control.md)
   - [LIP / ZMP](../wiki/concepts/lip-zmp.md)

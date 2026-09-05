@@ -268,11 +268,13 @@ flowchart LR
   - [VLA（视觉-语言-动作模型）](depth-vla.md) — Stage 6 方向 C 的展开版
   - [WAM（世界–动作模型）](depth-wam.md)
   - [BFM（人形行为基础模型）](depth-bfm.md) — Stage 6 方向 D 的展开版
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md) — 成功判据（目标等价 vs 轨迹相似）的评测侧
   - [人形足球（全向行走 → 感知踢球 → 多机战术）](depth-humanoid-soccer.md)
   - [人形群控展演（群舞同步 → 编队走位 → 群体特技）](depth-humanoid-swarm-performance.md)
   - [人形拳击（动作跟踪 → 潜空间技能 → 对抗自博弈）](depth-humanoid-boxing.md)
   - [Sim2Real（域差画像 → 执行器对齐 → 鲁棒训练 → 真机部署）](depth-sim2real.md)
   - [Real2Sim（真实世界 → 可仿真资产/场景/孪生）](depth-real2sim.md)
+  - [ICL（具身上下文学习）](depth-icl.md) — 姊妹路线：训练期从示范学 vs 部署期从上下文学
 - 人形控制全景图：[Humanoid Control Roadmap](../wiki/roadmaps/humanoid-control-roadmap.md)
 - 技术栈地图：[tech-map/dependency-graph.md](../tech-map/dependency-graph.md)
 

@@ -3,11 +3,12 @@ type: task
 tags: [loco-manipulation, humanoid, whole-body, manipulation, locomotion]
 status: complete
 summary: "Loco-Manipulation 关注机器人边移动边操作的全身协调问题。2025-2026 年的趋势正从分层控制扩展到生成模型、VLA 与触觉增强的统一全身感知控制。"
-updated: 2026-08-31
+updated: 2026-09-05
 sources:
   - ../../sources/papers/roboreact_arxiv_2608_03387.md
   - ../../sources/papers/smpc2rl_arxiv_2608_12063.md
   - ../../sources/papers/lucid_arxiv_2608_07746.md
+  - ../../sources/papers/fwbc_vla_arxiv_2609_03889.md
   - ../../sources/papers/agile_arxiv_2603_20147.md
   - ../../sources/papers/pot_vla_arxiv_2607_18016.md
   - ../../sources/papers/faro_arxiv_2607_18362.md
@@ -126,7 +127,7 @@ flowchart TD
 ### 3. 基础模型路线 (Foundation Models / VLA)
 - **核心**：将视觉、语言和全身动作（Whole-body Actions）映射到统一的 Token 空间。
 - **趋势**：强调从互联网规模的人类视频中学习，而非依赖昂贵的机器人演示。
-- **代表作**：Ψ₀ (2026), WholeBodyVLA (2025), SENTINEL (2025), [DAJI](../entities/paper-daji-anticipatory-joint-intent.md)（2026，语言条件预期关节意图接口）；[OpenHLM](../entities/paper-loco-manip-161-154-openhlm.md)（2026，关节级全身遥操作 + π₀.₅ 系 VLA + HuMI 共训的全身原生配方，**已开源**）；[HAF](../entities/paper-haf-humanoid-vla-adaptation.md)（2026，三阶段 action flow + DCT 潜空间 SAC 把通才 VLA 适配到天工家庭 loco-manipulation，**未开源**）。
+- **代表作**：Ψ₀ (2026), WholeBodyVLA (2025), SENTINEL (2025), [DAJI](../entities/paper-daji-anticipatory-joint-intent.md)（2026，语言条件预期关节意图接口）；[OpenHLM](../entities/paper-loco-manip-161-154-openhlm.md)（2026，关节级全身遥操作 + π₀.₅ 系 VLA + HuMI 共训的全身原生配方，**已开源**）；[HAF](../entities/paper-haf-humanoid-vla-adaptation.md)（2026，三阶段 action flow + DCT 潜空间 SAC 把通才 VLA 适配到天工家庭 loco-manipulation，**未开源**）；[FWBC-VLA](../entities/paper-fwbc-vla.md)（2026，无 F/T 的残差力同时条件化 π₀.₅ 与轮足底盘补偿；擦白板终段 64%、开门 52%，**未开源**）。
 
 ### 4. 视觉分层 Sim2Real（Keypoint Tracker + Depth Visuomotor）
 - **核心**：**任务无关低层** 从人类动作蒸馏 **关键点跟踪器**（motion teacher → keypoint student）；**任务专用高层** 从特权物体状态教师蒸馏 **egocentric 深度 visuomotor 生成器**；接口为 root + 头/双手/双足共 5 点，共享低层、逐任务训高层。
@@ -140,7 +141,7 @@ flowchart TD
 
 ### 6. 触觉增强的行为克隆路线 (Touch-Aware BC)
 - **核心**：把接触信号纳入全身操作策略训练，而不是只依赖视觉与本体感受。
-- **代表作**：[HTD](../methods/humanoid-transformer-touch-dreaming.md) (2026) 使用 [解耦 WBC / LBC](../entities/htd-decoupled-wbc.md) 保持全身稳定，并在模仿学习中预测未来手部力和触觉 latent，提升插入、折叠、工具使用和端杯移动等接触丰富任务的成功率。WBC 训练与 G1 部署已开源；HTD 策略代码截至 2026-08-26 仍待发布。
+- **代表作**：[Humanoid Touch Dream](../entities/paper-humanoid-touch-dream.md) / [HTD 方法](../methods/humanoid-transformer-touch-dreaming.md) (IROS 2026) 使用 [解耦 WBC / LBC](../entities/htd-decoupled-wbc.md) 保持全身稳定，并在模仿学习中预测未来手部力和触觉 latent，提升插入、折叠、工具使用和端杯移动等接触丰富任务的成功率。WBC 训练与 G1 部署已开源；HTD 策略代码截至 2026-09-03 仍待发布。
 
 ### 7. 反向层级架构 (MPC-over-RL)
 - **核心**：底层使用通用的 RL WBC 策略（如 Relic）提供稳定的运动基座；高层使用基于采样的 MPC（如 CEM）在底层策略的命令空间内进行在线规划。
@@ -275,8 +276,10 @@ flowchart TD
 - [Teleoperation](./teleoperation.md)
 - [LAC](../entities/paper-lac.md) — G1 上身线+角柔顺；拧腕/托物可读 \(K_\theta\)（部分开源）
 - [Immersive Social VR+LLM（论文实体）](../entities/paper-immersive-social-vr-llm-humanoids.md) — AVP + LLM 语音高层 locomotion + 双向音频社交（H1；未开源）
+- [PAMoR（论文实体）](../entities/paper-pamor.md) — UCL：运动学闭式 V-A + 可组合潜扩散，G1 实时情感全身运动；感知 Top-1 0.384（arXiv:2608.28213；未开源）
 - [Contact-Rich Manipulation](../concepts/contact-rich-manipulation.md)
-- [Humanoid Transformer with Touch Dreaming](../methods/humanoid-transformer-touch-dreaming.md)
+- [Humanoid Touch Dream（论文实体）](../entities/paper-humanoid-touch-dream.md)
+- [Humanoid Transformer with Touch Dreaming（方法）](../methods/humanoid-transformer-touch-dreaming.md)
 - [HTD 解耦 WBC](../entities/htd-decoupled-wbc.md) — HTD 开源下肢+腰控制器（Isaac Lab，G1 零样本）
 - [ExoActor](../methods/exoactor.md) — 视频生成驱动的零样本人形交互行为生成
 - [VIRAL（论文实体）](../entities/paper-viral-humanoid-visual-sim2real.md) — 人形 loco-manipulation 视觉 Sim2Real 全栈（arXiv:2511.15200）
@@ -374,6 +377,7 @@ flowchart TD
 - **ingest 档案：** [sources/blogs/flexion_reflect_v1_0.md](../../sources/blogs/flexion_reflect_v1_0.md) — Flexion Reflect v1.0：长程 NL mission 跨楼层 loco-manip 产业演示（2026-06）
 - **ingest 档案：** [sources/blogs/limx_cosa_05_release_2026-07-15.md](../../sources/blogs/limx_cosa_05_release_2026-07-15.md) — LimX COSA 0.5：S2/S1/S0 调度 V³-0 VLA + WBT，Oli 一镜到底家务 Demo（2026-07）
 - **ingest 档案：** [sources/papers/lucid_arxiv_2608_07746.md](../../sources/papers/lucid_arxiv_2608_07746.md) — LUCID：技能级世界模型想象控制长时程人形 loco-manipulation（arXiv:2608.07746）
+- **ingest 档案：** [sources/papers/fwbc_vla_arxiv_2609_03889.md](../../sources/papers/fwbc_vla_arxiv_2609_03889.md) — FWBC-VLA：无传感器接触残差 + 轮足全身补偿（arXiv:2609.03889）
 
 ## 一句话记忆
 

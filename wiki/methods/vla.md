@@ -2,14 +2,23 @@
 type: method
 tags: [vla, vision-language-action, foundation-policy, manipulation, rt2, pi0, pi07, vam]
 status: complete
-updated: 2026-08-31
+updated: 2026-09-05
 summary: "VLA（Vision-Language-Action）把语言、视觉和动作统一进一个多模态策略模型，是 manipulation、loco-manipulation 与端到端驾驶等任务上最具代表性的 foundation policy 实例化路径，使机器人能够直接从自然语言与图像条件生成控制动作。"
 related:
   - ../entities/embodied-interview-qa.md
   - ../comparisons/robot-learning-five-paradigms-taxonomy.md
   - ../comparisons/vlm-vln-vla-vlx-world-model-taxonomy.md
   - ../queries/embodied-fm-taxonomy-loop.md
+  - ../overview/vla-wm-reading-roadmap-14-papers-technology-map.md
+  - ../entities/paper-unified-robot-learning-survey.md
+  - ../overview/embodied-infra-2026-panorama.md
+  - ../queries/slam-second-spring-embodied.md
   - ../overview/vla-open-source-repro-landscape-2025.md
+  - ../entities/paper-rt-1.md
+  - ../entities/paper-rt-2.md
+  - ../entities/paper-openvla.md
+  - ../entities/paper-pi0.md
+  - ../entities/paper-dexholdem.md
   - ../entities/paper-tempo.md
   - ../entities/paper-autointervene.md
   - ../overview/vln-open-source-repro-paradigms.md
@@ -27,6 +36,11 @@ related:
   - ./pi07-policy.md
   - ../entities/paper-dpc.md
   - ../concepts/world-action-models.md
+  - ../entities/paper-gift-intermediate-feature-training.md
+  - ../entities/paper-minerva-libero.md
+  - ../entities/paper-fwbc-vla.md
+  - ../entities/paper-xr2-bimanual-household.md
+  - ../overview/open-source-reproducibility-9-papers-technology-map.md
   - ../overview/robot-world-models-training-loop-taxonomy.md
   - ../entities/roboscience-vloa.md
   - ../entities/paper-daji-anticipatory-joint-intent.md
@@ -38,6 +52,9 @@ related:
   - ../entities/paper-egosteer.md
   - ../entities/paper-ros2smolvla.md
   - ../entities/paper-indi.md
+  - ../entities/paper-imitator-game.md
+  - ../entities/paper-host-one-shot-human-video.md
+  - ../entities/paper-zero-wam.md
   - ../entities/paper-glancewam.md
   - ../entities/paper-m3-modality-masking.md
   - ../overview/glancewam-vla-crew-10-papers-technology-map.md
@@ -48,9 +65,12 @@ related:
   - ../entities/paper-ld4wam.md
   - ../entities/paper-lawa.md
   - ../entities/paper-arli.md
+  - ../entities/paper-smoothrl.md
+  - ../queries/embodied-six-routes-holes.md
   - ../entities/paper-reflexvla.md
   - ../entities/paper-flashvla.md
   - ../entities/paper-trex-tactile-reactive-dexterous-manipulation.md
+  - ../entities/paper-embodied-manipulation-foundation-models-survey.md
   - ../tasks/manipulation.md
   - ../tasks/loco-manipulation.md
   - ../entities/lerobot.md
@@ -69,6 +89,7 @@ related:
   - ../entities/paper-rove-humanoid-vla-intervention.md
   - ../entities/paper-greenvla-staged-vla-humanoid.md
   - ../entities/paper-green-for-go-vla-nav-grounding.md
+  - ../entities/paper-crosstracer.md
   - ../entities/paper-arcadia.md
   - ../entities/paper-joyai-ra-05.md
   - ../entities/paper-vesta-generalist-embodied-reasoning.md
@@ -90,6 +111,7 @@ related:
   - ../entities/paper-galaxea-g05.md
   - ../entities/paper-internvla-a15-unified-vla.md
   - ../entities/paper-harness-vla.md
+  - ../entities/paper-embodiedskills.md
   - ../entities/paper-robo-harness.md
   - ../entities/paper-fm-vla.md
   - ../entities/paper-chronos.md
@@ -134,6 +156,8 @@ sources:
   - ../../sources/papers/ucag_p_arxiv_2608_26058.md
   - ../../sources/papers/being_h07.md
   - ../../sources/papers/ros2smolvla_arxiv_2608_23320.md
+  - ../../sources/papers/fwbc_vla_arxiv_2609_03889.md
+  - ../../sources/papers/minerva_libero_arxiv_2609_03715.md
   - ../../sources/papers/ld4wam_arxiv_2608_22403.md
   - ../../sources/papers/arcadia_arxiv_2512_00076.md
   - ../../sources/papers/humannet.md
@@ -146,6 +170,8 @@ sources:
   - ../../sources/papers/egoscale_arxiv_2602_16710.md
   - ../../sources/sites/nvidia-research-egoscale.md
   - ../../sources/papers/egosteer_arxiv_2607_09701.md
+  - ../../sources/repos/awesome-robotics-manipulation.md
+  - ../../sources/papers/embodied_robot_manipulation_fm_survey_2512_22983.md
   - ../../sources/repos/awesome-wam-openmoss.md
   - ../../sources/papers/capvector_arxiv_2605_10903.md
   - ../../sources/sites/capvector-github-io.md
@@ -220,6 +246,9 @@ flowchart TD
 - **Gemini Robotics 2（闭源对照）**：DeepMind 全身人形 VLA + 公开预览 ER 2 agent + On-Device 快速跨本体；**VLA 权重未开源**，ER 编排样例见 [`robotics-samples`](https://github.com/google-gemini/robotics-samples)（[实体页](../entities/gemini-robotics.md)）
 - **CapVector**：在 **参数空间** 用 **辅助目标 SFT** 与 **标准 SFT** 两枚同分布 checkpoint 的差 **\(\theta_{\text{ao}}-\theta_{\text{ft}}\)** 抽取 **capability vector**，合并回 **\(\theta_{\text{pt}}\)** 得 **\(\theta_{\text{meta}}\)**；下游仅用 **标准 SFT + 轻量正交正则** 以接近纯 SFT 的开销复现 **Spatial Forcing、LaRA-VLA** 等辅助微调带来的收敛与成功率收益，并在 **LIBERO / RoboTwin** 与多 VLA 骨干上讨论 **跨域与真机** 迁移（见 [CapVector 论文实体页](../entities/paper-capvector-capability-vectors-vla.md)）
 - **StarVLA**：证明强 VLM 底座（Qwen3-VL）配合简单 MLP 动作头即可在多项基准上打破 SOTA，代表极简主义路线
+- **VLAct**：在 StarVLA 栈上做 **表征中心持续预训练**（多头共监督 + 部分统一跨本体动作布局）；16 GPU 开源数据达 LIBERO-Plus **82.6%**、未见 GR-1 仅 20% 轨迹超全数据 GR00T-N1.6（见 [VLAct](../entities/paper-vlact.md)，arXiv:2608.27550）
+- **GIFT / MINERVA / XR-2（2026-09-04 九篇盘点）**：[GIFT](../entities/paper-gift-intermediate-feature-training.md) 用几何/可供性/目标区域监督中间特征（LIBERO-Plus 79.6/72.6/87.8%，代码待发布）；[MINERVA](../entities/paper-minerva-libero.md) 用 0.54M task-ID 策略量 LIBERO 容量下限（约 95%，CPU 5.1 ms/chunk，已开源）；[XR-2](../entities/paper-xr2-bimanual-household.md) 开放 1500 小时双臂家务数据（策略未见）。横切面见 [开源可复现性 9 篇地图](../overview/open-source-reproducibility-9-papers-technology-map.md)
+- **FWBC-VLA（浙大 / 上海 AI Lab 等，arXiv:2609.03889）**：无 F/T 的 HSR-Force 残差同时条件化 π₀.₅ 与轮足底盘补偿；M20S 擦白板终段 **64%**、开门 **52%**；**确认未开源**（见 [FWBC-VLA](../entities/paper-fwbc-vla.md)）
 - **Pelican-Unified 1.0**：在 Qwen3-VL 上叠 **推理末态潜变量 \(z\)** 与 **Wan 系 UFG**，用 **同一扩散去噪** 联合生成未来视频与动作块，语言 / 视频 / 动作损失回传共享表示；定位为 **统一具身智能（UEI）** 闭环而非 VLA+世界模型流水线拼接（见 [Pelican-Unified 1.0](./pelican-unified-1.md)）
 - **mimic-video（Video-Action Model, VAM）**：用 **互联网规模视频扩散骨干**（如 Cosmos-Predict2）在 **潜空间** 形成与语言一致的 **视觉动力学计划**，再以 **流匹配动作解码器** 作 **逆动力学** 输出动作块；论文叙事强调相对传统 VLA 的 **样本效率** 与把瓶颈转移到 **视频表征质量**（见 [mimic-video](./mimic-video.md)）
 - **DeFI**：将 **GFDM（SVD 系前向动力学）** 与 **GIDM（DINO+VQ 自监督逆动力学）** 在混合/无标签视频上 **分开预训练**，下游再 **冻结前向 + 扩散适配器** 耦合微调，缓解 2D 预测与 3D 动作的目标纠缠并放大无动作标签人视频（见 [DeFI](./defi-decoupled-dynamics-vla.md)）
@@ -267,6 +296,7 @@ flowchart TD
 - **DA-Nav（导航 VLM，非操作 VLA）**：把城市户外导航写成 **商业方向指令 + 图像平面离散网格 grounding + CoT 偏离恢复**（Qwen2.5-VL-7B LoRA）；相对连续 waypoint / 分层 NaVILA，强调 **动作表示对齐 2D 视觉推理** 与 **recovery 数据**；CARLA SoTA 并零样本 Go2/人形（见 [DA-Nav](../entities/paper-da-nav.md)，arXiv:2607.11638；**暂未开源**）
 - **FSD-VLN（空中导航双系统，非操作 VLA）**：把 [GR00T N1](../entities/paper-hrl-stack-34-gr00t_n1.md) 的 VLM+DiT 迁到 UAV VLN——慢路冻结 VLM 写 VLSF，快路短视界 DiT 出 8 类离散飞行动作；未见相对自复现 OpenFly SR 5.1%→13.6%，单步 402→176 ms（见 [FSD-VLN](../entities/paper-fsd-vln.md)，arXiv:2607.08359；**确认未开源、无真机**）
 - **Green for Go（导航 VLA 推理时 overlay，非新模型）**：SegFormer **绿=可通行 / 红=不可通行** 喂冻结 **OmniVLA**；Grand Tour 最远航点误差 **−27–44%**，但归一化后主要是轨迹缩短约 **30%**；图像目标与 **stop** 几乎无增益（见 [Green for Go](../entities/paper-green-for-go-vla-nav-grounding.md)，arXiv:2607.05122；**确认未开源**）。**勿与** [Green-VLA](../entities/paper-greenvla-staged-vla-humanoid.md) **混淆**。
+- **CrossTracer（导航 VLA 跨本体残差，非操作 VLA）**：OmniVLA 改成 **VL-Tracer** 出无本体像素轨迹，**CE-Adapter** 按机器人 ID 做残差；NaviTrace 总分 **45.68**（相对 Gemini-2.5-Pro +28.1%），去 adapter 掉到 22.56；真机相对 OmniVLA 轮式 SR **0.40→0.65**、腿式 **0.45→0.70**（见 [CrossTracer](../entities/paper-crosstracer.md)，arXiv:2608.06688；**宣称开源 / 待核实**）
 - **S²-VLA（驾驶 VLA，武汉理工，arXiv:2607.13926）**：针对单流驾驶 VLA 的 **spatial representation collapse**，把 **InternVL3-2B 多尺度语义流** 与 **绕过自回归头的 ViT 空间流**（BEV map / agent 辅助）解耦，经 **Dual-Stream Planning Adapter** 级联融合；NAVSIM 纯 SFT **PDMS 87.1 / NC 98.4**；**未开源**（见 [S²-VLA](../entities/paper-s-squared-vla.md)）
 
 ## VLA 与传统策略的区别
@@ -338,6 +368,8 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 
 综述 *World Action Models*（arXiv:2605.12090）把典型 VLA 写作 **\(p(a \mid o, l)\)** 的语义条件策略，并指出其往往 **不显式滚未来物理状态**。当未来观测预测与动作生成在 **同一策略框架内耦合**、并以联合对象 **\(p(o', a \mid o, l)\)** 为训练目标时，文献中才归类为 **WAM**（含 Cascaded 与 Joint 两族）。入口概念页见 [World Action Models（WAM）](../concepts/world-action-models.md)。闭源产业侧 [Riemann-1.0](../entities/paper-riemann-1.md) 把 Joint 再收成 **动作优先全因果 AR**（先 \(a_t\) 再 \(z_t\)），同一模型兼任策略与仿真；真机对照表里 [G0.5](../entities/paper-galaxea-g05.md) 是其开源 VLA 对手。
 
+*Bai et al., Embodied Robot Manipulation in the Era of Foundation Models*（arXiv:2512.22983）从 **功能角色** 而非模型家族组织操作文献：VLA 落在低层「输入建模 → 策略学习」管线，常与高层 LLM/MLLM 规划器、几何约束或 affordance 模块组合；详见 [基础模型时代具身操作综述](../entities/paper-embodied-manipulation-foundation-models-survey.md) 与配套 [Awesome-Robotics-Manipulation](https://github.com/BaiShuanghao/Awesome-Robotics-Manipulation)。
+
 ## 部署经验后训练（post-training from experience）
 
 离线 SFT / BC 往往不足以覆盖真机 **分布偏移** 与 **接触/精细操作** 长尾失败。近年路线在预训练 VLA 之上，用 **自主 rollout + 人类干预 + 价值/优势信号** 做迭代提纯：
@@ -387,10 +419,14 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 - [sources/papers/star_vla.md](../../sources/papers/star_vla.md) — StarVLA 极简基准模型
 - [sources/papers/being_h07.md](../../sources/papers/being_h07.md) — Being-H0.7 潜空间世界–动作模型
 - [sources/papers/ros2smolvla_arxiv_2608_23320.md](../../sources/papers/ros2smolvla_arxiv_2608_23320.md) — ROS2SmolVLA：ROS 2 本地 SmolVLA × UR10e
+- [sources/papers/fwbc_vla_arxiv_2609_03889.md](../../sources/papers/fwbc_vla_arxiv_2609_03889.md) — FWBC-VLA：无传感器接触残差 + 轮足全身补偿
+- [sources/papers/minerva_libero_arxiv_2609_03715.md](../../sources/papers/minerva_libero_arxiv_2609_03715.md) — MINERVA：LIBERO 容量下限与 CPU 推理成本
 - [sources/papers/ld4wam_arxiv_2608_22403.md](../../sources/papers/ld4wam_arxiv_2608_22403.md) — LD4WAM：运动对齐潜动力学 WAM
 - [sources/papers/humannet.md](../../sources/papers/humannet.md) — HumanNet 百万小时人中心视频语料与 VLA 受控预训练对比
 - [sources/repos/humannet.md](../../sources/repos/humannet.md) — HumanNet 项目页与 GitHub 索引
 - [sources/papers/world_action_models_survey_2605.md](../../sources/papers/world_action_models_survey_2605.md) — WAM 综述与 Cascaded/Joint 分类
+- [sources/papers/embodied_robot_manipulation_fm_survey_2512_22983.md](../../sources/papers/embodied_robot_manipulation_fm_survey_2512_22983.md) — 基础模型时代操作综述（规划 × 学习双轴）
+- [sources/repos/awesome-robotics-manipulation.md](../../sources/repos/awesome-robotics-manipulation.md) — Awesome-Robotics-Manipulation 策展列表
 - [sources/papers/pelican_unified_uei_arxiv_2605_15153.md](../../sources/papers/pelican_unified_uei_arxiv_2605_15153.md) — Pelican-Unified 1.0（UEI）技术报告 arXiv:2605.15153
 - [sources/papers/pi07.md](../../sources/papers/pi07.md) — π₀.₇ 论文与官方博客归档
 - [sources/repos/awesome-wam-openmoss.md](../../sources/repos/awesome-wam-openmoss.md) — Awesome-WAM 论文库
@@ -411,6 +447,7 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 - [sources/papers/lingbot_vla_v2_tech_report.md](../../sources/papers/lingbot_vla_v2_tech_report.md) — LingBot-VLA 2.0：6 万小时数据管线 + MoE + Dual-Query 蒸馏（arXiv:2607.06403）
 - [sources/repos/lingbot-vla-v2.md](../../sources/repos/lingbot-vla-v2.md) — LingBot-VLA 2.0 官方仓库与权重入口
 - [sources/papers/harness_vla_arxiv_2607_08448.md](../../sources/papers/harness_vla_arxiv_2607_08448.md) — Harness VLA：冻结 VLA 作接触原语 + 记忆增强 agentic harness（arXiv:2607.08448v3）
+- [sources/papers/embodiedskills_arxiv_2609_01281.md](../../sources/papers/embodiedskills_arxiv_2609_01281.md) — EmbodiedSkills：guarded AgentLoop + 可执行 skill contract（arXiv:2609.01281）
 - [sources/papers/fm_vla_arxiv_2607_18231.md](../../sources/papers/fm_vla_arxiv_2607_18231.md) — FM-VLA：Force-VAE 力觉长程记忆（arXiv:2607.18231）
 - [sources/papers/chronos_arxiv_2606_30318.md](../../sources/papers/chronos_arxiv_2606_30318.md) — Chronos：全历史 SSM + IMLE + 二阶桥（arXiv:2606.30318）
 - [sources/papers/robointer_1_5_arxiv_2607_18709.md](../../sources/papers/robointer_1_5_arxiv_2607_18709.md) — RoboInter1.5 中间表示套件（arXiv:2607.18709）
@@ -421,24 +458,32 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 - [sources/papers/da_nav_arxiv_2607_11638.md](../../sources/papers/da_nav_arxiv_2607_11638.md) — DA-Nav：方向感知城市尺度 VLN（arXiv:2607.11638）
 - [sources/papers/fsd_vln_arxiv_2607_08359.md](../../sources/papers/fsd_vln_arxiv_2607_08359.md) — FSD-VLN：空中长程 VLN 快慢双系统（arXiv:2607.08359）
 - [sources/papers/green_for_go_vla_nav_grounding_arxiv_2607_05122.md](../../sources/papers/green_for_go_vla_nav_grounding_arxiv_2607_05122.md) — Green for Go：冻结导航 VLA 绿/红视觉接地（arXiv:2607.05122）
+- [sources/papers/crosstracer_arxiv_2608_06688.md](../../sources/papers/crosstracer_arxiv_2608_06688.md) — CrossTracer：像素轨迹残差跨本体导航（arXiv:2608.06688）
 
 ## 关联页面
+- [Imitator Game](../entities/paper-imitator-game.md) — 字幕条件 VLA vs 人视频条件：L3 功能替代与未见任务零样本都弱（arXiv:2608.22301）
+- [HOST](../entities/paper-host-one-shot-human-video.md) — 人视频 one-shot 不改 VLA 权重；先预测机器人未来观测再出动作（arXiv:2607.20033）
 - [具身智能高频面试题库](../entities/embodied-interview-qa.md) — 卷三 VLA/IL 面试速查（短答案 + 频次）；深读仍以本页与实体为准
 - [机器人学习五大范式](../comparisons/robot-learning-five-paradigms-taxonomy.md) — VLA 作为多模态学习信号主线，与 IL / RL / LfV / 持续学习对照
 - [FB / BFM-Zero / INTACT / Mimic / VLA 任务空间表征对比](../comparisons/fb-bfm-zero-intact-mimic-vla-task-space.md) — VLA 作为任务球上的稀疏语义投影；OOD 勿只归因数据量
 - [五大具身模型分类（VLM/VLN/VLA/VLX/WM）](../comparisons/vlm-vln-vla-vlx-world-model-taxonomy.md) — 感知→导航→执行→推演递进框架
+- [统一机器人学习综述](../entities/paper-unified-robot-learning-survey.md) — 表征–VLA–WM 六种耦合；TMLR 2026
 - [Query：具身大模型分类学选型闭环知识链](../queries/embodied-fm-taxonomy-loop.md) — VLA 是五层选型闭环的 **③ 动作执行层**：全模态+本体状态 → 关节/末端控制量，也是「泛化 ↔ 实时带宽」矛盾最尖锐的一层
 - [WAM / VLA / 跨本体 9 篇技术地图](../overview/wam-vla-cross-embodiment-9-papers-technology-map.md) — Zero-WAM / StreamPI / UCAG-P / MA-VLA 等接口显式化盘点
 - [VLA 开源复现景观（2025）](../overview/vla-open-source-repro-landscape-2025.md) — GitHub 高可见项目按复现目标分组
+- [具身 Infra 2026 全景](../overview/embodied-infra-2026-panorama.md) — 闭环周转时间 vs 单点模型分
+- [Query：具身时代 SLAM 精华与糟粕](../queries/slam-second-spring-embodied.md) — 深蓝沙龙：VLA 是 BC，Planning 不会随参数自动出现
 - [VLN 四范式复现路径](../overview/vln-open-source-repro-paradigms.md) — 导航域 Uni-NaVid 等（与 UniVLA 操作栈区分）
 - [Uni-LaViRA](../entities/paper-uni-lavira.md) — training-free 导航 agent：主张导航可落在 MLLM 输出流形内，对照「堆轨迹训导航 VLA」
 - [DA-Nav](../entities/paper-da-nav.md) — 城市尺度方向感知 VLN：图像平面网格 + CoT 恢复（对照连续 waypoint / NaVILA）
 - [FSD-VLN](../entities/paper-fsd-vln.md) — 空中 VLN 快慢双系统：GR00T N1 骨干 + VLSF（仿真、未开源）
 - [Green for Go](../entities/paper-green-for-go-vla-nav-grounding.md) — 冻结 OmniVLA 的绿/红可通行 overlay（对照 Green-VLA；未开源）
+- [CrossTracer](../entities/paper-crosstracer.md) — 像素轨迹残差做跨本体导航（NaviTrace；宣称开源 / 待核实）
 - [深度学习基础](../concepts/deep-learning-foundations.md)
 - [Foundation Policy（基础策略模型）](../concepts/foundation-policy.md)
 - [仿生多模态机器人综述（Science Robotics 2026）](../entities/paper-bioinspired-multimodal-robotics.md) — 展望中将 VLA/世界模型等纳入多模态切换与环境适配的计算智能侧
 - [π₀ (Pi-zero) 策略模型](./π0-policy.md) — 结合 Flow Matching 的最新 VLA 突破
+- [DexHoldem](../entities/paper-dexholdem.md) — 真机扑克：预训练 VLA 领先任务 IL，但 SPSR 仍只有 47.5%
 - [π₀.7（Pi-zero 0.7）通才 VLA](./pi07-policy.md) — Physical Intelligence 2026 通才模型与多模态提示条件路线
 - [Perceptron Isaac 0.5](../entities/perceptron-isaac-05.md) — 36B 稀疏开源通才；视频小时置换 teleop 的 scaling law（部分开源）
 - [StarVLA](./star-vla.md) — 基于 Qwen3-VL 的极简 VLA 基准
@@ -463,6 +508,8 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 - [DyPES-VLA](../entities/paper-dypes-vla.md) — 共享动力学先验 + 本体特化 MoE 跨本体 VLA（arXiv:2608.06374）
 - [ReflexVLA](../entities/paper-reflexvla.md) — 延迟感知动态操纵 1B VLA + ReflexBench；代码待开放（arXiv:2608.14379）
 - [ARLI](../entities/paper-arli.md) — 异步 VLA 延迟感知 RL 后训练；中间已承诺动作 + 中间观测条件 DSRL（arXiv:2608.23831；确认未开源）
+- [SmoothRL](../entities/paper-smoothrl.md) — 异步 chunk 环内 value-gradient 在线 RL 微调 π₀.₅（arXiv:2608.29768；项目页 2026-09-04 已上线，仍未开源）
+- [六条路线的窟窿](../queries/embodied-six-routes-holes.md) — VLA 的数据/实时/记忆/最后一毫米卡点与「RL 作后训练」坐标
 - [AdvDex](../entities/paper-advdex.md) — 人手/灵巧手 JAAS 统一动作空间；确认未开源（arXiv:2608.14028）
 - [PRM-as-a-Judge](../entities/paper-prm-as-a-judge.md) — 冻结 PRM 过程评测套件；工具仓已开源（arXiv:2608.14284）
 - [Action Chunking](./action-chunking.md)
@@ -500,6 +547,7 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 - [Green-VLA（分阶段 VLA 与人形部署）](../entities/paper-greenvla-staged-vla-humanoid.md) — DataQA + 语义统一动作 + IQL/噪声 RL 的 R2 对齐（arXiv:2602.00919）
 - [JoyAI-RA 0.5（双动作对齐 VLWA）](../entities/paper-joyai-ra-05.md) — LAC-WM + 130-D 规范动作 + 内–外环 RL；AgiBot 真机人视频缩放（arXiv:2608.05674；未开源）
 - [Harness VLA（冻结 VLA + 记忆增强 harness）](../entities/paper-harness-vla.md) — 固定原语库编排 `vla_act`；LIBERO-Pro / RoboCasa365 / RoboTwin C2R（arXiv:2607.08448v3，[RPent](https://github.com/RLinf/RPent)）
+- [EmbodiedSkills（AgentLoop + skill contract）](../entities/paper-embodiedskills.md) — Qwen3-VL guarded runtime + OpenPI/π₀.₅；RoboTwin **86.20%**、LIBERO **97.40%**（arXiv:2609.01281，[已开源](https://github.com/DCDmllm/EmbodiedSkills)）
 - [RoboHarness（异构策略编排）](../entities/paper-robo-harness.md) — VLA+RL+TAMP 能力边界路由与 Memory Bridge；LIBERO-LoHo 95.2%（arXiv:2607.18060；仓暂为项目页镜像）
 - [FM-VLA（力觉长程记忆）](../entities/paper-fm-vla.md) — Force-VAE 压缩 wrench 历史注入 π₀.₅；接触计数任务平均 83.3%、+3.3 ms（arXiv:2607.18231）
 - [KEMO（事件关键帧视觉记忆）](../entities/paper-kemo-event-driven-keyframe-memory-vla.md) — 运动学峰 + DINOv2 去重选帧插拔 π₀.₅（arXiv:2606.23589）
@@ -547,6 +595,11 @@ VLA 通常不是高频底层控制器，真机上常见 50ms 以上推理延迟�
 - [GSR / ParaVLA](../entities/paper-gsr-paravla.md) — 改写指令崩溃来自 joint routing；冻结 T5 重绑（arXiv:2608.02497，已开源）
 - [Ego2Robot](../entities/paper-ego2robot.md) — 第一人称人视频合成 15 形态 18,561 h 预训练数据（arXiv:2608.02580；管线未开源）
 - [EATR-Stereo](../entities/paper-eatr-stereo.md) — 冻结 VLM + primary-aligned CVAT + 分段本体路由融合头载双目；33-DoF Omega 全流程 60%/抓取 100%（arXiv:2608.17453；未开源）
+- [GIFT](../entities/paper-gift-intermediate-feature-training.md) — 动作足够用的中间特征监督；LIBERO-Plus 79.6/72.6/87.8%（arXiv:2609.04193；待发布）
+- [MINERVA](../entities/paper-minerva-libero.md) — 0.54M 闭集容量下限，标准 LIBERO 约 95%，CPU 5.1 ms/chunk（arXiv:2609.03715；已开源）
+- [FWBC-VLA](../entities/paper-fwbc-vla.md) — 无传感器接触残差 + 轮足全身补偿（arXiv:2609.03889；未开源）
+- [XR-2](../entities/paper-xr2-bimanual-household.md) — 1500 小时双臂家务 + DAgger 修正（arXiv:2609.03591；数据已开）
+- [开源可复现性 9 篇技术地图](../overview/open-source-reproducibility-9-papers-technology-map.md) — 2026-09-04 九篇盘点横切面
 
 
 ## 推荐继续阅读

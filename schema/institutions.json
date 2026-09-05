@@ -75,6 +75,21 @@
         "cmu"
       ]
     },
+    "fujitsu": {
+      "label": "富士通（Fujitsu Limited）",
+      "aliases": [
+        "fujitsu",
+        "fujitsu-limited"
+      ]
+    },
+    "fujitsu-research-america": {
+      "label": "富士通美国研究院（Fujitsu Research of America）",
+      "aliases": [
+        "fujitsu-research-america",
+        "fra",
+        "fujitsu-america"
+      ]
+    },
     "cornell": {
       "label": "康奈尔大学（Cornell University）",
       "aliases": [
@@ -181,6 +196,21 @@
       "label": "上海交通大学（SJTU）",
       "aliases": [
         "sjtu"
+      ]
+    },
+    "hohai": {
+      "label": "河海大学（Hohai University）",
+      "aliases": [
+        "hohai",
+        "hhu"
+      ]
+    },
+    "cowarobot": {
+      "label": "酷哇科技（COWARobot）",
+      "aliases": [
+        "cowarobot",
+        "coowa",
+        "coowai"
       ]
     },
     "zju": {
@@ -631,6 +661,21 @@
         "hit"
       ]
     },
+    "bupt": {
+      "label": "北京邮电大学（BUPT）",
+      "aliases": [
+        "bupt",
+        "beijing-university-of-posts-and-telecommunications"
+      ]
+    },
+    "soochow": {
+      "label": "苏州大学（Soochow University）",
+      "aliases": [
+        "soochow",
+        "suda",
+        "soochow-university"
+      ]
+    },
     "upo": {
       "label": "巴勃罗·德·奥拉维德大学（Universidad Pablo de Olavide, UPO）",
       "aliases": [
@@ -737,6 +782,14 @@
       "label": "华为（Huawei）",
       "aliases": [
         "huawei"
+      ]
+    },
+    "openjiuwen": {
+      "label": "开放九问（openJiuwen）",
+      "aliases": [
+        "openjiuwen",
+        "open-jiuwen",
+        "jiuwen"
       ]
     },
     "ubc": {
@@ -2212,6 +2265,13 @@
         "pengcheng"
       ]
     },
+    "innovation-investment-research-institute": {
+      "label": "创新投资研究院（Innovation Investment Research Institute）",
+      "aliases": [
+        "innovation-investment-research-institute",
+        "iiri"
+      ]
+    },
     "reconova": {
       "label": "锐冠信息（Reconova）",
       "aliases": [
@@ -3183,6 +3243,100 @@
       "label": "超忆（TranscEngram）",
       "aliases": [
         "transcengram"
+      ]
+    },
+    "szu": {
+      "label": "深圳大学（Shenzhen University）",
+      "aliases": [
+        "szu",
+        "shenzhen-university"
+      ]
+    },
+    "aalborg": {
+      "label": "奥尔堡大学（Aalborg University）",
+      "aliases": [
+        "aalborg",
+        "aau",
+        "aalborg-university"
+      ]
+    },
+    "ceu": {
+      "label": "中欧大学（Central European University）",
+      "aliases": [
+        "ceu",
+        "central-european-university"
+      ]
+    },
+    "metric-ai": {
+      "label": "度量人工智能实验室（Metric AI Lab）",
+      "aliases": [
+        "metric-ai",
+        "metric-ai-lab"
+      ]
+    },
+    "keenon": {
+      "label": "擎朗智能（KEENON Robotics）",
+      "aliases": [
+        "keenon",
+        "keenon-robotics"
+      ]
+    },
+    "dkfz": {
+      "label": "德国癌症研究中心（DKFZ）",
+      "aliases": [
+        "dkfz",
+        "german-cancer-research-center"
+      ]
+    },
+    "goethe": {
+      "label": "法兰克福歌德大学（Goethe University Frankfurt）",
+      "aliases": [
+        "goethe",
+        "goethe-university",
+        "goethe-frankfurt"
+      ]
+    },
+    "mila": {
+      "label": "蒙特利尔学习算法研究所（Mila）",
+      "aliases": [
+        "mila",
+        "mila-quebec"
+      ]
+    },
+    "umontreal": {
+      "label": "蒙特利尔大学（Université de Montréal）",
+      "aliases": [
+        "umontreal",
+        "universite-de-montreal",
+        "udem"
+      ]
+    },
+    "ami-labs": {
+      "label": "先进机器智能实验室（AMI Labs）",
+      "aliases": [
+        "ami-labs",
+        "advanced-machine-intelligence"
+      ]
+    },
+    "zust": {
+      "label": "浙江科技学院（Zhejiang University of Science and Technology）",
+      "aliases": [
+        "zust",
+        "zhejiang-university-of-science-and-technology"
+      ]
+    },
+    "kesai": {
+      "label": "可扩展自主智能（KE:SAI）",
+      "aliases": [
+        "kesai",
+        "ke-sai"
+      ]
+    },
+    "arrow-air": {
+      "label": "箭头航空（Arrow Air）",
+      "aliases": [
+        "arrow-air",
+        "arrowair"
       ]
     }
   }

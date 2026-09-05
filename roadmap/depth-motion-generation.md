@@ -225,6 +225,7 @@ flowchart LR
   - [遥操作（人形全身遥操作 + 手指遥操作 → 示范数据/实时接管）](depth-teleoperation.md)
   - [动作重定向（人体动作 → 机器人参考轨迹）](depth-motion-retargeting.md) — 姊妹路线：生成负责"造动作"，重定向负责"落到机器人"
   - [BFM（人形行为基础模型）](depth-bfm.md) — 行为先验的策略权重侧表达
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md)
   - [模仿学习与技能迁移](depth-imitation-learning.md) — Diffusion Policy 一系与本路线共享生成式建模基础
   - [VLA（视觉-语言-动作模型）](depth-vla.md) — 语义接口与分层设计的邻接路线
   - [WAM（世界–动作模型）](depth-wam.md)
@@ -242,6 +243,7 @@ flowchart LR
   - [人形拳击（动作跟踪 → 潜空间技能 → 对抗自博弈）](depth-humanoid-boxing.md)
   - [Sim2Real（域差画像 → 执行器对齐 → 鲁棒训练 → 真机部署）](depth-sim2real.md)
   - [Real2Sim（真实世界 → 可仿真资产/场景/孪生）](depth-real2sim.md)
+  - [ICL（具身上下文学习）](depth-icl.md)
 - 人形控制全景图：[Humanoid Control Roadmap](../wiki/roadmaps/humanoid-control-roadmap.md)
 - 技术栈地图：[tech-map/dependency-graph.md](../tech-map/dependency-graph.md)
 

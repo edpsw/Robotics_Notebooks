@@ -264,11 +264,13 @@ flowchart LR
   - [Sim2Real（域差画像 → 执行器对齐 → 鲁棒训练 → 真机部署）](depth-sim2real.md) — Stage 6 数字副本的下游消费者
   - [人形拳击（动作跟踪 → 潜空间技能 → 对抗自博弈）](depth-humanoid-boxing.md)
   - [BFM（人形行为基础模型）](depth-bfm.md)
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md)
   - [感知越障（Perceptive Locomotion）](depth-perceptive-locomotion.md)
   - [动作生成（文本/多模态 → 人形动作）](depth-motion-generation.md)
   - [VLA（视觉-语言-动作模型）](depth-vla.md)
   - [Real2Sim（真实世界 → 可仿真资产/场景/孪生）](depth-real2sim.md)
   - [WAM（世界–动作模型）](depth-wam.md)
+  - [ICL（具身上下文学习）](depth-icl.md)
 - 关联知识页：
   - [Humanoid Hardware 101：七类子系统技术地图](../wiki/overview/humanoid-hardware-101-technology-map.md)
   - [Humanoid 执行器 102：八章技术地图](../wiki/overview/humanoid-actuator-102-technology-map.md)

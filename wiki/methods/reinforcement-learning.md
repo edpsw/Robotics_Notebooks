@@ -2,7 +2,7 @@
 type: method
 tags: [rl, locomotion, policy-optimization, model-free]
 status: complete
-updated: 2026-08-31
+updated: 2026-09-04
 related:
   - ../concepts/rl-runner.md
   - ../entities/embodied-interview-qa.md
@@ -13,6 +13,7 @@ related:
   - ../overview/robot-control-paradigm-rl-intelligent-control.md
   - ../overview/humanoid-rl-policy-training-five-modules.md
   - ../methods/value-based-reinforcement-learning.md
+  - ../entities/paper-smoothrl.md
   - ../methods/hierarchical-reinforcement-learning.md
   - ../entities/richard-sutton.md
   - ../entities/sutton-barto-rl-book.md
@@ -272,6 +273,7 @@ flowchart LR
 - [SRL-MPC（论文实体）](../entities/paper-srl-mpc.md) — RL 调 MPC 参数而非端到端策略（arXiv:2608.21175）
 - [TOSS Framework（论文实体）](../entities/paper-toss-framework.md) — 人类教学四维过程模型 + OSF 数据（arXiv:2608.21083）
 - [HIL-HARC（论文实体）](../entities/paper-hil-harc.md) — 真机在线 RL：CTDE 混合动作 + HRA 分解 critic（arXiv:2608.09762）
+- [SmoothRL](../entities/paper-smoothrl.md) — 异步 chunk 执行环内 value-gradient 在线微调冻结 VLA（arXiv:2608.29768；未开源）
 - [ResMimic（论文实体）](../entities/paper-resmimic.md) — GMT 先验 + 物体条件残差 PPO 的两阶段 loco-manipulation（arXiv:2510.05070）
 - [REFINE-DP（论文实体）](../entities/paper-loco-manip-161-157-refine-dp.md) — 扩散规划器 DPPO 微调 + 低层 PPO 联合优化（arXiv:2603.13707）
 - [Residual Policy Learning（方法页）](./residual-policy-learning.md) — base + 残差统一框架与九篇谱系论文导航
@@ -306,6 +308,7 @@ flowchart LR
 - [PPO](./ppo.md) — 大规模并行运控的默认 on-policy 算法
 - [PyBullet](../entities/pybullet.md) — 轻量入门仿真器
 - [Gymnasium](../entities/gymnasium.md) — 单智能体 RL 环境 API 标准（`reset` / `step` / `spaces`）
+- [HydroGym（论文实体）](../entities/paper-hydrogym.md) — *Nature* 2026 流控 RL 基准平台；Gymnasium 接口 + 通道→翼型零样本迁移（arXiv:2512.17534，已开源）
 - [Cartpole 问题](../concepts/cartpole.md) — Actor–Critic 实验原点与 Gym / Isaac 教学环境对照
 - [赛车漂移 RL 开源景观](../overview/racing-drift-rl-open-source-landscape.md) — f1tenth_gym / CARLA / GPU 向量化等 **轮式极限驾驶** RL 开源入口
 

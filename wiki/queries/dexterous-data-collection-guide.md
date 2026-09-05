@@ -2,14 +2,16 @@
 type: query
 tags: [dexterity, data-collection, teleoperation, simulation, robot-hand]
 status: complete
-updated: 2026-08-29
+updated: 2026-09-05
 related:
   - ../entities/allegro-hand.md
   - ../entities/ruka-v2-hand.md
   - ../entities/midas-hand.md
   - ../entities/all-hands-up.md
   - ../entities/dexbench.md
+  - ../entities/paper-dexholdem.md
   - ../entities/mimic-wearable-u1.md
+  - ../entities/twindex.md
   - ../entities/paper-teledexter.md
   - ../entities/paper-nestdex.md
   - ../entities/paper-spd.md
@@ -28,6 +30,7 @@ sources:
   - ../../sources/sites/spd-bot.md
   - ../../sources/sites/humantouch-xsparkai.md
   - ../../sources/sites/allhandsup-org.md
+  - ../../sources/sites/x2robot-twindex.md
   - ../../sources/papers/hand_visibility_detector_arxiv_2608_11574.md
 summary: "灵巧操作数据采集指南：介绍了如何利用 Shadow Hand、Allegro Hand 或低成本遥操作装置采集高质量、多模态的灵巧抓取与操作演示数据。"
 ---
@@ -61,7 +64,7 @@ summary: "灵巧操作数据采集指南：介绍了如何利用 Shadow Hand、A
 - **优点**：无需佩戴繁琐设备，操作者手部无约束。
 - **缺点**：视觉遮挡严重（例如手指重叠时）；缺乏力反馈，操作者很难感知抓握力度。需要按关节降权时，可在 21 点之上叠加 [Hand Visibility Detector](../entities/paper-hand-visibility-detector.md) 的可见概率（HInt 上系统评过，不是检测器整手分）。
 - **代表项目**：AnyTeleop, DexCap；开源硬件侧 [RUKA-v2 Hand](../entities/ruka-v2-hand.md) 已集成 **AnyTeleop 向量重定向 + OpenTeach/Oculus VR** 遥操作管线；[MIDAS Hand](../entities/midas-hand.md) 提供 **MediaPipe 摄像头 + MANUS 手套** 双模态重定向与 **283 taxel 触觉同步流**（`midas-hand-org` 四仓库）。
-- **固定运动学外骨骼（产业参考）**：[mimic wearable U1](../entities/mimic-wearable-u1.md) 用 **刚性连杆强制 M1 可达空间**，复制腕相机与指尖触觉布局，以 **零软件重定向** 采集中层数据——与视觉方案互补，见 [mimic 数据金字塔](../entities/mimic-hand-m1.md#数据金字塔中的位置)。
+- **固定运动学外骨骼（产业参考）**：[mimic wearable U1](../entities/mimic-wearable-u1.md) 用 **刚性连杆强制 M1 可达空间**，复制腕相机与指尖触觉布局，以 **零软件重定向** 采集中层数据——与视觉方案互补，见 [mimic 数据金字塔](../entities/mimic-hand-m1.md#数据金字塔中的位置)。自变量 [TwinDEX](../entities/twindex.md)（2026-09）把同一思想做成 **三指 7 主动外骨骼 ↔ 同构机械手**，宣称纯 robot-free 数据的 data-efficiency 与真机遥操作重叠、吞吐 **5.3×**；**未开源**，勿与同机构 XRZero-G0（VR+夹爪）混为一谈。
 - **配对数据集参考**：[HRDexDB](../entities/hrdexdb-dataset.md) 采用 **XSens + MANUS 手套** 遥操 xArm6 + 多灵巧手，在 23 路同步相机下采集 **同物体人–机配对** 3D 轨迹与触觉（与纯视觉 teleop 的遮挡权衡不同）。
 
 ## 2. 穿戴式数据手套 (Data Gloves)
@@ -81,7 +84,7 @@ summary: "灵巧操作数据采集指南：介绍了如何利用 Shadow Hand、A
 - **方案 C：视觉重构**：从海量的人类操作视频（YouTube/Epic Kitchens）中，利用计算机视觉算法逆向推导出手的位姿序列。
 - **方案 D：学习式接触执行层采数**：[TeleDexter](../entities/paper-teledexter.md) 用 MoCap 给出指尖+物体目标，仿真训好的 co-tracking 控制器在真机上完成 finger gaiting / 工具切换，从而采到运动学遥操作采不到的接触丰富示范（每任务约 50 条即可训 Diffusion Policy）。代价是 **物体专用策略 + 重型动捕**，且截至 2026-07-28 **未开源**。
 - **方案 E：Copilot / 嵌套采数**：[NestDex](../entities/paper-nestdex.md)（arXiv:2608.13362）让操作员只控臂 + **1-DoF clutch**，可复用本体感觉内层手技能生成手指轨迹；完整示范再训**部署时不再依赖内层**的外层 visuomotor。相对同平台 AnyTeleop，六任务采数成功率 **100%** vs 三任务 **0%**。代价是每技能先采约 10 条重定向轨迹，且截至 2026-08-17 **未开源**。
-- **方案 F：仿真 VR 预训练再真机短微调**：[SPD](../entities/paper-spd.md)（CoRL 2026）让操作员戴 Quest 在 MuJoCo 里直接控目标双臂灵巧手，5 人一周采 **75 h** on-embodiment 演示做扩散策略预训练；真机每任务再 **1–2 h** 微调。五项接触丰富任务都胜过从零 BC。代价是仿真接触必须调到「像真的」，且截至 2026-08-17 **代码与 spd-75h 未列下载**。
+- **方案 F：仿真 VR 预训练再真机短微调**：[SPD](../entities/paper-spd.md)（CoRL 2026 / [arXiv:2608.15917](https://arxiv.org/abs/2608.15917)）让操作员戴 Quest 在 MuJoCo 里直接控目标双臂灵巧手，5 人一周采 **75 h** on-embodiment 演示做扩散策略预训练；真机每任务再 **1–2 h** 微调。五项接触丰富任务都胜过从零 BC。代价是仿真接触必须调到「像真的」，且截至 2026-09-05 **代码与 spd-75h 未列下载**。
 
 ## 采集质量的 Checklist
 
@@ -97,6 +100,7 @@ summary: "灵巧操作数据采集指南：介绍了如何利用 Shadow Hand、A
 - [MediaPipe 实体](../entities/mediapipe.md) — 低成本 21 点手部关键点感知框架
 - [Hand Visibility Detector](../entities/paper-hand-visibility-detector.md) — 逐关节可见性，给视觉 teleop / 多视标注做按点门控
 - [mimic wearable U1](../entities/mimic-wearable-u1.md) — 固定 M1 运动学的被动外骨骼中层采集
+- [TwinDEX](../entities/twindex.md) — 三指外骨骼–机械手共设计；纯 robot-free、无软件 retarget（自变量，未开源）
 - [Behavior Cloning](../methods/behavior-cloning.md)
 - [TeleDexter（论文实体）](../entities/paper-teledexter.md) — co-tracking 灵巧遥操作数据引擎
 - [SPD（论文实体）](../entities/paper-spd.md) — 仿真 VR 75 h 预训练 + 真机 1–2 h 微调（CoRL 2026；代码待发布）
@@ -107,6 +111,7 @@ summary: "灵巧操作数据采集指南：介绍了如何利用 Shadow Hand、A
 - [操作演示数据采集总指南](./demo-data-collection-guide.md)
 - [All Hands Up](../entities/all-hands-up.md) — RLWRLD 把高背驱、力矩可当学习信号的手标成 Type 2 采数手
 - [DexBench](../entities/dexbench.md) — Regime → 传感/标注优先级；本指南补「先定测什么再定采什么」
+- [DexHoldem](../entities/paper-dexholdem.md) — 1,470 条 ShadowHand 扑克示范；Vive 遥操作，失败尝试不进发布集
 
 ## 参考来源
 - Qin, B., et al. (2023). *AnyTeleop: A Unified and General Framework for Bimanual Dexterous Teleoperation*.
@@ -117,4 +122,5 @@ summary: "灵巧操作数据采集指南：介绍了如何利用 Shadow Hand、A
 - [sources/sites/aus-bot-nestdex.md](../../sources/sites/aus-bot-nestdex.md) — 项目页开源核查
 - [sources/sites/humantouch-xsparkai.md](../../sources/sites/humantouch-xsparkai.md)
 - [All Hands Up 站点归档](../../sources/sites/allhandsup-org.md)
+- [x2robot-twindex.md](../../sources/sites/x2robot-twindex.md) — TwinDEX 无本体三指共设计
 - [hand_visibility_detector_arxiv_2608_11574.md](../../sources/papers/hand_visibility_detector_arxiv_2608_11574.md) — 视觉 teleop 遮挡时的逐关节可见性

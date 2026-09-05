@@ -84,6 +84,8 @@ flowchart LR
 - [CRISP vs GS-Playground：Real2Sim 路线选型（接触动力学 vs 光真实感）](../wiki/comparisons/crisp-vs-gs-playground-real2sim.md)（本仓库）— 本阶段的核心选型页
 - [CRISP（Contact-guided Real2Sim）](../wiki/methods/crisp-real2sim.md) · [GS-Playground](../wiki/entities/gs-playground.md)（本仓库）— 两条维度的代表实现
 - [Flexion × Niantic × NVIDIA RGB Sim2Real 管线](../wiki/entities/flexion-niantic-nvidia-rgb-sim2real-pipeline.md)（本仓库）— 360° 扫描 → 3DGS+碰撞 mesh 的 NuRec 数字孪生 → Isaac Lab RGB 导航零样本真机
+- [NVIDIA Omniverse NuRec](../wiki/entities/nvidia-nurec.md)（本仓库）— 官方 USDZ 体积与 Isaac / AV 两条重建入口
+- [Instant NuRec](../wiki/entities/paper-instant-nurec.md)（本仓库）— 驾驶日志单次前向 3DGS（~1.5 s），作逐场景 NuRec 种子；办公室扫描不要套这条 CLI
 - [Spark vs Aholo：Web 大场景 3DGS 渲染选型](../wiki/comparisons/spark-vs-aholo-web-3dgs-renderers.md)（本仓库）— 重建资产的浏览器可视化栈
 
 ### 学完输出什么
@@ -197,7 +199,7 @@ flowchart LR
 - gap 在仿真侧还是真机侧消化：[Real2Sim 真机回放 vs 残差适配 vs 直接微调](../wiki/comparisons/sim2real-vs-real2sim-fine-tuning.md)
 
 **方向 C：成熟度与开源边界**
-- 许多工作 **code coming soon**（Agentic Real2Sim、SimFoundry 截至入库未挂公开仓），[CRISP](../wiki/methods/crisp-real2sim.md) / [Articraft](../wiki/entities/articraft.md) / [PhysX-Omni](../wiki/entities/physx-omni.md) 有公开代码或数据——选型前务必先核查开源状态与可复现边界
+- 许多工作仍 **code coming soon**（如 Agentic Real2Sim）。[SimFoundry](../wiki/entities/paper-simfoundry-real2sim-scene-generation.md) 已 **部分开源**（[NVlabs/SimFoundry](https://github.com/NVlabs/SimFoundry)：A/B 重建与 cousins 可跑，论文级训练/评测未随仓）。[CRISP](../wiki/methods/crisp-real2sim.md) / [Articraft](../wiki/entities/articraft.md) / [PhysX-Omni](../wiki/entities/physx-omni.md) 有公开代码或数据——选型前务必先核查开源状态与可复现边界
 
 **方向 D：与整机栈汇合**
 - Real2Sim 资产/评测在 [VLA 纵深](depth-vla.md)、[BFM 纵深](depth-bfm.md)、[WAM 纵深](depth-wam.md) 与 [Sim2Real 纵深](depth-sim2real.md) 中的位置；重建的可训练环境是整机栈数据与评测层的一块拼图
@@ -237,8 +239,10 @@ flowchart LR
   - [人形群控展演（群舞同步 → 编队走位 → 群体特技）](depth-humanoid-swarm-performance.md)
   - [人形拳击（动作跟踪 → 潜空间技能 → 对抗自博弈）](depth-humanoid-boxing.md)
   - [BFM（人形行为基础模型）](depth-bfm.md)
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md) — 下游：孪生资产上的分数能否外推真机
   - [VLA（视觉-语言-动作模型）](depth-vla.md)
   - [WAM（世界–动作模型）](depth-wam.md)
+  - [ICL（具身上下文学习）](depth-icl.md)
 - 人形控制全景图：[Humanoid Control Roadmap](../wiki/roadmaps/humanoid-control-roadmap.md)
 - 技术栈地图：[tech-map/dependency-graph.md](../tech-map/dependency-graph.md)
 

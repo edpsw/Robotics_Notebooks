@@ -2,8 +2,9 @@
 type: task
 tags: [manipulation, il, diffusion-policy, humanoid]
 status: draft
-updated: 2026-08-31
+updated: 2026-09-05
 related:
+  - ../entities/paper-imitator-game.md
   - ../entities/paper-flatlab.md
   - ../concepts/llm-robotics-control-interfaces.md
   - ../entities/anthropic-embody.md
@@ -12,6 +13,7 @@ related:
   - ../overview/vla-predict-grasp-9-papers-technology-map.md
   - ../entities/paper-flying-knots.md
   - ../entities/paper-robustness-robotic-manipulation-survey.md
+  - ../entities/paper-embodied-manipulation-foundation-models-survey.md
   - ../entities/paper-vtap-gripper.md
   - ../entities/humantouch.md
   - ../entities/yale-openhand.md
@@ -24,6 +26,7 @@ related:
   - ../entities/paper-simfoundry-real2sim-scene-generation.md
   - ../entities/paper-arcadia.md
   - ../entities/paper-agentic-real2sim.md
+  - ../entities/paper-lucida-r2s.md
   - ../entities/paper-robointer-1-5.md
   - ../entities/paper-fabrivla.md
   - ../entities/paper-egosteer.md
@@ -33,9 +36,12 @@ related:
   - ../entities/paper-fm-vla.md
   - ../entities/vla-sota-leaderboard.md
   - ../entities/paper-chord-contact-wrench-dexterous-manipulation.md
+  - ../entities/paper-demomimic.md
+  - ../entities/paper-embodiedskills.md
   - ../methods/regrind-retargeting-guided-rl.md
   - ../entities/paper-dexverse.md
   - ../entities/dexbench.md
+  - ../entities/paper-dexholdem.md
   - ../entities/paper-physmani-dynamic-manipulation-world-model.md
   - ../entities/paper-masked-visual-actions.md
   - ../entities/paper-ctrl-world.md
@@ -51,6 +57,9 @@ related:
   - ../entities/kinetiq-ascend.md
   - ../entities/sunday-robotics-act2.md
   - ../entities/generalist-gen15-one-shot.md
+  - ../entities/paper-host-one-shot-human-video.md
+  - ../entities/paper-zero-wam.md
+  - ../entities/skild-s1.md
   - ../entities/generalist-gen1-thousand-hands.md
   - ../concepts/robotics-solve-standard.md
   - ../entities/paper-softvtbench.md
@@ -60,6 +69,12 @@ related:
   - ../entities/paper-rift-wam.md
   - ../entities/letools.md
   - ../entities/let-base-dataset.md
+  - ../overview/open-source-reproducibility-9-papers-technology-map.md
+  - ../entities/paper-gift-intermediate-feature-training.md
+  - ../entities/paper-adarobovlg.md
+  - ../entities/paper-minerva-libero.md
+  - ../entities/paper-xr2-bimanual-household.md
+  - ../entities/paper-artis-gripper.md
 sources:
   - ../../sources/papers/fastgrasp_arxiv_2604_12879.md
   - ../../sources/papers/imitation_learning.md
@@ -76,6 +91,8 @@ sources:
   - ../../sources/papers/ld4wam_arxiv_2608_22403.md
   - ../../sources/papers/nestdex_arxiv_2608_13362.md
   - ../../sources/sites/dexbench-org.md
+  - ../../sources/papers/demomimic_stanford_2026.md
+  - ../../sources/papers/embodiedskills_arxiv_2609_01281.md
   - ../../sources/papers/arcadia_arxiv_2512_00076.md
   - ../../sources/blogs/generalist_thousand_hands.md
 summary: "Manipulation 关注机器人如何抓取、移动和操作物体，核心难点是感知、接触和全身协同。"
@@ -110,13 +127,13 @@ summary: "Manipulation 关注机器人如何抓取、移动和操作物体，核
 需要识别物体、理解姿态、估计空间位置；**2D 目标检测**（见 [目标检测](../methods/object-detection.md)、[YOLO v1](../entities/paper-yolo-unified-realtime-detection.md)）常作第一级 **物体锚点**；抓取子问题中常需要 **6D/7DoF 抓取位姿** 或 **候选集合**（见 [AnyGrasp](../entities/anygrasp.md) 一类检测式管线）。视觉特征多来自 [视觉骨干](../concepts/vision-backbones.md)（如 [ResNet](../entities/paper-resnet-deep-residual-learning.md)）预训练微调。
 
 ### 3. 灵巧操作
-很多操作需要多指协调、精细力控（如插头、拧瓶盖）。工业侧把这类任务收成可采购实物 + 状态终态的规格，见 [DexBench](../entities/dexbench.md)（18 原子任务 / OSC；官方评测仓待发布）。
+很多操作需要多指协调、精细力控（如插头、拧瓶盖）。工业侧把这类任务收成可采购实物 + 状态终态的规格，见 [DexBench](../entities/dexbench.md)（18 原子任务 / OSC；官方评测仓待发布）。真机扑克桌面协议见 [DexHoldem](../entities/paper-dexholdem.md)（ShadowHand + UR10e；报 SPSR 而不是只报做成）。
 
 ### 4. 开放词汇
 现实世界物体种类几乎无限，不可能为每个物体单独训练。
 
 ### 5. 仿真场景与交互资产
-操作仿真除策略外，还依赖 **可关节、带物理字段的 3D 资产**（尺度、材料、affordance、运动学）。近期 **sim-ready 生成**（如 [PhysX-Omni](../entities/physx-omni.md)、[PhysForge](../entities/paper-physforge-physics-grounded-3d-assets.md)）试图缓解 **PartNet-Mobility 系数据** 在类别与标注上的瓶颈，但导入目标引擎（SAPIEN、MuJoCo、Isaac 等）时仍需核对 **URDF/碰撞/关节限位**。**真机视频孪生**路线见 [SimFoundry](../entities/paper-simfoundry-real2sim-scene-generation.md)（arXiv:2606.28276）：单段 RGB 视频 → 数字孪生 + **digital cousins**，并直接对接 **策略评测与仿真演示训练**（DROID / YAM）。 **Episode 级 agentic Real2Sim** 见 [Agentic Real2Sim](../entities/paper-agentic-real2sim.md)（DROID→MuJoCo 回放孪生，代码待开放，arXiv:2607.19190）。
+操作仿真除策略外，还依赖 **可关节、带物理字段的 3D 资产**（尺度、材料、affordance、运动学）。近期 **sim-ready 生成**（如 [PhysX-Omni](../entities/physx-omni.md)、[PhysForge](../entities/paper-physforge-physics-grounded-3d-assets.md)）试图缓解 **PartNet-Mobility 系数据** 在类别与标注上的瓶颈，但导入目标引擎（SAPIEN、MuJoCo、Isaac 等）时仍需核对 **URDF/碰撞/关节限位**。**真机视频孪生**路线见 [SimFoundry](../entities/paper-simfoundry-real2sim-scene-generation.md)（arXiv:2606.28276，[NVlabs/SimFoundry](https://github.com/NVlabs/SimFoundry) **部分开源**）：单段 RGB 视频 → 数字孪生 + **digital cousins**，开源导出 **OmniGibson**；论文级策略训练/评测未随仓。 **Episode 级 agentic Real2Sim** 见 [Agentic Real2Sim](../entities/paper-agentic-real2sim.md)（DROID→MuJoCo 回放孪生，代码待开放，arXiv:2607.19190）。**室内物体级可编辑副本** 见 [Lucida](../entities/paper-lucida-r2s.md)（parse–generate–place + GizmoAct 9-DoF，arXiv:2608.30821，未开源）。
 
 ## 操作闭环流程总览
 
@@ -142,6 +159,7 @@ flowchart TD
 - **RL**：在仿真中学习抓取策略
 - **IL**：从演示中学习操作技能
 - **Task-Level ILC（可变形体）**：[Flying Knots](../entities/paper-flying-knots.md)（arXiv:2602.21302）— **单次人类示教 + 粒子绳模型 + critical-point 逆模型 QP**，在 xArm7 真机上 **≤10 trials** 完成动态打结，绳型间 **2–5 trials** 可迁移；与大规模 BC/扩散策略形成 **样本效率** 对照
+- **真机分钟级动态技能（抛接）**：[Robot Juggling / AthenaZero](../entities/paper-robot-juggling-athenazero.md)（arXiv:2608.26800，RAI）— **正则化记忆学习 + 互达集 MRS**；五种三球花样 **<5 min** 墙钟；先验零样本一轮都失败但仍正则学习；**确认未开源**
 - **神经布料仿真（可变形体 sim）**：[ClothTransformer](../entities/paper-clothtransformer-unified-latent-cloth-simulation.md)（arXiv:2605.27852）— **统一 latent Transformer** 覆盖 **人体着装 / 夹爪抓布 / 刚体碰撞**；~493.4k 帧 **GIPC 无穿透** 数据 + **可微 CCD**；可作 **操作规划 / 仿真加速** 的动力学先验（论文 Robotic Manip. 为仿真，非真机闭环）
 - **VLA (Vision-Language-Action Model)**：端到端视觉-语言-动作模型
   - 代表：UnifoLM, π₀, [Green-VLA](../entities/paper-greenvla-staged-vla-humanoid.md)（五阶段课程 + 统一多本体动作 + Green 人形上身部署，arXiv:2602.00919）
@@ -179,7 +197,9 @@ flowchart TD
 - **家用可变形操作 · Solve 叙事**：[ACT-2（Sunday Robotics）](../entities/sunday-robotics-act2.md)（2026-07）在 **Memo** 移动平台上以 **人类 sensorized 预训练 + in-house post-training** 报告 **叠衣 99.1%（785 ep、未见家庭、零部署适配）**；评测框架见 [Robotics Solve 标准](../concepts/robotics-solve-standard.md)——与开源 [TidyBot2](../entities/tidybot2.md)、[LeRobot folding](../entities/lerobot.md)、竞赛全链路 [Learning to Fold / LeHome](../entities/paper-lehome-learning-to-fold.md)（仿真 1st / 真机 2nd，SO-ARM101）、以及 [χ₀ / kai0](../entities/paper-kai0.md)（双臂协同展平/折叠/挂衣，相对 π₀.₅ 约 +250% SR，代码数据权重已开）形成 **闭源可靠性主张 vs 可复现栈** 对照
 - **FastGrasp**（[实体页](../entities/paper-fastgrasp-mobile-dexterous-grasping.md)，arXiv:2604.12879）：**移动底盘 + 臂 + LeapHand 全身 RL 快速灵巧抓取**——CVAE 点云引导 + PPO + **二值触觉** 冲击稳定；仿真 **50.09%**、真机 **32–35%**
 - **ADEPT**（[实体页](../entities/paper-adept-dexterity.md)，arXiv:2608.19182）：**16 primitive reposing RL 预训练 + 保守 post-training + 两阶段 vision distill**——Kuka–Allegro / Flexiv–Sharpa **zero-shot** FMB peg insertion 与 dish placement；visuo-tactile **8/10** vs vision **3/10**；Code Coming soon
+- **DemoMimic**（[实体页](../entities/paper-demomimic.md)，Stanford 2026）：**单次人类示范** + **接触局部几何** 与 **AR/SCR** → 仿真 RL 教师蒸馏 **腕部 depth IL**；真机 **16 物体** 平均 **71%** SR，**最小 sim-to-real gap**（相对 DexMachina* / HERMES*）；**Code / arXiv coming soon**
 - **RoboEdit**（[实体页](../entities/paper-roboedit.md)，arXiv:2608.18948）：**人类操作 RGB 视频 → robot video + 3D hand states**（RoboEdit-14M）；下游 Franka 真机 YCB；无官方代码 URL
+- **EmbodiedSkills**（[实体页](../entities/paper-embodiedskills.md)，arXiv:2609.01281）：**guarded AgentLoop** + 可执行 skill contract；Qwen3-VL 高层 + OpenPI/π₀.₅ 低层；RoboTwin **86.20%**、LIBERO **97.40%**；[GitHub 已开源](https://github.com/DCDmllm/EmbodiedSkills)
 
 ## 在人形机器人中的特殊性
 
@@ -207,6 +227,7 @@ flowchart TD
 - [VLA](../methods/vla.md)
 - [ReflexVLA](../entities/paper-reflexvla.md) — 延迟感知动态操纵 1B VLA + ReflexBench（arXiv:2608.14379；代码待开放）
 - [ARLI](../entities/paper-arli.md) — 异步 VLA 延迟感知 RL 后训练；真机双臂 UR5e 约 40%→近 100%（arXiv:2608.23831；确认未开源）
+- [SmoothRL](../entities/paper-smoothrl.md) — 异步 chunk 环内 value-gradient 在线 RL；S1 投掷/笔帽/开箱 250 ep 后 94%/83%/90%（arXiv:2608.29768；项目页已上线、仍未开源）
 - [LAWA](../entities/paper-lawa.md) — 潜动作作测试时未来意图；RoboCasa few-shot 65.6% / full 80.8%（arXiv:2608.24882；代码待发布）
 - [WorldEcho / WorldSync](../entities/paper-worldecho-worldsync.md) — AC-WM off-expert 动作跟随评测与对齐（arXiv:2608.24885；确认未开源）
 - [AdvDex](../entities/paper-advdex.md) — 人手/灵巧手 JAAS 统一动作空间（arXiv:2608.14028；确认未开源）
@@ -240,6 +261,7 @@ flowchart TD
 - [ENPIRE](../methods/enpire.md) — coding agent 驱动的真机策略自改进闭环（自动 reset/verify + 多 PI 范式 + 机队 scaling）
 - [ASPIRE](../methods/aspire.md) — 持续学习 code-as-policy：逐原语 trace 调试 + 技能库复利 + 进化搜索（LIBERO-Pro / Robosuite / BEHAVIOR-1K）
 - [Harness VLA](../entities/paper-harness-vla.md) — 冻结 VLA + 固定原语记忆 harness；LIBERO-Pro / RoboCasa365 / RoboTwin C2R（arXiv:2607.08448）
+- [EmbodiedSkills](../entities/paper-embodiedskills.md) — AgentLoop + skill contract；Qwen3-VL + π₀.₅；RoboTwin 86.20% / LIBERO 97.40%（arXiv:2609.01281，已开源）
 - [RoboInter1.5](../entities/paper-robointer-1-5.md) — 稠密中间表示 Data/VQA/VLM/VLA + IR 条件 World（arXiv:2607.18709）
 - [Learning to Fold（LeHome 2026）](../entities/paper-lehome-learning-to-fold.md) — π₀.₅ + AWR/RECAP 异步 RL 与真机 DAgger 叠衣；仿真 1st / 真机 2nd（arXiv:2606.27163）
 - [χ₀ / kai0](../entities/paper-kai0.md) — Model Arithmetic + Stage Advantage + TDA；协同双臂叠衣/挂衣，相对 π₀.₅ 约 +250% SR（arXiv:2602.09021）
@@ -255,6 +277,7 @@ flowchart TD
 - [TopoRetarget（交互保留灵巧重定向）](../methods/toporetarget-interaction-preserving-dexterous-retargeting.md) — 人手演示 → 接触保真参考 → PPO 跟踪，Pen-Spin / 魔方重定向
 - [REGRIND（重定向引导灵巧操作 RL）](../methods/regrind-retargeting-guided-rl.md) — MoCap 单次演示 → interaction mesh 重定向 → 残差 RL；LEAP/WUJI 剪刀与螺丝刀真机（arXiv:2607.11874）
 - [CHORD（接触力旋量引导灵巧操作）](../entities/paper-chord-contact-wrench-dexterous-manipulation.md) — 人类演示 → CWS 奖励 + RL；4,739 项双手 benchmark 与 DexMachina/ManipTrans/SPIDER 对照
+- [DemoMimic（单次示范灵巧泛化）](../entities/paper-demomimic.md) — 接触局部几何 + AR/SCR；16 物体真机 71% 均值（Stanford；代码待发布）
 - [WARP（离线全身重定向）](../entities/paper-warp-whole-body-retargeting.md) — Meta Quest 离线人演示 → 闭式 c-SEW 机器人动作 → BC；全身移动操作数据管线（arXiv:2606.29940）
 - [DexVerse](../entities/paper-dexverse.md) — 100 项多任务多具身灵巧 benchmark + 3,180 VR 示范；IL/VLA 基线均值成功率 34%（arXiv:2607.08751，UNC/HKU/Berkeley）
 - [Grasp Pose Estimation (抓取位姿估计)](../methods/grasp-pose-estimation.md) — RGBD/点云 → 6-DoF 抓取候选；GraspNet → Contact-GraspNet → GSNet/AnyGrasp 方法谱系
@@ -309,6 +332,8 @@ flowchart TD
 - [Philia](../entities/philia.md) — Astribot 多机器人物理 AI 助手运行时（OpenClaw + Robot Gateway，arXiv:2607.11377）
 - [ssik](../entities/ssik.md) — 6R/7R **解析 IK** 全分支枚举；非 Pieper 6R 与 7R 冗余臂（UW PRL，BSD-3）
 - [GEN-1.5 一次示范学习](../entities/generalist-gen15-one-shot.md) — physical prompting / 极少步适应的闭源产业对照
+- [HOST](../entities/paper-host-one-shot-human-video.md) — 单视频秒级习得；双臂 ARX 八任务 62%；开源（arXiv:2607.20033）
+- [Zero-WAM](../entities/paper-zero-wam.md) — 人视频 ICL 任务规格；RoboTwin 未见 46.95%；代码待发布
 - [机器人 In-Context Learning（概念 taxonomy）](../concepts/robot-in-context-learning.md) — 示范/记忆/metadata/TTT 四类「上下文」拆解；长程未见视频 ICL 见 [S1](../entities/skild-s1.md)
 - [GEN-1 千手](../entities/generalist-gen1-thousand-hands.md) — 跨末端/工具接口的通才操作叙事（闭源产业对照）
 
@@ -328,6 +353,7 @@ flowchart TD
 
 ## 关联页面
 
+- [MILO](../entities/paper-milo.md) — 单图 LRM 解释人—物三维交互（SMPL-H + 物体网格）；操作链路的上游几何，不是策略
 - [ssik（解析逆运动学）](../entities/ssik.md) — 6R/7R 全分支解析 IK；遥操作跟踪与规划种子枚举，覆盖 EAIK 拒绝的几何
 - [LLM 机器人控制接口](../concepts/llm-robotics-control-interfaces.md) — 通用 LLM 直接控制 vs 监督 VLA
 - [Embody](../entities/anthropic-embody.md) — LIBERO 上的 LLM×VLA 监督评测
@@ -337,6 +363,7 @@ flowchart TD
 - [ScheduleStream（多臂 TAMP 与调度）](../entities/schedulestream.md) — 双臂/多臂 **物体分配 + 并行运动时间表** 的规划层框架（ICRA 2026）
 - [AprilTag（视觉 fiducial 库）](../entities/april-tag.md) — 工作台基准、手眼与对齐任务中的低成本位姿观测
 - [AnyGrasp](../entities/anygrasp.md) — 深度点云稠密抓取检测与跟踪的工程/SDK 入口
+- [Imitator Game](../entities/paper-imitator-game.md) — 人视频操作模仿 L0–L3：目标等价而非轨迹相似；IG-10K 已开源
 - [Imitation Learning](../methods/imitation-learning.md) — 操作任务的主流学习方法
 - [S1（Skild）](../entities/skild-s1.md) — 视频 ICL 长程未见操作（闭源产业样本）
 - [机器人 In-Context Learning](../concepts/robot-in-context-learning.md) — 示范进上下文 vs 后训练克隆
@@ -351,6 +378,7 @@ flowchart TD
 - [Teleoperation](./teleoperation.md) — 操作数据采集的主要手段
 - [Query：操作演示数据采集指南](../queries/demo-data-collection-guide.md) — 如何高效采集人类演示数据
 - [DexBench](../entities/dexbench.md) — RLWRLD × NVIDIA 工业灵巧规格（OSC / T00–T17）；规范页已公开，Arena 评测栈仍标 coming soon
+- [DexHoldem](../entities/paper-dexholdem.md) — 真机 ShadowHand 扑克基准：SPSR 47.5%、感知 exact match 34.3%（已开源）
 - [Query：接触丰富操作实践指南](../queries/contact-rich-manipulation-guide.md) — 装配、插拔、拧紧等任务的工程排错顺序
 - [Query：抓取策略选型](../queries/grasp-policy-selection.md) — 开放场景 vs 已知物体 / 稀疏 vs 稠密 / 几何 vs 学习的方案组合指南
 - [Query：操作 VLA 与视频-动作架构选型](../queries/manipulation-vla-architecture-selection.md) — VLA / mimic-video / DeFI / DWM / 开源策略族选型
@@ -364,12 +392,14 @@ flowchart TD
 - [G3M（T-RO 2026）](../entities/paper-tro-manip-04-g3m.md) — 图到图生成视频预训练 → 操作策略（GraphMimic 期刊版）
 - [DGM Robot Learning Survey（T-RO 2026）](../entities/paper-tro-manip-05-dgm-robot-learning-survey.md) — 深度生成模型在 LfD 中的模型族、应用与 OOD 设计
 - [操作鲁棒性综述（Dong et al., arXiv:2606.31494）](../entities/paper-robustness-robotic-manipulation-survey.md) — 不确定性与失败管理双原则、五模块机制与评测协议的系统框架
+- [基础模型时代具身操作综述（Bai et al., arXiv:2512.22983）](../entities/paper-embodied-manipulation-foundation-models-survey.md) — 高层规划六类 × 低层学习管线双轴 taxonomy，配套 Awesome-Robotics-Manipulation
 - [Impedance Control](../concepts/impedance-control.md) — 接触任务最常见的柔顺执行层
 - [PhysX-Omni](../entities/physx-omni.md) — 统一刚体/可变形/关节体 sim-ready 3D 生成与 PhysXVerse 数据引擎
 - [HomeWorld](../entities/paper-homeworld-whole-home-scene-generation.md) — 全屋 sim-ready  furnished 3D 与 **>15 manipulable objects/scene** 的场景级生成（arXiv:2606.06390）
 - [SimFoundry](../entities/paper-simfoundry-real2sim-scene-generation.md) — 真机视频 → sim-ready 孪生 + object/scene/task cousins；real-to-sim 评测与 sim-to-real 训练（arXiv:2606.28276）
 - [Arcadia](../entities/paper-arcadia.md) — 操作与 VLN 共享骨干 + Sim-from-Real；LIBERO 消融 87.2%、G1+Dex-3 27/100（arXiv:2512.00076；部分开源）
 - [Agentic Real2Sim](../entities/paper-agentic-real2sim.md) — VLM agent 编排 DROID→MuJoCo episode twin（arXiv:2607.19190，代码待开放）
+- [Lucida](../entities/paper-lucida-r2s.md) — 室内多视角 → 可编辑物体资产 + GizmoAct 闭环放置（arXiv:2608.30821，未开源）
 - [TSIL](../entities/paper-tsil-temporal-self-imitation-learning.md) — 长时域 Meta-World 操作 PPO：自适应时间目标 + 效率加权自模仿（arXiv:2606.19752）
 - [FabriVLA](../entities/paper-fabrivla.md) — 轻量 InternVL3.5 + gated SA flow-matching；Meta-World MT50 tier-avg **90.0%**（arXiv:2607.08575）
 - [VLA SOTA Leaderboard](../entities/vla-sota-leaderboard.md) — EvoMind/MINT-SJTU 社区 VLA / 灵巧手多基准排行榜
@@ -381,6 +411,12 @@ flowchart TD
 - [PRISM](../entities/paper-prism.md) — 多项式本体条件；LIBERO 无 force 输入达 91% 成功率（arXiv:2607.23473）
 - [FA-RDP](../entities/paper-fa-rdp.md) — 频率自适应视觉–力反应扩散；Flexiv 接触丰富三任务 81.7%（arXiv:2607.28596）
 - [World Action Planner](../entities/paper-world-action-planner.md) — pose-image WM + VLM 规划；LIBERO 组合/新布局泛化（arXiv:2607.27599）
+- [开源可复现性 9 篇技术地图](../overview/open-source-reproducibility-9-papers-technology-map.md) — 2026-09-04 九篇：表征 / 抓取 / 数据 / 评测 / 硬件
+- [GIFT](../entities/paper-gift-intermediate-feature-training.md) — 动作足够用的中间特征（arXiv:2609.04193）
+- [AdaRoboVLG](../entities/paper-adarobovlg.md) — 物理抓取与语义先验解耦（arXiv:2609.04096）
+- [MINERVA](../entities/paper-minerva-libero.md) — LIBERO 容量下限 0.54M / ~95%，CPU 5.1 ms/chunk（arXiv:2609.03715）
+- [XR-2](../entities/paper-xr2-bimanual-household.md) — 1500 小时双臂家务（arXiv:2609.03591）
+- [ARTiS](../entities/paper-artis-gripper.md) — 拆解工具夹爪（arXiv:2609.03362）
 
 
 ## 推荐继续阅读

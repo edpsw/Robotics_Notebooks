@@ -2,7 +2,7 @@
 type: task
 tags: [humanoid, locomotion, whole-body-control]
 status: complete
-updated: 2026-08-30
+updated: 2026-09-05
 related:
   - ./locomotion.md
   - ./stair-obstacle-perceptive-locomotion.md
@@ -20,9 +20,13 @@ related:
   - ../entities/paper-adp.md
   - ../entities/paper-learning-quiet-walking-aibo.md
   - ../entities/paper-quietwalk-humanoid-locomotion.md
+  - ../entities/paper-stay-seated.md
   - ../entities/paper-g1-confined-space-wbp.md
   - ../entities/paper-notebook-vb-com-learning-vision-blind-composite-humanoid.md
   - ../entities/paper-p3.md
+  - ../entities/paper-wm-loco.md
+  - ../entities/paper-safe-stop-humanoid.md
+  - ../entities/paper-bridge-humanoid.md
 summary: "人形机器人在复杂地形下的平衡与移动任务，强调高维动力学处理、环境感知以及全身肢体协调。"
 ---
 
@@ -62,6 +66,7 @@ summary: "人形机器人在复杂地形下的平衡与移动任务，强调高�
 - **接触辅助**：在攀爬高箱时使用手臂辅助。
 - **重心调节**：通过挥动手臂来补偿角动量。
 - **环境自适应**：利用膝盖或身体侧面在狭窄空间支撑。
+- **坐姿推进（非常规）：** [Stay Seated](../entities/paper-stay-seated.md)（arXiv:2608.28090）在 **被动万向椅** 上学习 G1 **全向坐姿速度跟踪**，脚–地推进 + 非固定骨盆–椅接触，零样本 sim2real；走向 seated loco-manipulation 的第一步。
 
 ## 英文缩写速查
 
@@ -111,6 +116,9 @@ summary: "人形机器人在复杂地形下的平衡与移动任务，强调高�
 - [HumoSlope 极端坡面物理引导步态](../entities/paper-humoslope-physics-guided-slope-locomotion.md) — slope-adaptive ZMP + BSGA；G1 盲穿户外草地坡至 32.1°；代码未开源
 - [G1 Confined-Space WBP](../entities/paper-g1-confined-space-wbp.md) — 狭窄空间三阶段全身规划 + 残差跟踪；超 NIST 孔洞/倾斜楼梯（arXiv:2608.10220；未开源）
 - [P³](../entities/paper-p3.md) — VAE 高程 latent + PPO 边缘似然；G1 踏石/楼梯/缺口真机（arXiv:2607.25541，已开源）
+- [WM-LOCO](../entities/paper-wm-loco.md) — RSSM+PPO 单深度预测特征；仿真沟/踏石上匹配 PPO 为 0%，G1 机载三类平均 93.3%（arXiv:2609.02542；代码待发布）
+- [Safe-Stop](../entities/paper-safe-stop-humanoid.md) — 急停可停止性双估计 + 阻尼 fallback；G1 OOD 停止 96.4%（arXiv:2609.02358；代码待发布）
+- [BRIDGE](../entities/paper-bridge-humanoid.md) — 形态–控制共设计的 80 cm / 12.5 kg / 21 DoF / ~$1500 人形（arXiv:2609.03497；CAD 已放，控制仓待录用）
 - [VB-Com](../entities/paper-notebook-vb-com-learning-vision-blind-composite-humanoid.md) — 视觉/盲策略复合，高程图失效时切盲走恢复（G1/H1，ICRA 2026；代码 coming soon）
 - [被动轮人形轮滑 AMP（Tsinghua）](../entities/paper-roller-skating-amp-humanoid-passive-wheels.md) — 被动轮滑 + 9 片圆柱碰撞模型；人体 MoCap→GMR→独立 AMP 学 Pump Glide / Push Glide
 - [ADP 对抗动力学先验](../entities/paper-adp.md) — SRBD-TO + 动力学窗对抗奖励，推扰相对 AMP 更稳；代码 coming soon
@@ -120,7 +128,7 @@ summary: "人形机器人在复杂地形下的平衡与移动任务，强调高�
 - [Locomotion](./locomotion.md)
 - [ZEST](../methods/zest.md) — Boston Dynamics 跨形态高动态模仿与零样本部署
 - [MTRG / GfR](../methods/mtrg-reference-goal-driven-rl.md) — RSS 2026；G1 箱式跑酷：参考塑形 + goal 泛化（超越 ZEST tracking 的 OOD 鲁棒性）
-- [HIL](../methods/hil-hybrid-imitation-learning.md) — 物理角色跑酷：tracking + AMP 混合模仿（仿真）
+- [HIL](../methods/hil-hybrid-imitation-learning.md) / [HIL 论文实体](../entities/paper-hil-hybrid-imitation-learning.md) — TOG 2026 物理角色跑酷 + heading；官方代码未开源
 - [HIL vs MTRG vs ZEST 跑酷路线对比](../comparisons/hil-vs-mtrg-vs-zest-parkour-imitation.md) — 跑酷模仿三条路线选型
 - [Light-Loco-Parkour（LightLP）](../entities/paper-light-loco-parkour.md) — Light Origins / Lightbot 0；稀疏种子 Real2Sim2Real + 多专家蒸馏，无技能标签机载深度跑酷（代码未开源）
 - [ParkourFormer](../entities/paper-parkourformer.md) — HKUST-GZ 等；Transformer 查询历史 + 未来两步 AMP 监督；G1 九类地形单策略平均穿越 93.85%（代码 Coming Soon）

@@ -53,7 +53,7 @@ summary: "ABot-N1（arXiv:2607.10383，高德 AMAP CV Lab）：慢–快 VLN 基
 
 - **架构读点清晰：** 相对 [ABot-N0](https://amap-cvlab.github.io/ABot-Navigation/ABot-N0/) 等 **单体 Brain–Action VLA**，N1 把 **推理频率** 与 **控制频率** 拆开，并用 **人类可读的 CoT + 像素锚点** 作瓶颈，便于区分「语义错了」还是「空间指错了」。
 - **城市级基准缺口：** 开源 **ABotN-PointBench**（31 真实 3DGS 场景、465 轨迹）与 **ABotN-POIBench**（163 POI）填补 **闭环、社会规则可通行** 的 Point/POI 评测空白；附带 **Short-Horizon OVON** 隔离物体「识别–接近」阶段。
-- **五任务单 checkpoint SOTA 叙事：** 报告在 Point / POI / Object / VLN-CE R2R·RxR / Person-Following 七套基准上领先专精与多任务基线，**POI 到达 +35.0 pp（至 77.3%）** 与 **室内外 Point-Goal 95.4% / 92.9% SR** 是城市部署的主证据。
+- **五任务单 checkpoint 领先叙事（2026-08 技术报告口径）：** 报告在 Point / POI / Object / VLN-CE R2R·RxR / Person-Following 七套基准上领先当时的专精与多任务基线，**POI 到达 +35.0 pp（至 77.3%）** 与 **室内外 Point-Goal 95.4% / 92.9% SR** 是城市部署的主证据。
 - **与通才 VLA 的对照轴：** 同 Qwen 系骨干族可与 [Qwen-VLA](./qwen-vla.md) 对照；N1 更强调 **导航专用慢–快接口** 而非操作–导航大一统 checkpoint。
 
 ## 核心信息
@@ -141,7 +141,7 @@ sequenceDiagram
 
 ## 局限与风险
 
-- **权重未发布：** 截至 2026-08-31 无法本地复现报告 SOTA 数字，仅能跑基准与自研 agent 对照。
+- **权重未发布：** 截至 2026-08-31 无法本地复现报告中的成绩数字，仅能跑基准与自研 agent 对照。
 - **慢–快异步：** 缓存像素目标在极端动态场景可能滞后；论文以噪声注入缓解，真机仍须验安全边界。
 - **与 ABot-N0 关系：** N1 为架构演进（像素接口 + GRPO），非简单 scale；跨代数字需看任务分项而非单 SR。
 - **评测栈复杂度：** 3DGS 渲染 + 双 conda 环境，CI 集成成本高于纯 Habitat 离散动作基准。
@@ -157,6 +157,22 @@ sequenceDiagram
 | VLN-CE R2R | NE **3.32** / SR **70.9%** | 语言指令 |
 | VLN-CE RxR | NE **3.13** / SR **73.9%** | 多语言长指令 |
 | Person-Following EVT | STT SR **90.1%** | 动态跟人 |
+
+## 与其他工作对比
+
+四条路线的分歧不在骨干大小，而在 **慢/快之间放什么接口**：
+
+| 工作 | 架构 | 慢–快之间的接口 | 任务覆盖 | 相对 ABot-N1 |
+|------|------|-----------------|----------|--------------|
+| **ABot-N1** | 慢 4B + 快 2B，异步 | **CoT 文本 + Target/Affordance 像素** | 五任务单 checkpoint | — |
+| [ABot-N0](https://amap-cvlab.github.io/ABot-Navigation/ABot-N0/) | 单体 Brain–Action VLA | 无显式瓶颈（端到端 latent） | 导航 | 前代；N1 是**接口层的架构演进 + GRPO**，非单纯 scale，跨代应看任务分项而非单 SR |
+| [Green for Go](./paper-green-for-go-vla-nav-grounding.md) | **冻结 VLA + 视觉提示** | 画在图像上的外部提示 | 导航接地 | 同样落在**图像空间**，但提示来自外部模块；N1 的像素目标是**内生**的、且可被 GRPO 按到达结果对齐 |
+| [Qwen-VLA](./qwen-vla.md) | 通才 VLA | 端到端 | 操作—导航通用 | 同 Qwen 骨干族；N1 不追大一统 checkpoint，只做**导航专用**慢–快接口 |
+| [ABot-M0.5](./paper-abot-m05-mobile-manipulation-wam.md) | 移动操作 WAM | 未来观测—动作联合 | 移动操作 | 同机构互补线：一个把未来**观测**当接口，一个把**像素锚点**当接口 |
+
+- **可诊断性是主要卖点**：CoT + 像素锚点让「语义错了」与「空间指错了」可分离归因，这是端到端 latent 接口做不到的；代价是慢系统缓存在极端动态场景可能滞后（见「局限与风险」）。
+- **基准不可横比**：ABotN-PointBench 用 **3DGS 闭环 + 社会可通行评分**，与旧 open-loop waypoint 基准的 SR/SPL 不在同一口径；POI **77.3%** 的 +35.0 pp 增益也应对照其自建基准读。
+- **开源边界的差异**：本文开源的是 **评测基础设施**（`ABotN-Bench`），策略权重截至 2026-08-31 未发布——与上表中已放权重的通才 VLA 相比，复现能力完全不同层级。
 
 ## 结论
 

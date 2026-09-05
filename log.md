@@ -1,3 +1,449 @@
+## [2026-09-05] ingest | sources/blogs/wechat_tencent_world_model_questions_2026-09-05.md — 腾讯科技世界模型访谈；点名论文独立节点；关键页 paper-lpwm / paper-phi-wm-acteffect
+
+- **触发：** 用户指定 <https://mp.weixin.qq.com/s/2DEpiexjwh5O6bBJDXk3LA>，并要求文内论文各有独立非重复详情节点。
+- **复用：** [Atlas](wiki/entities/atlas-world-model.md)、[LeVJEPA](wiki/entities/paper-levjepa.md)、[World Labs](wiki/entities/world-labs.md)、[功能分类](wiki/concepts/functional-taxonomy-world-models.md)（#1808 已合入）。
+- **步骤 2.5：** LeJEPA **已开源** CC BY-NC；LeWM **已开源** MIT+HF；LpWM **已开源** MIT；ActEffect / Atlas **确认未开源**。
+- **关键判断：** 过载词要拆岗位——Atlas 生成 3D、LpWM 改隐几何、ActEffect 把 WM 放进训练反馈。
+- **新建：** `paper-lejepa`、`paper-lewm`、`paper-lpwm`、`paper-phi-wm-acteffect`；归档访谈 raw + 三仓 + 光象站。
+- **交叉：** 生成式 WM / WAM / INTACT / LeVJEPA / Atlas / 功能分类
+
+## [2026-09-05] ingest | sources/papers/world_model_definition_roadmap_arxiv_2607_06401.md + sources/blogs/worldlabs_functional_taxonomy_world_models.md — Fei-Fei 功能分类 + 上智定义/路线图；确认未开源
+
+- **触发：** 用户指定 <https://arxiv.org/abs/2607.06401v1>、<https://drfeifei.substack.com/p/a-functional-taxonomy-of-world-models>
+- **复用：** 已有 [生成式世界模型](wiki/methods/generative-world-models.md)、[WAM](wiki/concepts/world-action-models.md)、[World Labs](wiki/entities/world-labs.md)、[Marble](wiki/entities/marble-world-model.md)、[训练闭环三线](wiki/overview/robot-world-models-training-loop-taxonomy.md)、Awesome 索引卡 [paper-sa-2607-06401](wiki/entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md)。**另建** 功能分类概念页；定义文 **原地升格** Awesome stub（同一 arXiv 不双实体）。
+- **步骤 2.5：** 官方博客 <https://www.worldlabs.ai/blog/taxonomy-of-world-models> 与 arXiv HTML **均无** GitHub / 权重。概念文 + 视角文 → **确认未开源**。Marble 仍是部分开源（Spark），不因本篇改变。
+- **关键判断：** 功能分类只描述解码（观测/状态/动作）；上智文补压缩定义与表征轴，并声明 WAM 不是第四实现列。仿真是枢纽；倒金字塔把数据天花板钉在互联网视频多样性。
+- **新建：** `functional-taxonomy-world-models`；升格 `paper-sa-2607-06401-a-definition-and-roadmap-for-world-models`（不另建第二实体）；归档 `worldlabs_functional_taxonomy_world_models.md`、`world_model_definition_roadmap_arxiv_2607_06401.md`
+- **交叉：** 生成式 WM / WAM / VL* 五家族 / 训练闭环三线 / 具身数据金字塔 / Cosmos 3 / Video-as-Simulation
+
+## [2026-09-05] ingest | sources/sites/cosmos-cookbook.md、Transfer1/2.5 仓与文档 — Cosmos Transfer 族 + Cookbook 入库；已开源但 2.x 有限维护；关键页 cosmos-transfer、paper-cosmos-transfer1、cosmos-cookbook
+
+- **触发：** 用户指定 Cookbook、Transfer2.5 文档/仓、NVIDIA/Cosmos、Transfer1 项目页/仓，并要求自动合并 PR
+- **复用：** [`nvidia-cosmos`](wiki/entities/nvidia-cosmos.md)、[`cosmos-3`](wiki/entities/cosmos-3.md)、[`paper-sa-2511-00062`](wiki/entities/paper-sa-2511-00062-world-simulation-with-video-foundation-models-fo.md)、[`nvidia_cosmos`](sources/repos/nvidia_cosmos.md) 已存在。**不另造** Cosmos 3 / Predict2.5 论文页。
+- **步骤 2.5：** Transfer1 / Transfer2.5 / Cookbook **已开源**（Apache-2.0 + NVIDIA Open Model License）。三仓 README 均写 **有限维护**，新产品走 [NVIDIA/cosmos](https://github.com/NVIDIA/cosmos)。Cosmos 3 Edge **不支持** V2V transfer。
+- **关键判断：** Transfer 卖的是「控制图钉几何、prompt 改外观」；Transfer1 均匀四控 Quality 8.54、64×B200 实时 4.2 s；Transfer2.5-2B 比 7B 小 3.5×。配方从 Cookbook 抄，不要从零猜 JSON。
+- **新建：** [`cosmos-transfer`](wiki/entities/cosmos-transfer.md)、[`paper-cosmos-transfer1`](wiki/entities/paper-cosmos-transfer1.md)、[`cosmos-cookbook`](wiki/entities/cosmos-cookbook.md)
+- **交叉：** nvidia-cosmos / cosmos-3 / Predict2.5 / Sim2Real / GWM / SO-101 / video-as-simulation
+
+## [2026-09-05] ingest | sources/repos/nvidia_isaac_teleop.md + sources/sites/nvidia-isaac-teleop-docs.md — Isaac Teleop 1.5.x 复核；已开源 Apache-2.0；关键页 isaac-teleop
+
+- **触发：** 用户指定 <https://nvidia.github.io/IsaacTeleop/main/index.html>、<https://github.com/NVIDIA/IsaacTeleop>，并要求自动合并 PR
+- **复用：** 已有 [isaac-teleop](wiki/entities/isaac-teleop.md)（2026-06 入库）。**不另造页**，按 1.5.x 文档补 Televiz / 无标记手重建 / LeRobot / 开源边界。
+- **步骤 2.5：** 文档与 README 均链 GitHub + PyPI。仓 **已开源** Apache-2.0（376★ / 85 forks）；`isaacteleop` wheel 含 Televiz。CloudXR Web Client **首次 EULA**；手重建另需 MANO + BMC + 第三方 Docker 权重。Upcoming（非 XR 主设备、云仿真遥操作、远程相机流）未交付。
+- **关键判断：** Lab 3.x XR 主线，不是「所有 Lab 遥操作」。Televiz 是 XR **合成器**，不是 NuRec 训练产品。no-robot 第一人称采数是一等公民。
+- **更新：** `isaac-teleop`；新建归档 `nvidia-isaac-teleop-docs.md`；复核 `nvidia_isaac_teleop.md`
+- **交叉：** Teleoperation / Isaac Lab / Isaac Sim / Isaac GR00T / GR00T-WBC / LeRobot / NuRec
+
+## [2026-09-05] ingest | sources/blogs/worldlabs_marble_world_model.md — Marble GA + docs/API；部分开源（Spark/示例，模型闭源）；关键页 marble-world-model
+
+- **触发：** 用户指定 <https://docs.worldlabs.ai/>、<https://marble.worldlabs.ai/>、<https://www.worldlabs.ai/blog/marble-world-model>，并要求自动合并 PR
+- **复用：** 已有 [world-labs](wiki/entities/world-labs.md)、[Atlas](wiki/entities/atlas-world-model.md)、[Spark](wiki/entities/spark-3dgs-renderer.md)。**另建** [marble-world-model](wiki/entities/marble-world-model.md)，不把文档塞进公司页。
+- **步骤 2.5：** 产品站/博客无权重 GitHub。→ **部分开源**：生成模型闭源 SaaS+World API；Spark 与 Interactive World Examples 开源。
+- **关键判断：** Marble 是外观/漫游资产源；collider ≠ sim-ready。对照 Instant NuRec / NuRec（忠实重建）与 SimFoundry（操作孪生）。
+- **新建：** `marble-world-model`；归档 `worldlabs_marble_world_model.md`、`worldlabs-docs.md`、`marble-worldlabs-ai.md`
+- **交叉：** World Labs / Atlas / Spark / 生成式世界模型 / GS-Playground / NuRec
+
+
+## [2026-09-05] ingest | sources/papers/instant_nurec_arxiv_2607_14203.md — Instant NuRec 前向 3DGS；部分开源静态 CLI；关键页 paper-instant-nurec / nvidia-nurec
+
+- **触发：** 用户指定 <https://docs.nvidia.com/nurec/>、<https://github.com/NVIDIA/instant-nurec>、<https://research.nvidia.com/labs/sil/projects/instant-nurec/>、<https://arxiv.org/abs/2607.14203>，并要求自动合并 PR
+- **复用：** 无同名页。挂接已有 [Sim2Real](wiki/concepts/sim2real.md)、[NuRec USDZ 消费方 Flexion 管线](wiki/entities/flexion-niantic-nvidia-rgb-sim2real-pipeline.md)、[Isaac](wiki/entities/isaac-gym-isaac-lab.md)、[SimFoundry](wiki/entities/paper-simfoundry-real2sim-scene-generation.md)、[GS-Playground](wiki/entities/gs-playground.md)。**另建** 产品实体 [nvidia-nurec](wiki/entities/nvidia-nurec.md)，不把文档与论文塞进同一页。
+- **步骤 2.5：** 项目页与文档均链到 GitHub + HF 权重。仓 **部分开源**（Apache-2.0）：静态 PLY + `.sky.npz` 可跑；动态层 / 训练 / AlpaSim 评测不在独立 CLI。NuRec 精修是 NGC 容器 `nre-ga:26.04`，不是本仓。NCore 演示数据门控。
+- **关键判断：** 闭环价值是 **换重建不改策略排序**（140 场景 AlpaSim），不是追平 34.38 dB；办公室 360° 扫描走 NuRec 机器人 / Niantic 路径，不要套 Instant AV CLI。
+- **新建：** [`paper-instant-nurec`](wiki/entities/paper-instant-nurec.md)、[`nvidia-nurec`](wiki/entities/nvidia-nurec.md)；归档 `sources/papers/instant_nurec_arxiv_2607_14203.md`、`sources/repos/nvidia-instant-nurec.md`、`sources/sites/nvidia-research-instant-nurec.md`、`sources/sites/nvidia-nurec-docs.md`
+- **交叉：** Sim2Real / 仿真评测基础设施 / Real2Sim 纵深 / Isaac Sim / Flexion 管线 / SimFoundry / GS-Playground / 生成式世界模型
+
+## [2026-09-05] ingest | sources/papers/robot_juggling_arxiv_2608_26800.md — RAI AthenaZero 真机抛接分钟级记忆学习；确认未开源；关键页 paper-robot-juggling-athenazero
+
+- **触发：** 用户指定 <https://arxiv.org/abs/2608.26800>、<https://arxiv.org/html/2608.26800v1>，并要求自动合并 PR
+- **步骤 2.5：** arXiv 与 RAI AthenaZero 博客 **无 GitHub / 数据集** → **确认未开源**
+- **关键判断：** 先验连 1 cycle 都完不成仍可作学习正则；MRS 排除 89% 不安全规划；五种三球花样 <5 min；与 [SPD](wiki/entities/paper-spd.md) 仿真预训练路线对照
+- **新建：** [`paper-robot-juggling-athenazero`](wiki/entities/paper-robot-juggling-athenazero.md)；归档 `sources/papers/robot_juggling_arxiv_2608_26800.md`、`sources/sites/rai-athenazero-blog.md`
+- **交叉：** Contact-Rich Manipulation / Sim2Real / Manipulation / Sumo / SMPC-to-RL / SPD
+
+## [2026-09-05] ingest | sources/papers/spd_corl_2026.md — 复核 SPD 并补挂 arXiv:2608.15917；代码/数据仍待发布
+
+- **触发：** 用户指定 ingest *Pre-training Visual Dexterity in Simulation*（<https://spd.bot/>、<https://arxiv.org/abs/2608.15917>），并要求自动合并 PR
+- **步骤 2.5：** 项目页 BibTeX 已更新为 arXiv:2608.15917；仍无 GitHub / spd-vr / spd-75h 下载 → **宣称将开源 / 待核实**
+- **更新：** [`sources/papers/spd_corl_2026.md`](sources/papers/spd_corl_2026.md)、[`sources/sites/spd-bot.md`](sources/sites/spd-bot.md)、[`wiki/entities/paper-spd.md`](wiki/entities/paper-spd.md)
+
+## [2026-09-05] ingest | sources/papers/dexholdem_arxiv_2605_18727.md — DexHoldem 真机扑克灵巧基准；已开源 Policy/Skills + TexasPokerRobot；关键页 paper-dexholdem
+
+- **触发：** 用户指定 <https://dexholdem.github.io/Dexholdem/>。
+- **复用：** 无同名页。挂接已有 [Manipulation](wiki/tasks/manipulation.md)、[DexBench](wiki/entities/dexbench.md)、[评测枢纽](wiki/overview/hub-embodied-eval-benchmark.md)、[π₀](wiki/methods/π0-policy.md)、[VLA](wiki/methods/vla.md)、[Diffusion Policy](wiki/methods/diffusion-policy.md)。**不另造** 方法页。
+- **步骤 2.5：** 项目页 Resources 同时链到 Policy 仓、Skills 仓与 HF 数据集。→ **已开源可运行**。两仓截至入库日未附 LICENSE；数据 CC BY 4.0（约 378 GB）。
+- **关键判断：** 测的不是扑克智能。报 SPSR 不要只报 TCR；芯片 pull 与筹码字典才是硬项；感知 field-wise 高不等于 Overall。
+- **新建：** [`paper-dexholdem`](wiki/entities/paper-dexholdem.md)；归档 `sources/papers/dexholdem_arxiv_2605_18727.md`、`sources/sites/dexholdem-github-io.md`、`sources/repos/dexholdem-policy.md`、`sources/repos/dexholdem-skills.md`、`sources/datasets/texaspokerrobot.md`
+- **交叉：** Manipulation / DexBench / 评测选型闭环 / 接触丰富操作 / π₀ / VLA / Diffusion Policy / 灵巧采数指南
+
+## [2026-09-05] ingest | sources/repos/project-quiver.md、sources/sites/arrowair-quiver.md — 接入 Arrow Quiver 25kg 开源 ArduPilot 机架；已开源 CERN-OHL-S；关键页 project-quiver；对照 PX4 / MAVSDK / Crazyflie
+
+- **触发：** 用户指定 <https://github.com/Arrow-air/project-quiver>、<https://arrowair.com/quiver>。
+- **复用：** 无同名页。挂接已有 [多旋翼栈总览](wiki/overview/multirotor-simulation-planning-control-stack.md)、[PX4](wiki/entities/px4-autopilot.md)、[MAVSDK](wiki/entities/mavsdk.md)、[Crazyflie](wiki/entities/crazyflie-firmware.md)、[Betaflight](wiki/entities/betaflight.md)。**不另造** ArduPilot 固件实体页。
+- **步骤 2.5：** 项目页写明 CAD / KiCad / ArduPilot 配置 / 装配文档在 GitHub。仓 **已开源** CERN-OHL-S-2.0（372★ / 96 forks）。飞控固件在上游 ArduPilot，不在本仓。无学习权重。
+- **关键判断：** 这是 **25 kg 作业机架**，不是 PX4 分叉、也不是室内微四轴。补齐总览里「ArduPilot 未列入本批」的机架层。
+- **新建：** [`project-quiver`](wiki/entities/project-quiver.md)；归档 `sources/repos/project-quiver.md`、`sources/sites/arrowair-quiver.md`；机构 `arrow-air`。
+- **交叉：** 多旋翼栈总览 / PX4 / MAVSDK / Crazyflie / Betaflight / AERIS-10 / 平滑路径 / VLN
+
+## [2026-09-05] ingest | sources/repos/multi-agent-cad.md — 接入清华 IEI Lab MAC；已开源 MIT；关键页 multi-agent-cad；对照 CAD Skills / Text-to-CAD
+
+- **触发：** 用户指定 <https://github.com/Pan-Chera/Multi-Agent-CAD>。
+- **复用：** 无同名页。挂接已有 [CAD Skills](wiki/entities/cad-skills.md)、[文字生成 CAD](wiki/concepts/text-to-cad.md)、[FreeCAD MCP](wiki/entities/freecad-mcp.md)、[GenCAD](wiki/entities/gencad.md)。**不另造** 方法页。
+- **步骤 2.5：** 无独立项目页。实验室 [IEI Lab](https://maureenzou.github.io/lab.html) 未挂下载。GitHub 仓 **已开源** MIT（930★）。无训练权重；需自备 OpenAI 兼容 API。`packages/cadpy` vendored 自 CAD Skills。
+- **关键判断：** 核心是结构化状态传递 + 确定性翻译器，不是「又一个写 build123d 的 agent」。同一套 P1–P10 上自报 116× 少 token。无 URDF/打印链。
+- **新建：** [`multi-agent-cad`](wiki/entities/multi-agent-cad.md)；归档 `sources/repos/multi-agent-cad.md`
+- **交叉：** CAD Skills / Text-to-CAD / FreeCAD MCP / GenCAD / text-to-cad-tools
+
+## [2026-09-05] ingest | sources/repos/tennis-vision.md — 接入 HarshTomar Tennis-Vision；已开源 MIT；关键页 tennis-vision；对照 Roboflow Sports / 场线检测 / 坐标后处理
+
+- **触发：** 用户指定 <https://github.com/HarshTomar1234/Tennis-Vision>。
+- **复用：** 无同名页。挂接已有 [Roboflow Sports](wiki/entities/roboflow-sports.md)、[场线检测](wiki/methods/soccer-field-line-detection.md)、[感知坐标后处理](wiki/concepts/perception-coordinate-postprocessing.md)、[Ultralytics](wiki/entities/ultralytics.md)、[Kalman](wiki/formalizations/kalman-filter.md)、[MediaPipe](wiki/entities/mediapipe.md)、[SAM 3D Body](wiki/entities/sam-3d-body.md)。**不另造** 方法页。
+- **步骤 2.5：** 无独立项目页。GitHub 仓 **已开源** MIT（67★）。TrackNet 权重不随仓再分发；可选 SAM 3D Body 为 Meta SAM License，默认关。球场微调权重在 HF `Coddieharsh/tennis-court-keypoints`。
+- **关键判断：** 广播网球离线分析，不是机载闭环。教学点：单应只在地板平面有效、重投影自洽 ≠ 场地有效、出点率 ≠ 定位精度、RTS/更大 YOLO 已测过并丢掉。
+- **新建：** [`tennis-vision`](wiki/entities/tennis-vision.md)；归档 `sources/repos/tennis-vision.md`
+- **交叉：** Roboflow Sports / 场线检测 / 坐标后处理 / 场线定位流水线 / Ultralytics / Kalman / MediaPipe / SAM 3D Body / Humanoid Soccer / 目标检测
+
+## [2026-09-05] ingest | sources/repos/nvidia-warp.md、sources/sites/nvidia-warp-docs.md、sources/repos/mujoco-warp.md — 接入 NVIDIA Warp 与 MuJoCo Warp 并接到 Newton；关键页 nvidia-warp、mujoco-warp
+
+- **触发：** 用户指定 <https://github.com/NVIDIA/warp>、<https://github.com/google-deepmind/mujoco_warp>、<https://nvidia.github.io/warp/stable/>。
+- **复用：** 无同名实体（`paper-warp-whole-body-retargeting` 是无关论文）。[Newton](wiki/entities/newton-physics.md) / [mjlab](wiki/entities/mjlab.md) / [MJX](wiki/entities/mujoco-mjx.md) 已存在，**不另造引擎页**。
+- **步骤 2.5：** Warp **已开源** Apache-2.0（`warp-lang`，~7.1k★，文档 1.17.0）。MJWarp **已开源** Apache-2.0（`mujoco-warp`，~1.4k★）。二者均可 `pip` 安装；MJWarp 文档在 MuJoCo readthedocs `mjwarp/`。
+- **关键判断：** Warp 是 JIT 计算层，`warp.sim` **已弃用**，机器人物理走 Newton。MJWarp 是 GPU drop-in MuJoCo、Newton 主要刚体后端；**Warp AD 尚未接通**（issue #500）。PGS / noslip / PLUGIN / IMPLICITFAST midpoint 有缺口。JAX 训练经 MJX + Playground；PyTorch 经 mjlab 或 Isaac Lab `feature/newton`。
+- **新建：** [`nvidia-warp`](wiki/entities/nvidia-warp.md)、[`mujoco-warp`](wiki/entities/mujoco-warp.md)
+- **交叉：** Newton / MuJoCo / MJX / mjlab / Brax / Playground / Isaac Lab / Omniverse / 仿真器选型 / 训练栈分层
+
+## [2026-09-05] ingest | sources/repos/newton-physics.md、sources/sites/newton-physics-docs-overview.md、NVIDIA Cosmos 一手族 — Newton 八求解器再核 + Cosmos 1.0/2.5/3 平台对齐；关键页 newton-physics、nvidia-cosmos
+
+- **触发：** 用户指定 <https://github.com/newton-physics/newton>、<https://newton-physics.github.io/newton/stable/guide/overview.html>，并要求一并找到英伟达 Cosmos 模型一手资料。
+- **复用：** [`newton-physics`](wiki/entities/newton-physics.md)、[`cosmos-3`](wiki/entities/cosmos-3.md) 已存在（2026-05 / 2026-06）。**不另造** Newton 页。Cosmos 1.0 / Predict2.5 的 Awesome 索引页 **原地升格**（同一 arXiv 只允许一个节点）。
+- **步骤 2.5：** Newton **已开源** Apache-2.0（~5.6k★）。Cosmos 3 **已开源**（[NVIDIA/cosmos](https://github.com/NVIDIA/cosmos) ~11.7k★ + [cosmos-framework](https://github.com/NVIDIA/cosmos-framework) + HF Cosmos3）。Predict2.5 **已开源但有限维护**。产品页 FAQ：Omniverse/Newton 仿真视频 → Cosmos Transfer。
+- **关键判断：** Newton stable Overview 新增 **Kamino / ImplicitMPM / Style3D**，接触改为 **`CollisionPipeline.collide`**。Cosmos 3 现含 **4B Edge**、4-step 蒸馏、SGLang / TensorRT-LLM、framework SFT。Predict2.5 PAI-Bench I2W Overall **0.810**。解析仿真 ≠ 像素 WFM。
+- **新建：** [`nvidia-cosmos`](wiki/entities/nvidia-cosmos.md)；一手源 `cosmos_wfm_arxiv_2501_03575`、`cosmos_predict25_arxiv_2511_00062`、`nvidia_cosmos_framework`、`nvidia_cosmos_predict25`、`sites/nvidia-cosmos`
+- **交叉：** Newton / Cosmos 3 / Omniverse / Isaac Lab / generative-world-models / WAM / 仿真器选型
+
+## [2026-09-05] ingest | sources/papers/luna_arxiv_2606_31981.md — LUNA（ECCV 2026）LBS-free 隐式 2D 驱动 3DGS；项目页 GitHub 占位未开源；关键页 paper-luna-universal-3d-human-animation
+
+- **触发：** 用户指定 <https://arxiv.org/abs/2606.31981>、<https://penghtyx.github.io/LUNA/>。
+- **复用：** 无同名页。挂接已有 [SMPL-X](wiki/concepts/smpl-x.md)、[GVHMR](wiki/entities/gvhmr.md)、[4DAnyone](wiki/entities/paper-4danyone.md)、[Face Anything](wiki/entities/paper-face-anything-4d-face-reconstruction.md)、[UMA](wiki/entities/paper-uma.md)、[人形训练数据管线](wiki/queries/humanoid-training-data-pipeline.md)。
+- **步骤 2.5：** 项目页 GitHub 按钮为注释占位（`href="#"`），无 HF / 权重。→ **宣称将开源 / 截至 2026-09-05 未列可用链接。** 不建 `sources/repos/`。机构 `hkust` / `meta` 已注册。
+- **关键判断：** 推理丢掉 LBS，训练仍蒸馏软结构；主场是 Cloth10K PSNR **22.07** 与 MSJ **0.0032**（相对 MV-LHM 约 **4.5×**）。NeuMan 与前馈打平。输出是 splat，**不是**关节指令。
+- **新建：** [`paper-luna-universal-3d-human-animation`](wiki/entities/paper-luna-universal-3d-human-animation.md)；归档论文 + 项目页
+- **交叉：** SMPL-X / GVHMR / 4DAnyone / Face Anything / UMA / 人形训练数据管线 / 2D→3D Gap
+
+## [2026-09-05] ingest | sources/repos/nvlabs-simfoundry.md — SimFoundry 官方仓再核：部分开源 Apache-2.0；关键页已存在
+
+- **触发：** 用户指定项目页 / [NVlabs/SimFoundry](https://github.com/NVlabs/SimFoundry) / arXiv:2606.28276。
+- **复用：** [`paper-simfoundry-real2sim-scene-generation`](wiki/entities/paper-simfoundry-real2sim-scene-generation.md)（2026-07-03 已 complete）。**不另造页**。
+- **步骤 2.5（2026-09-05）：** 官方仓已公开（2026-08-14 V0）。→ **部分开源**。A 重建 / B cousins / C OmniGibson 加载可跑；README 写明 **数据生成与策略训练未随仓**。HF `nadunRanawaka1/simfoundry-assets`。导出是 **OmniGibson JSON**，不是论文写的 Isaac Lab。
+- **关键判断：** 不要再写「未挂公开仓」。能复现场景孪生，不能复现 Pearson 0.911 训练协议。24 GiB 必须 `low_vram`；全量约 250 GB + 门控权重 + Gemini。
+- **新建：** [`nvlabs-simfoundry`](sources/repos/nvlabs-simfoundry.md)
+- **交叉：** Sim2Real / Manipulation / 仿真评测基础设施 / GEAR / BEHAVIOR-1K / depth-real2sim
+
+## [2026-09-05] ingest | sources/papers/pointdit_arxiv_2607_02515.md — PointDiT 像素空间点图扩散；已开源 google-research/pointdit；关键页 paper-pointdit
+
+- **触发：** 用户指定 <https://haofeixu.github.io/pointdit/>。
+- **复用：** 无同名页。挂接已有 [单目深度综述](wiki/entities/paper-monocular-depth-estimation-survey.md)、[2D→3D 提升 Gap](wiki/concepts/2d-to-3d-semantic-lifting-gap.md)、[感知栈选型闭环](wiki/queries/robot-perception-stack-selection-loop.md)、[Flex-π](wiki/entities/paper-flex-pi.md)、[ADM-BA](wiki/entities/paper-adm-ba.md)。
+- **步骤 2.5：** 项目页 + [google-research/pointdit](https://github.com/google-research/pointdit)（Apache-2.0）+ [HF haofeixu/pointdit](https://huggingface.co/haofeixu/pointdit)。仓内 `main.py` / `scripts/demo_*.sh` / `eval_*.sh` / `train_stage*.sh` 可跑。→ **已开源**。DINOv3 权重门控，不随 checkpoint。
+- **关键判断：** 去掉 VAE 与混合回归头；x-prediction 是硬门槛（v-pred 崩）。H 型 4 步 Rel\(_d\) **2.75** / BF1 **10.49**，1 步 **72 ms**。室外 KITTI/DIODE/ETH3D 仍落后 MoGe。输出仿射不变，不是 metric。机构注册 `kesai`。
+- **新建：** [`paper-pointdit`](wiki/entities/paper-pointdit.md)；归档项目页 + 官方仓
+- **交叉：** 单目深度综述 / 2D→3D Gap / 感知选型闭环 / Flex-π / ADM-BA
+
+## [2026-09-05] ingest | sources/papers/hil_hybrid_imitation_learning_arxiv_2505_12619.md — TOG 2026 HIL 再核：heading 任务 + 官方未开源 + 一作非官方 G1 仓；关键页 paper-hil-hybrid-imitation-learning
+
+- **触发：** 用户指定 HIL TOG PDF / Peng 组项目页 / Code(G1) Hybrid-Motion-Imitation。
+- **复用：** [`hil-hybrid-imitation-learning`](wiki/methods/hil-hybrid-imitation-learning.md) 与对比页已存在（预印本 *Diverse Parkour Skills from Videos*）。**不另造方法页**，升格 TOG 定稿并补实体页。
+- **步骤 2.5：** [jiashunwang.github.io/HIL](https://jiashunwang.github.io/HIL/) 与 [xbpeng.github.io/projects/HIL](https://xbpeng.github.io/projects/HIL/index.html) **无 GitHub**。→ 官方 TOG 角色动画 **确认未开源**。一作 [jiashunwang/Hybrid-Motion-Imitation](https://github.com/jiashunwang/Hybrid-Motion-Imitation)（Apache-2.0）自标 unofficial extension of GfR + HIL，G1 箱攀/搬箱可跑，**无 AMP 判别器**。
+- **关键判断：** 统一观测（无相位）；跑酷 skill acc **0.66** / DTW **0.31** / 完成率 0.74；heading facing **0.97**。完成率低于纯任务基线不是失败。机构 `cmu` / `nvidia` / `sfu` 已注册。
+- **新建：** [`paper-hil-hybrid-imitation-learning`](wiki/entities/paper-hil-hybrid-imitation-learning.md)；归档项目页 + G1 仓
+- **交叉：** AMP / DeepMimic / ASE / MTRG / ZEST / holosoma / Locomotion
+
+## [2026-09-05] ingest | sources/sites/ac5113-milo.md — MILO 项目页再核加深（UT Austin / ECCV 2026）；确认已开源 MIT；关键页已存在
+
+- **触发：** 用户指定 <https://ac5113.github.io/MILO/>
+- **复用：** [`paper-milo`](wiki/entities/paper-milo.md)（2026-08-31 已 complete）。**不另造页**。
+- **步骤 2.5（2026-09-05 再核）：** 项目页 Code 链到 [ac5113/MILO](https://github.com/ac5113/MILO)；README 与 `docs/PIPELINE.md` 可跑。→ **已开源（MIT）**。SMPL-H / SAM 3 / SAM 3D 权重门控，不随仓。
+- **关键判断：** 增益来自 **联合 LRM 脚手架** 不是拟合器。InterCap 有模板联合 PA-CD **7.45 cm**（PICO 10.33，无 GT 接触）。HODome / IMHD **无模板更好**（6.38 / 6.98）。模板对瓶/杯有用，对行李箱/椅/伞会变差。核心 **344 s/图**，瓶颈在 LRM 189 s。输出是网格，**不是**关节指令。
+- **加深：** 编译 Table 1–7 + 运行时 + 仓库步骤；挂接 PICO / 重定向 / Manipulation / ECHO。
+- **交叉：** PICO / motion-retargeting-pipeline / Manipulation / ECHO / CLAP 九篇地图
+
+## [2026-09-05] ingest | sources/papers/4danyone_arxiv_2608_20335.md — 4DAnyone 单目随意视频→重建级多视角/4DGS；已开源 ant-research/4DAnyone；关键页 paper-4danyone
+
+- **触发：** 用户指定 <https://4danyone.github.io/>。
+- **步骤 2.5：** 项目页给出 [ant-research/4DAnyone](https://github.com/ant-research/4DAnyone)（Apache-2.0）与 [HF AntResearch/4DAnyone](https://huggingface.co/AntResearch/4DAnyone)。→ **已开源**。建 `sources/repos/4danyone.md`。机构 `zju` / `robbyant` / `ant-group` / `hkust` / `cuhk` 均已注册。
+- **关键判断：** 几何走 GVHMR（depth-buffered 40/308），外观走 Wan2.2-TI2V-5B + RCP/TCR，再抬 4DGS。DNA-Rendering 4DGS PSNR **24.15**。仓内 4090 峰值 **<24 GB**、121 帧约 **27 s**、Turbo **5.58×**。Roadmap 仍写 4DGS 方法未接线；仓文档是 nerfstudio **3DGS**。输出是多视角/点绘，**不是**关节指令。
+- **交叉：** GVHMR / SMPL-X / Face Anything / Motion Retargeting / EasyMocap
+
+## [2026-09-05] ingest | sources/papers/fwbc_vla_arxiv_2609_03889.md + MINERVA/BRIDGE 再核 — FWBC-VLA 无传感器接触 WBC 新建实体；MINERVA 补 CPU 5.1ms；BRIDGE CAD 部分开源、规格 80cm
+
+- **触发：** 用户指定 MINERVA（GitHub / arXiv:2609.03715 / HF）、BRIDGE（arXiv:2609.03497 / 项目页）、FWBC-VLA（arXiv:2609.03889）。
+- **复用：** [`paper-minerva-libero`](wiki/entities/paper-minerva-libero.md)、[`paper-bridge-humanoid`](wiki/entities/paper-bridge-humanoid.md) 已存在（2026-09-04 九篇盘点）。**不另造页**，再核加深。
+- **新建：** [`paper-fwbc-vla`](wiki/entities/paper-fwbc-vla.md)；机构注册 `zust`。
+- **步骤 2.5：** MINERVA **已开源**（`k1000dai/MINERVA` + HF）。BRIDGE **部分开源**（项目页 `.stp` CAD；控制/BOM 待录用）。FWBC-VLA **确认未开源**（无项目页/仓；WL&Arm 宣称将公开）。
+- **关键判断：** MINERVA 0.54M L1 CPU **5.1 ms/chunk**；BRIDGE 规格以表为准 **80 cm / 12.5 kg / 21 DoF**，跟踪 SR **94.83**；FWBC-VLA 擦白板终段 **64%**、开门 **52%**，FI 与 BC 必须拆开读。
+- **交叉：** VLA / Manipulation / Loco-Manipulation / WBC / Contact Estimation / Contact-Rich / Humanoid Locomotion / FM-VLA / 九篇地图
+
+## [2026-09-04] ingest | sources/papers/agile_perceptive_traversal_arxiv_2608_29769.md — Sparse 3D Traversal 再核加深（ETH RSL 猴架）；确认未开源；关键页已存在，补枢纽挂接与电池/热/射线锥
+
+- **触发：** 用户指定 <https://nemantor.github.io/sparse-3d-traversal-website/>
+- **复用：** [`paper-agile-perceptive-traversal-sparse-3d`](wiki/entities/paper-agile-perceptive-traversal-sparse-3d.md)（2026-09-02 已 complete）。**不另造页**。
+- **步骤 2.5（2026-09-04 再核）：** 项目页 **无** GitHub / HF / Zenodo；作者账号 `nemantor` 无对应仓。→ **确认未开源**。勿建 `sources/repos/`。
+- **关键判断：** 14/15 真机成功绑在电池压降 / 热积分 / E1R 射线锥，而不是更大 DR。AME-2 13.8k 打过 1.31M MLP；盲学生不可行。跳上峰值 2.11 kW、电压最低 34.7 V。
+- **加深：** 编译 Table IV 全行、电池/热参数、两套 LiDAR 噪声；挂接 [`stair-obstacle-perceptive-locomotion`](wiki/tasks/stair-obstacle-perceptive-locomotion.md) 枢纽与 PHP / ANYmal Parkour 对照。
+
+## [2026-09-04] ingest | sources/papers/lucida_r2s_arxiv_2608_30821.md — Lucida 组合式 Real-to-Sim（ByteDance Seed×PKU×ZJU）；项目页仅 arXiv/HF，确认未开源；关键页 paper-lucida-r2s
+
+- **触发：** 用户指定 <https://lucida-r2s.github.io/>
+- **步骤 2.5：** **确认未开源**。项目页 `project.resources` 仅 arXiv + Hugging Face papers；论文未承诺发代码；`github.com/lucida-r2s` 为 Pages 托管。勿建 `sources/repos/`。
+- **关键判断：** 精度后移到 GizmoAct 闭环放置；主读数是 R2S-Scene F-Score 0.924 与 CA-1M ADD-SB@0.05 83.4%，不是策略 Pearson。漏检不可事后补。
+- **新建：** [`paper-lucida-r2s`](wiki/entities/paper-lucida-r2s.md)；归档论文 + 项目页
+- **交叉：** Sim2Real / CRISP / SimFoundry / Agentic Real2Sim / R2S-EGO / Awesome-R2S2R / Manipulation
+
+## [2026-09-04] ingest | sources/repos/easymocap.md — EasyMocap（zju3dv）：无标记多视角/互联网视频 SMPL 工具箱；已开源（非商业科研许可）；ZJU-MoCap 协议申请
+
+- **触发：** 用户指定 <https://github.com/zju3dv/EasyMocap>
+- **步骤 2.5：** **已开源（科研许可）**。文档站 <https://chingswy.github.io/easymocap-public-doc/> 与 GitHub 互指；CLI `emc` + `apps/demo/mv1p.py` / `mvmp.py` 可跑。LICENSE 仅教育/研究/非营利，商用须邮件 `xwzhou@zju.edu.cn`。SMPL/MANO 权重不随仓。ZJU-MoCap（LightStage + Mirrored-Human）需协议 PDF + 邮件申请。iMocap 多视频特定动作 README 仍标 Coming soon。
+- **关键判断：** 有标定外参走 EasyMocap；野外单目世界轨迹走同组 [GVHMR](wiki/entities/gvhmr.md)。输出 `Rh` ≠ 官方 `global_orient`，接 GMR 前必须转换。不是机器人关节指令。
+- **新建：** [`easymocap`](wiki/entities/easymocap.md)；归档 repo + 文档站
+- **交叉：** GVHMR / FreeMoCap / MAMMA / motion-retargeting-pipeline / SMPL-X / GMR
+
+## [2026-09-04] ingest | sources/papers/crosstracer_arxiv_2608_06688.md — CrossTracer 像素轨迹残差跨本体导航；NaviTrace 45.68；项目页无代码（宣称开源/待核实）；关键页 paper-crosstracer
+
+- **触发：** 用户指定 CrossTracer（arXiv:2608.06688）；鹏城实验室 / 南科大 / 创新投资研究院 / 苏州大学
+- **步骤 2.5：** 项目页 <https://lilduckkk.github.io/CrossTracer-Nav/> **无** GitHub / HF。NaviTrace 对照表把 CrossTracer-8B 标 Open-Source ✓；作者仓 `Lilduckkk` 仅有 `whisper_turtlesim`。→ **宣称开源 / 待核实**。勿建 `sources/repos/`。
+- **关键判断：** 语义提案与本体可通行要拆开；去掉 CE-Adapter 掉 23.12 分。NaviTrace 45.68 ≠ VLN-CE SR。goal-pose 63.91 不能与语言-only 横比。
+- **新建：** [`paper-crosstracer`](wiki/entities/paper-crosstracer.md)；机构注册 `innovation-investment-research-institute`
+- **交叉：** VLA / VLN / 四范式 / hub-cross-embodiment / Green for Go / HumanoidVLN / NaVILA
+
+## [2026-09-04] ingest | sources/blogs/wechat_humanoid_zhiyan_inertia_closedloop_calib_2026-08-26.md — 人形智研院「出厂体检」：惯量标定必须闭环；PRIME 复用并补强（已开源）；KILVO 复用；Calib3R/CAL²M 待升格
+
+- **触发：** 用户指定 <https://mp.weixin.qq.com/s/sl06FnCPmUh6GilJuK-xEQ>
+- **步骤 2.5：** 文内主案例 **PRIME 已开源**（[well-robotics/PRIME](https://github.com/well-robotics/PRIME)，BSD-3-Clause；项目页 [PRIME-project](https://jkangkjr.github.io/PRIME-project/)）。KILVO **代码待开放**（既有 complete 页）。Calib3R / CAL²M 为相机外参 / SLAM 轴，**不造页**。
+- **关键判断：** 单关节台架覆盖不了分布式质量与终身漂移；量产要运动学 / 惯量 / IMU 零偏 / 足底力四张单子闭环，并绑机身序列号。标定误差是地板，大模型是上限。ISO 13482 **不**写成已核实的出厂惯量强制项。
+- **新建：** [`humanoid-closed-loop-inertia-calibration`](wiki/concepts/humanoid-closed-loop-inertia-calibration.md)；PRIME 论文/项目页归档
+- **复用：** [`prime-system-id`](wiki/entities/prime-system-id.md)（HMI draft → complete，**不另造** `paper-prime`）；[`paper-kilvo`](wiki/entities/paper-kilvo.md)
+- **交叉：** SysID / 关节执行器辨识 / 连杆-转子惯量 / 物理保真度 / Sim2Real 闭环 / 接触力旋量 / Crocoddyl
+
+## [2026-09-04] ingest | sources/papers/levjepa_arxiv_2608_27395.md — LeVJEPA（arXiv:2608.27395）：LeJEPA+SIGReg 视频预训练；已开源 MIT（module.py/权重 CC BY-NC）；关键页 paper-levjepa
+
+- **触发：** 用户指定论文 <https://arxiv.org/abs/2608.27395>、项目页 <https://levjepa.github.io/>
+- **步骤 2.5：** **已开源**。项目页互链 [MLO-lab/LeVJEPA](https://github.com/MLO-lab/LeVJEPA)（2026-08-28 建仓）与 HF `galilai-group/LeVJEPA-VideoMix-Large`。主体 MIT；`module.py` 与发布权重 **CC BY-NC 4.0**（改编 Meta V-JEPA）。默认复现走公开 Walking Tours，论文主表 K710 20% 需自备。
+- **关键判断：** 坍塌对策从 EMA/predictor 换成 SIGReg；95% 均匀 token drop 是增强不是近似；block-causal 几乎不掉点。本文**不是**规划 WM（无 AC / MPC / 真机）。
+- **新建：** [`paper-levjepa`](wiki/entities/paper-levjepa.md)；机构注册 `dkfz` / `goethe` / `mila` / `umontreal` / `ami-labs`
+- **交叉：** V-JEPA 2、V-JEPA 2.1、WCM、generative-world-models、world-model-physics-fidelity-outputs、video-as-simulation
+
+
+## [2026-09-04] ingest | sources/repos/sciencediscovery.md + sources/sites/openjiuwen-com.md — openJiuwen 平台与 ScienceDiscovery 科研工作台；已开源 Apache-2.0；双托管 GitHub/AtomGit
+
+- **触发：** 用户指定 <https://atomgit.com/openJiuwen/sciencediscovery>、<https://github.com/openJiuwen-ai/sciencediscovery>、<https://www.openjiuwen.com>
+- **步骤 2.5：** **已开源**。GitHub `openJiuwen-ai/sciencediscovery` 与 AtomGit `openJiuwen/sciencediscovery` 双托管；Apache-2.0；中英文档完整。官网为平台入口（WorkSwarm / 协同工程），ScienceDiscovery 以代码仓为准。模型与文献全文不随仓。
+- **关键结构：** Node API `:4310` 进程内 `native-agent`（非 LangChain）+ Runner `:4311` Bubblewrap；科学 MCP（PubMed/arXiv/PDB 等）延迟披露；CAS 溯源。仓内 `skills/` 仅 2 个内置包，README「300+ Skills」按生态叙事读。
+- **新建：** [`sciencediscovery`](wiki/entities/sciencediscovery.md)、[`openjiuwen`](wiki/entities/openjiuwen.md)；机构注册 `openjiuwen`
+- **未升格：** JiuwenSwarm / JiuwenSymbiosis / agent-core 仅在平台页登记（一次一条）
+- **交叉：** AI Auto-Research、Hermes、OpenClaw、DeepSeek Harness、autoresearch、MCP、index.md
+
+## [2026-09-04] ingest | sources/blogs/wechat_embodied_station_9_papers_open_source_2026-09-04.md — 具身智能小站 9 篇开源盘点；9/9 独立节点（GIFT/AdaRoboVLG/IRWOZ 2.0/Network Design/MINERVA/FailBench/XR-2/BRIDGE/ARTiS）；0 复用。MINERVA+NetworkDesign 已开源；IRWOZ/FailBench/XR-2/ARTiS 部分开源；GIFT/AdaRoboVLG 待发布；BRIDGE 仓待核实
+
+
+## [2026-09-04] ingest | sources/papers/smoothrl_arxiv_2608_29768.md + 深蓝六条路线公众号 — SmoothRL 项目页再核已上线仍未开源；六条窟窿写回 query
+
+- **触发：** 用户指定 <https://www.astribot.com/research/SmoothRL>、arXiv:2608.29768、<https://mp.weixin.qq.com/s/k7CR03ZHaSQRMVvutpSnCg>
+- **复用：** [`paper-smoothrl`](wiki/entities/paper-smoothrl.md)（2026-09-02 已 complete）。**不要**把公众号误读成 SmoothRL 通稿——正文是深蓝《拆完这六条技术路线…》。
+- **步骤 2.5（SmoothRL，2026-09-04 再核）：** 项目页 **已上线**（Nuxt；2026-09-02 为 404）。Hero + 9 段任务对比视频在 OSS `media/smoothrl/`。页内 **无** GitHub / HF → **确认未开源**。作者：Guang Gao\* / Yuxuan Nong\* / Baifu Huang；Lead：Jianan Wang。
+- **关键数字：** S1 三任务 250 ep：投掷 39%→94%、笔帽 8%→83%、开箱 30%→90%；RMS acc/jerk −52%/−47%。
+- **新建：** 公众号写回 [`embodied-six-routes-holes`](wiki/queries/embodied-six-routes-holes.md)；raw + blog 归档。文内 Helix / Index / ER 2 / RL Token 等 **映射已有节点，0 重复造页**。
+- **交叉：** VLA / action-chunking / Manipulation / RL / Lumo-2 / Philia / Figure / Gemini / 五大范式 / 五层选型闭环
+
+## [2026-09-04] structural | roadmap/depth-icl.md — 新增第 23 条纵深路线「ICL（具身上下文学习）」并接入路线视图/首页/主路线
+
+- **触发：** 维护者要求"增加一个 ICL（in-context learning）的纵深"。仓库已有 [`robot-in-context-learning`](wiki/concepts/robot-in-context-learning.md) 概念页与 [四路线对比](wiki/comparisons/wam-ttt-robottt-stellavla-zero-wam-embodied-icl.md)，但没有对应的学习路线页。
+- **新建：** [`roadmap/depth-icl.md`](roadmap/depth-icl.md)（Stage 0–5）：判别边界（映射选择 / 状态估计 / 映射本身，只有第三类是真 ICL）→ 示范表征与 action tokenizer → 遥操作示范线（配对数据 + 防"复制最近 chunk"捷径）→ 人类视频线（无动作标签 + embodiment gap）→ 零梯度上下文 vs 快权重 TTT vs 记忆增强的选型与每步推理预算 → 规模涌现与评测协议。
+- **排序位：** 按各方向起点里程碑历史顺序，置于人形拳击（2017）与 BFM（2018）之间，起点取 **One-Shot Imitation Learning，NeurIPS 2017**（综述归档参考文献 1）。
+- **接入点：** `docs/depth-filters.js`（DEPTH_ORDER / HUB_IDS / FILTERS / META，22→23 条，emoji 🧩）、`docs/index.html` 首页按钮与纵深路线计数、`docs/main.js` 折叠文案与 hero 兜底值、`README.md` / `index.md` / `roadmap/README.md` / `roadmap/motion-control.md` 四处清单、22 条既有 depth 页的「其它纵深路径」互链，以及 ICL 概念页与四路线对比页的回链。
+- **验证：** `tests/test_depth_filters.py` 期望长度 23→24；`make ci-preflight` 12/12 通过、`lint_wiki` 0 errors；全量 `pytest` 429 passed；`eslint docs/main.js` 通过。
+
+## [2026-09-04] structural | docs/roadmap.html + docs/main.js — 路线详情页本库超链接悬停浮窗
+
+- **改动：** [`docs/roadmap.html`](docs/roadmap.html) 增加 `#detail-inline-link-tooltip` 与 `graph-tooltip.js`；[`docs/main.js`](docs/main.js) 在路线页正文 / 知识地图 / 阶段相关项上复用详情页内链 hover 卡片
+- **清单：** [`docs/checklists/frontend-optimization-v1.md`](docs/checklists/frontend-optimization-v1.md) Phase 3
+- **验证：** [`scripts/verify_roadmap_inline_link_preview.cjs`](scripts/verify_roadmap_inline_link_preview.cjs)
+
+## [2026-09-04] ingest | sources/papers/host_arxiv_2607_20033.md + 再核 Imitator Game / GEN-1.5 / S1 / Zero-WAM — 五条人视频 one-shot / ICL 节点：HOST 新建；其余复用已有 complete 页
+
+- **触发：** 用户指定五条独立不重复详情节点：[1] Imitator Game（imitator-game.github.io）[2] GEN-1.5（generalistai.com/blog/gen-1.5）[3] Skild S1（skild.ai/blogs/s1）[4] arXiv:2607.20033 [5] Zero-WAM（arXiv:2608.26103）
+- **复用（同一 arXiv / 已有实体不重造）：**
+  - [1] [`paper-imitator-game`](wiki/entities/paper-imitator-game.md)（2608.22301）— 2026-09-04 再核仍 **已开源（MIT）** + HF IG-10K
+  - [2] [`generalist-gen15-one-shot`](wiki/entities/generalist-gen15-one-shot.md) — 再核仍 **确认未开源**
+  - [3] [`skild-s1`](wiki/entities/skild-s1.md) — 再核 `github.com/skild-ai` 仍 0 公开仓，**确认未开源**
+  - [5] [`paper-zero-wam`](wiki/entities/paper-zero-wam.md)（2608.26103）— 仓仍仅 README/`docs`，**仍待发布**（计划 2026-09-15 前）
+- **新建：** [4] HOST（*Human-to-robot One-Shot Skill AcquisiTion*）— [`paper-host-one-shot-human-video`](wiki/entities/paper-host-one-shot-human-video.md)
+- **步骤 2.5（HOST）：** **已开源** — [CGuangyan-BIT/HOST](https://github.com/CGuangyan-BIT/HOST) 对齐/耦合/策略训练入口 + HF [`Guangyan/HOST`](https://huggingface.co/Guangyan/HOST)（MIT）。仓根无统一 LICENSE；193k 真机轨迹未随仓；`eval_openloop.sh` 不指挥真机。
+- **关键数字：** 双臂 ARX R5；单视频平均 **29 s**；八任务 **62%**；相对语言零样本约 **+45 pt**；已掌握保留约 **99%**；相对 50 条 SFT 演示少 50×、快约 507×。
+- **交叉：** ICL 概念表、IL / Manipulation / WAM、四路线对比、跨具身枢纽、Foundation Policy；四条复用页回链 HOST
+## [2026-09-04] ingest | sources/papers/unified_robot_learning_survey_arxiv_2609_03927.md — TMLR 表征–VLA–世界模型统一综述；独立节点，不造表内空壳
+
+- **触发：** 用户指定 <https://arxiv.org/abs/2609.03927>
+- **步骤 2.5：** **确认未开源 / 无配套实现**（arXiv-only，无项目页/GitHub）
+- **关键页：** 新建 [`paper-unified-robot-learning-survey`](wiki/entities/paper-unified-robot-learning-survey.md)；交叉 VLA / WM / WAM / 五大分类 / 选型闭环 / 14 篇阅读路线
+- **机构注册：** `fujitsu-research-america`、`fujitsu`；CMU 已有
+
+## [2026-09-04] ingest | sources/papers/umr_unified_motion_retargeting_arxiv_2609_02134.md — UMR：学习点云对应的统一人形重定向；独立节点，代码待发布
+
+- **触发：** 用户指定 *Unified Motion Retargeting for Humanoids with Learned Point Cloud Correspondence*（香港科技大学广州校区 / 诺亦腾 / 汉阳大学 / 香港科技大学 / 香港大学；[arXiv:2609.02134](https://arxiv.org/abs/2609.02134)）
+- **步骤 2.5：** **待发布**。所谓项目链接即 arXiv；HTML/PDF 未列 GitHub。同团队 [AdaPT 项目页](https://humanoidtennis.github.io/AdaPT/) 写 MoCap「UMR coming soon」，AdaPT 仓不含本实现。
+- **关键页：** 新建 [`paper-umr-unified-motion-retargeting`](wiki/entities/paper-umr-unified-motion-retargeting.md)；交叉 [Motion Retargeting](wiki/concepts/motion-retargeting.md)、[hub](wiki/overview/hub-motion-retargeting.md)、[GMR](wiki/methods/motion-retargeting-gmr.md)、[OmniRetarget](wiki/entities/paper-hrl-stack-03-omniretarget.md)、[OmniContact](wiki/entities/paper-omnicontact-humanoid-loco-manipulation.md)、[BeyondMimic](wiki/methods/beyondmimic.md)、[SONIC](wiki/methods/sonic-motion-tracking.md)、[AdaPT](wiki/entities/paper-adapt.md)
+- **消歧：** 勿与 AdaMorph（2601.07284）或 PALUM（2601.07272）混页
+
+## [2026-09-04] ingest | sources/papers/{wm_loco,focus,safe_stop} + 两篇公众号 — WM-LOCO/FOCUS 新建独立节点，Safe-Stop 复用；Infra 全景与 SLAM 沙龙写回 overview/query
+
+- **触发：** 用户指定 <https://mp.weixin.qq.com/s/qVqpihnA4GezsE2MIJjKDw>、三篇论文（WM-LOCO / Safe-Stop / FOCUS）须独立非重复详情节点，以及 <https://mp.weixin.qq.com/s/0MUtW7aaPPltT9oO3SUtSg>
+- **步骤 2.5：** WM-LOCO **待发布**（`m0puppet.github.io/wm-loco` 仅项目页，Code coming soon）；Safe-Stop **待发布**（2026-09-04 再核项目页仍无 GitHub，**复用**既有 complete 页）；FOCUS **确认未开源**（无项目页/官方仓；勿与 StefanoFerraro/FOCUS 世界模型仓混淆）
+- **关键页：** 新建 [`paper-wm-loco`](wiki/entities/paper-wm-loco.md)、[`paper-focus-foot-observation-confidence`](wiki/entities/paper-focus-foot-observation-confidence.md)；复用 [`paper-safe-stop-humanoid`](wiki/entities/paper-safe-stop-humanoid.md)；地图 [`g1-foothold-safe-stop-focus-technology-map`](wiki/overview/g1-foothold-safe-stop-focus-technology-map.md)；Infra 长文写回 [`embodied-infra-2026-panorama`](wiki/overview/embodied-infra-2026-panorama.md)（30 条参考文献映射已有节点，缺页待升格）；SLAM 沙龙写回 [`slam-second-spring-embodied`](wiki/queries/slam-second-spring-embodied.md)
+- **机构注册：** `bupt` 北京邮电大学（BUPT）、`soochow` 苏州大学（Soochow University）
+
+## [2026-09-03] lint | wiki/entities/paper-{demomimic,openvla,tapvid-mv,physics-consistent-hrc-benchmark}.md — 清空全量 lint 信息型预警：补 1 篇「对比」段 + 2 条评测枢纽双向回链 + 1 条陈旧声明时效化 + 1 个缺页误报归档
+
+- **触发：** 跑一遍全量知识库 lint（`python3 scripts/lint_wiki.py`），失败项 0，余 **5 条信息型预警**（三段式缺「对比」×1、评测基准枢纽回链缺失×2、陈旧声明×1、缺页概念候选×1）
+- **三段式补「对比」：** [`paper-demomimic`](wiki/entities/paper-demomimic.md) 新增 `## 与其他工作对比`（DexMachina\* 95.8→21.72% / HERMES\* 93.7→3.37% 的 sim-to-real 崩塌对照、CHORD 的 wrench 空间 vs 本页接触局部几何、ADEPT 大规模预训练+distill vs 单次示范、VisualMimic 全身 loco-manip vs 桌面多指、多示范 IL 的 per-object 重采集）——均由页内已有事实归并成表，未引入新论断；另注明 \* 基线数字来自项目页复现而非原论文自报
+- **评测基准闭环：** [`paper-physics-consistent-hrc-benchmark`](wiki/entities/paper-physics-consistent-hrc-benchmark.md) 落 ③ 层接触安全切面（名义 SR 经区域+力安全筛查 72.9%→56.4%，与 SoftVTBench 同类）；[`paper-tapvid-mv`](wiki/entities/paper-tapvid-mv.md) 落 ② 层前置感知切面（多视角长时 3D 对应，30+ baseline 未接近解决、瓶颈在几何恢复）；枢纽页 [`embodied-eval-benchmark-selection-loop`](wiki/queries/embodied-eval-benchmark-selection-loop.md) 同步补 `related` / `sources` / 「关联页面」条目并 bump `updated`
+- **陈旧声明时效化：** [`paper-openvla`](wiki/entities/paper-openvla.md) 的「开源 7B 可达闭源 SOTA 约 85%+」补上 **2024 年原文发表时** 的时间限定与「发表时快照、横比前回榜核协议」的读法，并链到 [`vla-sota-leaderboard`](wiki/entities/vla-sota-leaderboard.md) 作为相对位次的复核入口——该数字是发表时相对 RT-2-X 的对照基线值，不是当前位次
+- **缺页误报归档：** `LCM` 属「缩写 slug ≠ 页面 stem」，已由 [`concepts/lcm-basics.md`](wiki/concepts/lcm-basics.md)（UDP 组播 pub/sub + 类型描述语言）+ [`concepts/ipc-inter-process-communication.md`](wiki/concepts/ipc-inter-process-communication.md) + [`comparisons/ros2-vs-lcm.md`](wiki/comparisons/ros2-vs-lcm.md) 覆盖，按 ethercat / ros2 / urdf 惯例登记进 `MISSING_CONCEPT_COVERED_ELSEWHERE`
+- **验证：** lint「✅ 所有检查通过！」（0 失败 / 0 信息型，覆盖率 3407/3407）；`make ci-preflight` 全绿（导出质量 12/12）；`eval_search_quality` 通过；`ruff check` + `ruff format --check` 通过；`npm run lint:js` 通过；`pytest` 429 passed / 608 subtests
+- **派生物：** 本会话 `git fetch --unshallow` 后重跑 `ci-preflight`，`wiki-activity` 口径为 git（非 log.md 兜底），故 `exports/` `docs/exports/` 统计随本次提交（图谱 30934 → 30940 边）
+- **合并 main 后复跑：** 合入 origin/main（PR #1769：新建 `concepts/motion-control-policy-evaluation-metrics.md` + 第 22 条纵深路线 `roadmap/depth-embodied-eval.md`）后二次全量 lint 仍为 **0 失败 / 0 信息型**，新页未带入新预警；冲突仅在 `log.md`（顶部两侧各自 prepend，按倒序时间线保留双方）与徽章/统计派生物（取 main 侧后由 `ci-preflight` 重算，图谱 3434 节点 / 31065 边）
+
+## [2026-09-03] ingest | wiki/concepts/motion-control-policy-evaluation-metrics.md — 新建「运控模型评测指标」概念页：四组指标坐标系（跟踪误差 / 命令跟随 / model-based 求解 / 硬件部署）、可比性四项对齐（参考表示·rollout 记账·终止准则·指标实现）、HumanScore 偏好对齐、MDS/MID/DSJE 难度分层、仿真→半实物→真机三段验收；归纳自 HumanTracker(2608.13555)/MDS(2512.07248)/Barkour(2305.14654)/HumanoidBench/TrackerLab 与 locomotion 任务页
+
+## [2026-09-03] structural | roadmap/depth-embodied-eval.md — 补 Stage 4「运控模型测评」（Succ+MPJPE 联报、参考表示/rollout 记账/终止准则四项对齐、难度分层 MDS/MID/DSJE、locomotion 速度/CoT/摔倒率/硬件安全裕度、MPC-WBC 求解耗时与约束违反、仿真→半实物→真机三段验收）；原 Stage 4/5 顺延为 5/6，路线更新为 Stage 0–6
+
+## [2026-09-03] structural | roadmap/depth-embodied-eval.md — 新增第 22 条纵深路线「具身模型测评」（Stage 0–5：四层边界 → MLLM 认知 → 世界模型保真 → 策略成功率 → sim↔real 校准 → 评测基建/榜单治理）；同步 README/index/motion-control/roadmap README 与 docs 路线视图（depth-filters.js 新增 embodied-eval key、首页按钮与计数 21→22）
+
+## [2026-09-03] fix | wiki/entities/gpufree.md、wiki/comparisons/china-gpu-cloud-platforms.md — 按平台开发者勘误（issue #1767）修正算力自由定位、去除 Docker/星级打分、补容器桌面 3.0
+
+- **触发：** 平台开发者 `@RiskerFalor` 在 [issue #1767](https://github.com/ImChong/Robotics_Notebooks/issues/1767) 指出早期页面（含 AI 生成成分）有误
+- **修正点：** ①定位改为「产品重心是机器人仿真」；②「Docker 容器」→「容器实例/容器化平台」；③文档成熟度星级 → 文档风格描述（打分不可跨受众线性比较）；④容器桌面非 VNC，3.0（2026-09-03）GPU 加速 + 手柄；⑤RT Core 由 NVIDIA 卡型决定，不是平台差异点；⑥补赛事/高校合作与价格（标注为厂商自述）；⑦补「公共模型存储未必是加分项」误区
+- **核对：** 官网首页已有「合作赛事」入口；`docs/guide/quick_start.html` 仍写 noVNC-vulkan、无 3.0 章节 → 相关条目标注「开发者自述 / 待官方文档更新回填」
+- **归档：** [`sources/sites/gpufree.md`](sources/sites/gpufree.md) 新增「开发者勘误」小节原样保留一手说法
+
+## [2026-09-03] ingest | sources/blogs/wechat_embodied_station_8_papers_open_source_2026-09-03.md — 具身智能小站 8 篇开源论文速览；新建 7 实体 + 系统可靠性技术地图；DemoMimic 复用
+
+- **触发：** 用户指定公众号 <https://mp.weixin.qq.com/s/-UqboKHaoG5eu79u9XQU0w>；要求每篇独立非重复详情节点
+- **步骤 2.5：** HINT/SA-WAM/Safe-Stop **待发布**（项目页无 GitHub）；Physics HRC **部分/待发布**（匿名预览 benchmark Coming soon）；TAPVid-MV **部分开源**（基准/Perpetua 经项目页）；TTI Survey + PACT **已开源**；DemoMimic **复用** complete 页并补 arXiv:2609.01938
+- **关键页：** 新建 `paper-hint-robot-manipulation`、`paper-sa-wam`、`paper-physics-consistent-hrc-benchmark`、`paper-safe-stop-humanoid`、`paper-tapvid-mv`、`paper-test-time-intelligence-survey`、`paper-pact-hrc-action-admission`；地图 [`open-source-system-reliability-8-papers-technology-map`](wiki/overview/open-source-system-reliability-8-papers-technology-map.md)
+
+## [2026-09-03] ingest | sources/sites/ipc_primary_refs.md — POSIX/Linux IPC 一手资料（pipe/shm/mq/unix man-pages、OSTEP、APUE、Beej）；新建 wiki/concepts/ipc-inter-process-communication.md；交叉 OS 基础、运控中间件指南、hub 系统工程/通信
+
+## [2026-09-03] ingest | sources/papers/humanoid_touch_dream.md — Humanoid Touch Dream（IROS 2026）；升格 canonical 论文实体；WBC 已开源、策略/遥操作 on-going
+
+## [2026-09-03] ingest | sources/papers/embodiedskills_arxiv_2609_01281.md — EmbodiedSkills AgentLoop；GitHub 已开源
+
+## [2026-09-03] ingest | sources/papers/demomimic_stanford_2026.md — DemoMimic 单次示范灵巧泛化；开源待发布（Code/arXiv coming soon）
+
+## [2026-09-03] ingest | sources/papers/{parcelstow,adapt_2609_00677,facet_0} — G1 时间鲁棒性 / 文本运动 / 动作–受力联合预测；Facet-0 仓库仍占位
+
+- **触发：** 用户指定三组：ParcelStow（GitHub + arXiv:2609.01453 + HF `cenwerem/parcelstow`）、ADAPT（arXiv:2609.00677 + wuyan01 项目页）、Facet-0（GitHub + arXiv:2609.01596 + 项目页 + ManuFacet-1K）
+- **步骤 2.5：**
+  - **ParcelStow：已开源** — `coenwerem/parcelstow` Apache-2.0 + HF 示范/权重；Isaac Lab G1 L6；无真机。v1 只报包裹插入。
+  - **ADAPT（ETH）：确认未开源** — 项目页无 GitHub/HF。勿与网球 AdaPT（2608.20087 / `noitom-robotics/AdaPT`）混淆。
+  - **Facet-0：部分开源** — ManuFacet-1K 已上 HF；`PINE-Lab-NTU/FACET` 仅 README（Code coming soon）；模型卡为空。纠正 2026-09-02 浅入库的「已开源」。
+- **关键页：** [`paper-parcelstow`](wiki/entities/paper-parcelstow.md) 深化；新建 [`paper-adapt-text-driven-humanoid`](wiki/entities/paper-adapt-text-driven-humanoid.md)；[`paper-facet-0`](wiki/entities/paper-facet-0.md) 深化并改开源边界
+- **主张：** ParcelStow \(r=2\) 专家 84% / ACT 53%；ADAPT 仿真 Success 0.984、真机走慢跑满；Facet-0 五任务 82% vs RECAP 15%，16→38→82 三段互补
+
+## [2026-09-02] ingest | sources/sites/x2robot-twindex.md — 自变量 TwinDEX 三指外骨骼–同构手共设计无本体采数；确认未开源；升格 wiki/entities/twindex.md
+
+- **触发：** 用户指定项目主页 <https://x2robot.com/pages/twindex>；要求自动合并 PR
+- **步骤 2.5：** 项目页（Next.js）与英文页 **未列** GitHub / HF / arXiv；BibTeX *Coming soon*。GitHub `twindex` 检索 0 仓。**确认未开源。** 勿把同机构 [XRZero-G0](https://github.com/X-Square-Robot/XRZero-G0)（VR+夹爪，arXiv:2604.13001）或 [sdk_hand](https://github.com/X-Square-Robot/sdk_hand)（五指）写成 TwinDEX 复现入口。
+- **关键页：** [`twindex`](wiki/entities/twindex.md)；交叉 teleoperation / 灵巧采数指南 / 手套 vs 视觉 / mimic U1 / DEUX / HandUMI
+- **主张（项目页）：** 3 指 9 DoF（7 主动+2 被动）；采数吞吐 **5.3×** 真机遥操作；robot-free 与 on-robot data-efficiency 重叠；化学实验约 24–25 子动作（页内 24/25 不一致）
+
+## [2026-09-02] ingest | sources/papers/rise_adaptive_imagination_arxiv_2608_20430.md — 酷哇 RISE 自适应想象 WAM（arXiv:2608.20430）；代码 MIT + CounterDrive 已开、权重未发；勿与 OpenDriveLab RISE 混淆
+
+- **触发：** 用户指定论文 *RISE: Adaptive Imagination for World Action Models*；机构 COWARobot / 上交 / 河海；项目页 https://cowarobot-ai.github.io/RISE/ ；代码 https://github.com/COOWAI/RISE ；数据集 https://huggingface.co/datasets/COWARobot/CounterDrive
+- **步骤 2.5：** 项目页链 GitHub + HF。**已开源（部分）**：`COOWAI/RISE` MIT 训练/评测代码与七段手动链；HF CounterDrive tar 约 31.5 GB（CC-BY-NC-ND-4.0）。**权重未发**。GitHub README（约 2026-08-13）仍写论文/数据未发布，**以项目页 + arXiv:2608.20430 + HF 实际文件为准**。
+- **关键页：** [`paper-rise-adaptive-imagination-wam`](wiki/entities/paper-rise-adaptive-imagination-wam.md)；同名对照 [`paper-sa-2602-11075` OpenDriveLab RISE](wiki/entities/paper-sa-2602-11075-rise-self-improving-robot-policy-with-compositio.md)；交叉 WAM / latent-imagination / V-JEPA 2 / X-Foresight
+- **机构注册：** `cowarobot` 酷哇科技（COWARobot）、`hohai` 河海大学（Hohai University）；`sjtu` 已有
+
+## [2026-09-02] ingest | sources/papers/imitator_game_arxiv_2608_22301.md — The Imitator Game 再核：MIT 仿真仓 + HF IG-10K/Assets 已开源；深化 L0–L3 / Arena 数字；真机评测仍走申请
+
+- **触发：** 用户指定 arXiv:2608.22301 + 项目页 https://imitator-game.github.io/ ；2026-08-30 已有浅入库
+- **步骤 2.5（再核）：** [imitator-game/The-Imitator-Game](https://github.com/imitator-game/The-Imitator-Game) **MIT**；HF `IG-10K-Dataset` / `IG-10K-Assets`；ModelScope `Zhouxunzhe/*`。真机部署无上传接口。
+- **关键页：** [`paper-imitator-game`](wiki/entities/paper-imitator-game.md)；交叉 IL / VLA / Manipulation / 评测选型闭环
+
+## [2026-09-02] ingest | sources/blogs/wechat_embodied_ai_lab_vla_wm_reading_roadmap_2026-09-02.md — 14 篇独立节点：新建 10（RT-1/RT-2/OpenVLA/π0/Octo/DP/CLIP/ACT/SPOC/DINOv2）+ 复用 4（LaDi-WM/DreamDojo/RISE/PointWorld）；Octo arxiv 迁出方法页；13/14 已开源，RT-2 官方训练未开源
+
+## [2026-09-02] ingest | sources/blogs/worldlabs_atlas_omni_world_model.md — World Labs Atlas omni 世界模型（相机可控生成、稀疏 3D 重建、Real-to-Sim）；早期访问未开源；新增 wiki/entities/atlas-world-model.md；交叉 world-labs、generative-world-models
+
+- **触发：** 用户指定 <https://www.worldlabs.ai/blog/atlas>
+- **步骤 2.5：** 博客与官网 **未列** GitHub/HF → **早期访问（未开源）**；输出 splat 与 Marble/Spark 同表征
+- **关键页：** [`atlas-world-model`](wiki/entities/atlas-world-model.md)、[`world-labs`](wiki/entities/world-labs.md)
+
+## [2026-09-02] ingest | sources/blogs/wechat_embodied_station_7_papers_contact_manipulation_2026-09-02.md — 7 篇开源论文独立节点：Facet-0/ParcelStow/Dual-MP/Depth Survey/ADM-BA/Peg-in-Bench/NP-Throw；Peg-in-Bench 仓库待发布
+
+## [2026-09-02] ingest | sources/papers/hydrogym_nature_s41586_026_10917_6.md — HydroGym 主动流控 RL 平台（Nature 2026）；arXiv:2512.17534 开放全文 + GitHub/HF 已开源；通道→翼型零样本减阻
+
+- **触发：** 用户指定 Nature s41586-026-10917-6，并查询 arXiv 等开放获取入口
+- **开放获取：** **arXiv:2512.17534**（推荐）；Nature 读者链 rdcu.be/fBvqa；SI PDF 可下
+- **步骤 2.5：** `dynamicslab/hydrogym` + `dynamicslab.github.io/hydrogym` → **已开源（MIT）**；HF 环境 checkpoint
+- **关键页：** [`paper-hydrogym`](wiki/entities/paper-hydrogym.md)；交叉 [`gymnasium`](wiki/entities/gymnasium.md) / [`sim2real`](wiki/concepts/sim2real.md)
+
+## [2026-09-02] ingest | sources/papers/ame_arxiv_2506_09588.md, sources/repos/ame_locomotion_sii_fusc.md — AME 补 Science Robotics 10(105) eadv3604 正式发表与 SII-FUSC 社区复现；复核 UCAG-P 仍待发布
+
+- **触发：** 用户一次 ingest 含两篇：（1）*One Policy, Many Embodiments* / UCAG-P；（2）*Attention-Based Map Encoding* / AME（arXiv:2506.09588）
+- **UCAG-P：** 已于 2026-08-28 入库；**步骤 2.5 复核（2026-09-02）** — [public-bots.github.io/UCAG-P](https://public-bots.github.io/UCAG-P) 与 [Public-BOTs/UCAG-P](https://github.com/Public-BOTs/UCAG-P) 仍 **code release coming soon**，无训练入口
+- **AME 更新：** 补 *Science Robotics* **10**(105) **eadv3604**（DOI [10.1126/scirobotics.adv3604](https://doi.org/10.1126/scirobotics.adv3604)）；官方 **无训练代码**，Zenodo [10.5281/zenodo.14499786](https://doi.org/10.5281/zenodo.14499786)；新建社区复现归档 [SII-FUSC/AME_Locomotion](https://github.com/SII-FUSC/AME_Locomotion)（**非官方**，G1 + Isaac Lab）
+- **关键页：** [`paper-ame-attention-based-map-encoding`](wiki/entities/paper-ame-attention-based-map-encoding.md)、[`paper-ucag-p`](wiki/entities/paper-ucag-p.md)
+
+## [2026-09-02] ingest | sources/papers/anyworld_arxiv_2608_29242.md — AnyWorld：动作–相机–具身因子化 egocentric WM，无配对人–机数据重组 GR1/IRON rollout；UniT 适配 +4.8pp/+35pp；项目页未开源
+
+- **触发：** 用户指定 arXiv:2608.29242（小鹏机器人 / NTU / A*STAR IAIC / ZJU / CUHK）
+- **步骤 2.5：** 项目页 `xpeng-robotics.github.io/anyworld` **未列** GitHub/权重 → **未开源**
+- **关键页：** [`paper-anyworld`](wiki/entities/paper-anyworld.md)；交叉 [`paper-unit-unified-physical-language`](wiki/entities/paper-unit-unified-physical-language.md)
+
+## [2026-09-02] ingest | sources/papers/agile_perceptive_traversal + blind_dexterity + smoothrl — 三篇 arXiv:2608.29769/29487/29768：猴架 LiDAR 感知穿越 / G1 纯本体操作 / 异步 VLA 在线 RL；均未开源（Blind Dexterity 待发布）
+
+- **触发：** 用户指定三篇论文 + 项目页
+- **步骤 2.5：** Sparse-3D 项目页无代码；BlindDexterity **Code to be released**；SmoothRL 项目页 **404**、arXiv 无仓库
+- **关键页：** [`paper-agile-perceptive-traversal-sparse-3d`](wiki/entities/paper-agile-perceptive-traversal-sparse-3d.md)、[`paper-blind-dexterity`](wiki/entities/paper-blind-dexterity.md)、[`paper-smoothrl`](wiki/entities/paper-smoothrl.md)
+
+## [2026-09-01] ingest | sources/papers/fixanything_arxiv_2608_23549.md — FixAnything：Wan2.1 LoRA 统一修复四类 3D 渲染伪影 + Flow-DPO 几何偏好；推理与 HF 权重已开源
+
+- **触发：** 用户指定 arXiv:2608.23549（ECCV 2026，CMU）
+- **步骤 2.5：** GitHub `kvuong2711/fix-anything` + HF LoRA **已开源（推理）**；SFT/Flow-DPO 训练脚本未发布
+- **关键页：** [`paper-fixanything`](wiki/entities/paper-fixanything.md)；交叉 [`paper-wan-video`](wiki/entities/paper-wan-video.md) / [`paper-r2s-ego`](wiki/entities/paper-r2s-ego.md)
+
+## [2026-09-01] ingest | sources/blogs/wechat_embodied_station_7_papers_open_source_system_loop_2026-09-01.md — 7 篇开源系统闭环盘点；新建 6 实体 + 复用 Motus2；6/7 已开源
+
+## [2026-09-01] ingest | sources/repos/starter_kit_racing.md — mrdoob/starter-kit-racing Kenney Godot→JS 街机赛车；crashcat + GridMap 编辑器；MIT 已开源；升格 starter-kit-racing 实体并补赛车景观
+
+- **触发：** 用户指定 <https://github.com/mrdoob/starter-kit-racing>
+- **步骤 2.5：** GitHub + Pages **MIT 已开源**；Kenney CC0 资产在仓内
+- **关键页：** [`starter-kit-racing`](wiki/entities/starter-kit-racing.md)；交叉赛车漂移景观 / drive-game / nordschleife-racer
+
+## [2026-09-01] ingest | sources/papers/motus2_arxiv_2608_30237.md — Motus2 自进化 GWM 灵巧操作；项目页未列代码仓；升格 wiki/entities/paper-motus2.md
+
+- **触发：** 用户指定 <https://motus-robotics.github.io/motus2/>
+- **步骤 2.5：** 项目页与 `motus-robotics` 组织 **无** 训练/推理仓库 → **未开源**（仅静态站 `motus-robotics.github.io`）
+- **关键页：** [`paper-motus2`](wiki/entities/paper-motus2.md)；交叉 Motus 索引 / Motubrain / `world-action-models`
+
+## [2026-09-01] ingest | sources/papers/embodied_robot_manipulation_fm_survey_2512_22983.md — 基础模型时代操作综述（规划×学习双轴）入库；Awesome 列表已开源；升格 wiki/entities/paper-embodied-manipulation-foundation-models-survey.md
+
+## [2026-09-01] ingest | sources/blogs/wechat_zanehub_robot_structural_modal_analysis.md — 接入 Zane Hub 结构模态解读并升格 robot-structural-modal-analysis 概念页
+
+## [2026-09-01] ingest | sources/papers/vlact_arxiv_2608_27550.md + stay_seated + aero_hand_open — VLAct/Stay Seated/Aero Hand Open 三篇 ingest；VLAct 与 Aero 已开源，Stay Seated 未开源
+
+## [2026-09-01] ingest | sources/papers/pamor_arxiv_2608_28213.md — PAMoR：UCL 运动学闭式 V-A + 可组合潜扩散，G1 实时情感全身运动；感知 Top-1 0.384；截至入库日未开源
+
+- **触发：** 用户指定 arXiv:2608.28213（UCL Chengxu Zhou 组）
+- **步骤 2.5：** arXiv 为唯一官方入口；**未列 GitHub/权重** → **未开源**
+- **关键页：** [`paper-pamor`](wiki/entities/paper-pamor.md)；交叉 [`textop`](wiki/entities/paper-loco-manip-161-022-textop.md) / [`diffusion-motion-generation`](wiki/methods/diffusion-motion-generation.md) / [`hiaer`](wiki/entities/paper-notebook-hierarchical-intention-aware-expressive-motion-g.md)
+
+## [2026-09-01] ingest | sources/papers/ssr_arxiv_2605_30770.md — SSR 复核查补核心信息/工程实践/源码时序图；项目页确认未开源
+
+## [2026-09-01] ingest | sources/papers/robot_in_crib_sensorimotor_contingency_scirobotics_2026.md — iCub 摇篮 mobile paradigm；四策略挑战「动得更多」；仿真代码已开源、真机未列 GitHub
+
+- **触发：** 用户指定 Science Robotics 2026（DOI:10.1126/scirobotics.aed4106）；全文无 arXiv，用 CTU 新闻 + 姊妹 arXiv:2504.17939 + 官方仿真仓核查
+- **步骤 2.5：** 仿真 [`mobile-paradigm-model`](https://github.com/ctu-vras/mobile-paradigm-model) **已开源**；真机七条件 **未列代码**；媒体见 CTU Google Drive
+- **关键页：** [`paper-robot-in-crib-sensorimotor-contingency`](wiki/entities/paper-robot-in-crib-sensorimotor-contingency.md)
+
 ## [2026-08-31] ingest | sources/blogs/wechat_meiri_zhineng_embodied_icl_four_papers_2026-08-31.md — 四篇具身 ICL 纵横向解读；对比页 + StellaVLA 新建 + RoboTTT arXiv 补录
 
 - **触发：** 用户指定 <https://mp.weixin.qq.com/s/vIUalf3vZI3AV-HWSVruew>，与 WAM-TTT / RoboTTT / StellaVLA / Zero-WAM 四论文 ingest 一并合并
@@ -7833,6 +8279,24 @@
 - **意图：** 接入 Microsoft 官方 WinUI 3 开源仓库（`microsoft/microsoft-ui-xaml`），为 Windows 侧遥操作/采数控制台提供 UI 框架实体。
 - **开源核查：** **已开源**（MIT，可 `init.cmd` + `build.cmd` 构建）；外部代码 PR 暂不接受（OSS 推进中）。
 - **关键页：** [`wiki/entities/winui.md`](wiki/entities/winui.md)；交叉更新 [`wiki/tasks/teleoperation.md`](wiki/tasks/teleoperation.md)。
+
+## [2026-09-01] ingest | sources/blogs/wechat_shenlan_robot_path_planning_five_paradigms.md — 深蓝具身智能路径规划五范式长文
+
+- **意图：** 接入《具身智能基础》专栏第 11 篇，按图搜索、采样、人工势场、最优控制/MPC、强化学习与 AI 五条路线梳理路径规划范式，并以狭窄通道场景对照组合选型。
+- **开源核查：** N/A（综述科普文，无单一项目页）。
+- **关键页：** [`wiki/comparisons/robot-path-planning-five-paradigms-taxonomy.md`](wiki/comparisons/robot-path-planning-five-paradigms-taxonomy.md)；交叉更新 [`mobile-robot-navigation-planning-methods`](wiki/comparisons/mobile-robot-navigation-planning-methods.md)、控制/学习姊妹 taxonomy。
+
+## [2026-09-05] ingest | sources/repos/robotis-git.md — 复核 ROBOTIS-GIT 组织（154 仓）；新增 cyclo_mjlab / zenoh_ros2_sdk 归档与 wiki/entities/robotis-cyclo-mjlab.md；刷新组织 hub
+
+- **触发：** 用户指定 <https://github.com/ROBOTIS-GIT>；要求自动合入
+- **变更：** 组织数 152→154；新增 **cyclo_mjlab**（K1 · mjlab RL/Mimic）、**zenoh_ros2_sdk** + **lerobot_robot_ros2_zenoh**（LeRobot 无 ROS 2 安装路径）；刷新 [`robotis.md`](wiki/entities/robotis.md) 双仿真栈地图
+- **开源核查：** 主线仓 **已开源**；Zenoh LeRobot 集成标 **Alpha**
+
+## [2026-09-05] ingest | sources/papers/egoexomocap_arxiv_2607_15868.md — EgoExoMoCap 分布式 HMD ego-exo 野外动捕
+
+- **意图：** 接入 ECCV 2026 Spotlight 论文与 SIPLAB 项目页，沉淀分布式智能眼镜互观测的全身 SMPL 重建管线（EgoNet + ViTPose 射线 + DINOv3 门控）。
+- **开源核查：** GitHub `eth-siplab/EgoExoMoCap` **已建仓但 Code coming soon**（MIT，待发布）。
+- **关键页：** [`wiki/entities/paper-egoexomocap.md`](wiki/entities/paper-egoexomocap.md)；交叉更新 [`ego-category-04-ego-exo-fusion`](wiki/overview/ego-category-04-ego-exo-fusion.md)、[`paper-notebook-category-14-human-motion`](wiki/overview/paper-notebook-category-14-human-motion.md)。
 
 ## [2026-08-22] ingest | sources/blogs/wechat_guyue_rosclaw_ros2_natural_language.md — 古月居 RosClaw / RoboClaw 自然语言控 ROS2 长文
 

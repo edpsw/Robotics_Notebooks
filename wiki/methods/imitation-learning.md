@@ -2,7 +2,7 @@
 type: method
 tags: [il, behavior-cloning, diffusion-policy, sim2real]
 status: complete
-updated: 2026-08-30
+updated: 2026-09-05
 related:
   - ../concepts/robot-in-context-learning.md
   - ../concepts/behavioral-cloning-mysteries.md
@@ -26,6 +26,9 @@ related:
   - ../entities/paper-interprior.md
   - ../entities/paper-veragmil.md
   - ../entities/paper-imitator-game.md
+  - ../entities/paper-host-one-shot-human-video.md
+  - ../entities/generalist-gen15-one-shot.md
+  - ../entities/paper-zero-wam.md
   - ../entities/paper-tsil-temporal-self-imitation-learning.md
   - ./mimic-video.md
   - ./egoscale.md
@@ -37,6 +40,7 @@ related:
   - ../entities/paper-topreward.md
   - ../entities/paper-taco-tactile-sensor-benchmark.md
   - ../entities/xyz-deux.md
+  - ../entities/twindex.md
   - ../entities/paper-chronos.md
   - ../overview/sergey-levine-diffusion-expressive-policies.md
   - ../entities/paper-seeker.md
@@ -65,6 +69,7 @@ sources:
   - ../../sources/papers/speedtuning_arxiv_2608_09138.md
   - ../../sources/blogs/seohong_behavioral_cloning_mystery.md
   - ../../sources/blogs/skild_s1_in_context_learning.md
+  - ../../sources/papers/imitator_game_arxiv_2608_22301.md
 summary: "Imitation Learning 通过专家演示学习策略，以 DAgger 和行为克隆 (Behavior Cloning, BC) 为核心支柱，是奖励难定义任务中最直接的数据驱动路线。"
 ---
 
@@ -183,7 +188,7 @@ flowchart TD
 
 ## 常见问题
 
-- **Retarget 误差**：MoCap 动作不一定适配机器人身体结构
+- **Retarget 误差**：MoCap 动作不一定适配机器人身体结构；[TwinDEX](../entities/twindex.md) 一类共设计接口则用同构外骨骼 **绕开** 软件 retarget，代价是锁死特定手。
 - **分布偏移**：训练分布和真实部署差异
 - **技能组合**：如何把多个独立技能串成复杂长序列
 
@@ -234,8 +239,12 @@ flowchart TD
 - [Inverse Reinforcement Learning](./inverse-reinforcement-learning.md) — 从演示推断奖励再交给 RL；GAIL 只匹配占用，AIRL 才追求可迁移 $r$
 - [Chronos](../entities/paper-chronos.md) — 全历史 SSM + IMLE + 二阶桥的非马尔可夫模仿（arXiv:2606.30318）
 - [SpeedTuning](../entities/paper-speedtuning.md) — 冻结模仿基座，只学执行速度倍率（ICRA 2025；仿真仓已开源）
+- [ParcelStow](../entities/paper-parcelstow.md) — G1 L6 上问模仿是否继承专家跨速度鲁棒性；\(r=2\) 时 ACT 53% / 专家 84%（arXiv:2609.01453）
 - [VERAGMIL](../entities/paper-veragmil.md) — VR + Isaac Sim 颗粒喂食仿真；BC/BCQ + VR 示范（IROS 2025；arXiv:2608.18258）
-- [Imitator Game](../entities/paper-imitator-game.md) — L0–L3 意图级模仿基准；L3 功能替代崩溃（arXiv:2608.22301）
+- [Imitator Game](../entities/paper-imitator-game.md) — L0–L3 意图级模仿基准；L3 功能替代崩溃；MIT 仓 + IG-10K 已开源（arXiv:2608.22301）
+- [HOST](../entities/paper-host-one-shot-human-video.md) — 单条人视频、约 29 s、不改权重；八任务 62%；代码+权重已开（arXiv:2607.20033）
+- [GEN-1.5](../entities/generalist-gen15-one-shot.md) — 闭源 physical prompting；one-shot ~59% / 10 步 ~83%
+- [Zero-WAM](../entities/paper-zero-wam.md) — 人视频作 in-context 任务规格；代码待发布（arXiv:2608.26103）
 - [CLAW (宇树 G1 全身动作数据生成管线)](./claw.md) — 通过 MuJoCo 仿真和组合原子动作快速生成带语言标签的专家数据
 - [Humanoid Transformer with Touch Dreaming](./humanoid-transformer-touch-dreaming.md) — 用未来触觉 latent 预测增强人形接触丰富型操作的行为克隆策略
 - [robot_lab](../entities/robot-lab.md) — 提供高效 IL/RL 任务开发环境的扩展框架
@@ -275,6 +284,7 @@ flowchart TD
 - [TSIL（论文实体）](../entities/paper-tsil-temporal-self-imitation-learning.md) — RL 训练期按配置挖掘快速成功并效率加权回放（arXiv:2606.19752）
 - [TacO（触觉传感器操作基准）](../entities/paper-taco-tactile-sensor-benchmark.md) — 统一 ACT 管线跨模态触觉真机 IL 评测（arXiv:2605.21976）
 - [DEUX（XYZ）](../entities/xyz-deux.md) — 真店手套采数 → Brain X IL/RL 的闭源服务机器人样本
+- [TwinDEX](../entities/twindex.md) — 三指外骨骼 robot-free 示范 → 同构手策略（闭源；宣称零真机数据）
 - [LeTools](../entities/letools.md) — 乐聚 Kuavo 官方 rosbag→LeRobot v3→ACT/VLA 训练部署栈
 - [LET-Base-Dataset](../entities/let-base-dataset.md) — Kuavo 真机操作小时库（CC-BY-NC-SA）
 

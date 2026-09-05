@@ -222,6 +222,7 @@ flowchart LR
   - [人形群控展演（群舞同步 → 编队走位 → 群体特技）](depth-humanoid-swarm-performance.md)
   - [动作重定向（人体动作 → 机器人参考轨迹）](depth-motion-retargeting.md) — Stage 1 数据管线的展开版
   - [BFM（人形行为基础模型）](depth-bfm.md) — Stage 2 潜空间先验的展开版
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md)
   - [模仿学习与技能迁移](depth-imitation-learning.md) — 跟踪基座的方法前置
   - [人形 RL 运动控制](depth-rl-locomotion.md) — RL 训练管线的前置
   - [Loco-Manipulation（移动操作）](depth-loco-manipulation.md)
@@ -237,6 +238,7 @@ flowchart LR
   - [安全控制（CLF/CBF）](depth-safe-control.md)
   - [Sim2Real（域差画像 → 执行器对齐 → 鲁棒训练 → 真机部署）](depth-sim2real.md)
   - [Real2Sim（真实世界 → 可仿真资产/场景/孪生）](depth-real2sim.md)
+  - [ICL（具身上下文学习）](depth-icl.md)
 - 关联知识页：
   - [RoboStriker](../wiki/entities/paper-notebook-robostriker.md)
   - [REK](../wiki/entities/rek.md)

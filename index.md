@@ -26,7 +26,9 @@
 | 想让一群人形同台跳舞变队形炫技 | [人形群控展演纵深路线](roadmap/depth-humanoid-swarm-performance.md) |
 | 想让仿真训好的策略稳上真机 | [Sim2Real 纵深路线](roadmap/depth-sim2real.md) |
 | 想让两台人形在擂台上对打 | [人形拳击纵深路线](roadmap/depth-humanoid-boxing.md) |
+| 想让机器人读完一条示范就会新任务 | [ICL 纵深路线](roadmap/depth-icl.md) |
 | 想做人形全身行为基础模型 | [BFM 纵深路线](roadmap/depth-bfm.md) |
+| 想证明/证伪一个具身模型（含运控模型）到底好不好 | [具身模型测评纵深路线](roadmap/depth-embodied-eval.md) |
 | 想让机器人看地形越障 | [感知越障纵深路线](roadmap/depth-perceptive-locomotion.md) |
 | 想用生成模型造人形动作 | [动作生成纵深路线](roadmap/depth-motion-generation.md) |
 | 想让机器人听懂指令干活 | [VLA 纵深路线](roadmap/depth-vla.md) |
@@ -65,6 +67,7 @@
 - [Residual Policy Learning](wiki/methods/residual-policy-learning.md)（base + 残差统一框架：经典 RPL/Residual RL → RFC → Versatile Jumping → G1 上 RuN/ResMimic 九篇谱系）
 - [PyTorch](wiki/entities/pytorch.md)
 - [TensorFlow](wiki/entities/tensorflow.md)
+- [世界模型功能分类（Renderer / Simulator / Planner）](wiki/concepts/functional-taxonomy-world-models.md)（Fei-Fei / World Labs：按 POMDP 输出消歧；上海人工智能实验室补表征轴）
 - [World Action Models（WAM）](wiki/concepts/world-action-models.md)（联合未来–动作分布的具身策略范式；综述与 Awesome-WAM 资源入口）
 - [Pelican-Unified 1.0（UEI）](wiki/methods/pelican-unified-1.md)（Qwen3-VL 推理末态 \(z\) + Wan 系 UFG：同一扩散去噪联合未来视频与动作；arXiv:2605.15153）
 - [mimic-video（VAM）](wiki/methods/mimic-video.md)（互联网视频潜计划 + 流匹配动作解码；arXiv:2512.15692）
@@ -87,6 +90,8 @@
 - [MuJoCo](wiki/entities/mujoco.md)
 - [dm_control / Control Suite](wiki/entities/dm-control.md)
 - [MuJoCo MJX](wiki/entities/mujoco-mjx.md)（JAX/XLA 版 MuJoCo，GPU 批量与可微 rollout）
+- [NVIDIA Warp](wiki/entities/nvidia-warp.md)（`warp-lang`：Python JIT 到 CPU/CUDA；Newton / MJWarp 计算底座）
+- [MuJoCo Warp](wiki/entities/mujoco-warp.md)（GPU 版 MuJoCo；Newton 主要刚体后端，Warp AD 未通）
 - [Brax](wiki/entities/brax.md)（JAX 可微物理与 RL 训练；与 MJX、MuJoCo Playground 的官方组合指引）
 - [legged_gym](wiki/entities/legged-gym.md)
 - [Pinocchio](wiki/entities/pinocchio.md)
@@ -120,6 +125,8 @@
 - [SenseNova-Skills（OpenSenseNova）](wiki/entities/sensenova-skills.md)（Agent Skills 办公技能库：信息图/PPT/Excel/深度研究；Hermes/OpenClaw + SenseNova API）
 - [Hermes Agent（Nous Research）](wiki/entities/hermes-agent.md)（常驻自主代理：网关 + 记忆/技能闭环 + 多沙箱 + cron/子代理；MIT）
 - [DeepSeek Harness（dsh）](wiki/entities/deepseek-harness.md)（深度求索官方插件化 agent 运行时：Cordis + Web/headless/Python SDK；MIT，开发者预览）
+- [openJiuwen（开放九问）](wiki/entities/openjiuwen.md)（华为共建开源 Agent 平台：WorkSwarm / 协同工程；GitHub + AtomGit）
+- [ScienceDiscovery](wiki/entities/sciencediscovery.md)（openJiuwen 本地 AI 科研工作台：MCP 文献 + Bubblewrap 沙箱 + CAS 溯源；Apache-2.0）
 
 ### roadmap/ — 成长路线
 回答"应该先学什么、再学什么、学完输出什么"。

@@ -1,253 +1,258 @@
 {
-  "generated_at": "2026-08-31",
-  "node_count": 3374,
-  "edge_count": 30382,
+  "generated_at": "2026-09-05",
+  "node_count": 3487,
+  "edge_count": 31996,
   "coverage": {
-    "covered": 3349,
-    "total": 3349,
+    "covered": 3460,
+    "total": 3460,
     "percent": 100
   },
   "latest_wiki_nodes": [
     {
-      "path": "wiki/comparisons/wam-ttt-robottt-stellavla-zero-wam-embodied-icl.md",
-      "detail_id": "wiki-comparisons-wam-ttt-robottt-stellavla-zero-wam-embodied-icl",
-      "label": "WAM-TTT × RoboTTT × StellaVLA × Zero-WAM：具身 ICL 四路线对比",
-      "type": "comparison",
-      "recency": "2026-08-31",
-      "source": "git",
-      "action": "added",
-      "community_label": "视觉语言动作纵深路线（Vision-Language-Action Deep-Dive Roadmap, VLA） 社区"
-    },
-    {
-      "path": "wiki/entities/paper-stellavla-structured-icl-vla.md",
-      "detail_id": "entity-paper-stellavla-structured-icl-vla",
-      "label": "StellaVLA（结构化 In-Context 示范 · VLA）",
+      "path": "wiki/entities/robotis-cyclo-mjlab.md",
+      "detail_id": "entity-robotis-cyclo-mjlab",
+      "label": "cyclo_mjlab（ROBOTIS）",
       "type": "entity",
-      "recency": "2026-08-31",
-      "source": "git",
-      "action": "added",
-      "community_label": "视觉语言动作纵深路线（Vision-Language-Action Deep-Dive Roadmap, VLA） 社区"
-    },
-    {
-      "path": "wiki/entities/winui.md",
-      "detail_id": "entity-winui",
-      "label": "WinUI",
-      "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true
     },
     {
-      "path": "wiki/entities/paper-abot-n1.md",
-      "detail_id": "entity-paper-abot-n1",
-      "label": "ABot-N1（通用视觉–语言导航基础模型）",
+      "path": "wiki/entities/paper-egoexomocap.md",
+      "detail_id": "entity-paper-egoexomocap",
+      "label": "EgoExoMoCap",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true
     },
     {
-      "path": "wiki/entities/paper-wikiskill.md",
-      "detail_id": "entity-paper-wikiskill",
-      "label": "WikiSkill（持久 Wiki 驱动的 Agent Skill 进化）",
-      "type": "entity",
-      "recency": "2026-08-31",
+      "path": "wiki/concepts/functional-taxonomy-world-models.md",
+      "detail_id": "wiki-concepts-functional-taxonomy-world-models",
+      "label": "世界模型功能分类（Renderer / Simulator / Planner）",
+      "type": "concept",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "操作（Manipulation） 社区"
     },
     {
-      "path": "wiki/entities/paper-alloego-vlm.md",
-      "detail_id": "entity-paper-alloego-vlm",
-      "label": "AlloEgo-VLM：消歧自我中心与环境中心参照系",
+      "path": "wiki/entities/marble-world-model.md",
+      "detail_id": "entity-marble-world-model",
+      "label": "Marble（World Labs 多模态世界模型）",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
+      "source": "git",
+      "action": "added",
+      "community_label": "操作（Manipulation） 社区"
+    },
+    {
+      "path": "wiki/entities/paper-lejepa.md",
+      "detail_id": "entity-paper-lejepa",
+      "label": "LeJEPA（无启发式 JEPA · arXiv:2511.08544）",
+      "type": "entity",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true,
-      "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
+      "community_label": "操作（Manipulation） 社区"
     },
     {
-      "path": "wiki/entities/paper-esrp.md",
-      "detail_id": "entity-paper-esrp",
-      "label": "ESRP：具身场景家具重排规划",
+      "path": "wiki/entities/paper-lewm.md",
+      "detail_id": "entity-paper-lewm",
+      "label": "LeWorldModel / LeWM（像素端到端 JEPA WM · arXiv:2603.19312）",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
-      "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
+      "has_repo": true,
+      "community_label": "操作（Manipulation） 社区"
     },
     {
-      "path": "wiki/entities/paper-milo.md",
-      "detail_id": "entity-paper-milo",
-      "label": "MILO：大型重建模型解释人—物三维交互",
+      "path": "wiki/entities/paper-lpwm.md",
+      "detail_id": "entity-paper-lpwm",
+      "label": "LpWM（稀疏世界模型 · arXiv:2608.22764）",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
+      "source": "git",
+      "action": "added",
+      "has_repo": true,
+      "community_label": "操作（Manipulation） 社区"
+    },
+    {
+      "path": "wiki/entities/paper-phi-wm-acteffect.md",
+      "detail_id": "entity-paper-phi-wm-acteffect",
+      "label": "Phi-WM 1.0 ActEffect（训练时后果反馈）",
+      "type": "entity",
+      "recency": "2026-09-05",
+      "source": "git",
+      "action": "added",
+      "community_label": "操作（Manipulation） 社区"
+    },
+    {
+      "path": "wiki/entities/nvidia-nurec.md",
+      "detail_id": "entity-nvidia-nurec",
+      "label": "NVIDIA Omniverse NuRec",
+      "type": "entity",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true
     },
     {
-      "path": "wiki/entities/paper-mistypilot.md",
-      "detail_id": "entity-paper-mistypilot",
-      "label": "MistyPilot：社交机器人的多智能体 LLM 技能编排",
+      "path": "wiki/entities/paper-instant-nurec.md",
+      "detail_id": "entity-paper-instant-nurec",
+      "label": "Instant NuRec（Feed-Forward 3D Gaussian Reconstruction for Driving Scene Simulation）",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
+      "source": "git",
+      "action": "added",
+      "has_repo": true
+    },
+    {
+      "path": "wiki/entities/cosmos-cookbook.md",
+      "detail_id": "entity-cosmos-cookbook",
+      "label": "Cosmos Cookbook（WFM 配方站）",
+      "type": "entity",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true,
-      "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
+      "community_label": "操作（Manipulation） 社区"
     },
     {
-      "path": "wiki/entities/paper-trapvla.md",
-      "detail_id": "entity-paper-trapvla",
-      "label": "TrapVLA：把 VLA 困在配置化失败模式",
+      "path": "wiki/entities/cosmos-transfer.md",
+      "detail_id": "entity-cosmos-transfer",
+      "label": "Cosmos Transfer（条件世界翻译）",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true,
-      "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
+      "community_label": "操作（Manipulation） 社区"
     },
     {
-      "path": "wiki/entities/paper-vitar.md",
-      "detail_id": "entity-paper-vitar",
-      "label": "ViTaR：基础 VLA 的视触觉残差适配",
+      "path": "wiki/entities/nvidia-cosmos.md",
+      "detail_id": "entity-nvidia-cosmos",
+      "label": "NVIDIA Cosmos（世界基础模型平台）",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
-      "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
+      "has_repo": true,
+      "community_label": "操作（Manipulation） 社区"
     },
     {
-      "path": "wiki/overview/clap-cross-embodiment-vla-wm-9-papers-technology-map.md",
-      "detail_id": "wiki-overview-clap-cross-embodiment-vla-wm-9-papers-technology-map",
-      "label": "CLAP / 跨本体 WM / VLA：9 篇论文的阅读坐标",
-      "type": "overview",
-      "recency": "2026-08-31",
+      "path": "wiki/entities/paper-cosmos-transfer1.md",
+      "detail_id": "entity-paper-cosmos-transfer1",
+      "label": "Cosmos-Transfer1: Conditional World Generation with Adaptive Multimodal Control",
+      "type": "entity",
+      "recency": "2026-09-05",
+      "source": "git",
+      "action": "added",
+      "has_repo": true,
+      "community_label": "操作（Manipulation） 社区"
+    },
+    {
+      "path": "wiki/entities/paper-robot-juggling-athenazero.md",
+      "detail_id": "entity-paper-robot-juggling-athenazero",
+      "label": "Robot Juggling：分钟级真机动态操作学习",
+      "type": "entity",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added"
     },
     {
-      "path": "wiki/entities/paper-temporalflow-vla.md",
-      "detail_id": "entity-paper-temporalflow-vla",
-      "label": "TemporalFlow-VLA：物理接地执行历史",
+      "path": "wiki/entities/multi-agent-cad.md",
+      "detail_id": "entity-multi-agent-cad",
+      "label": "Multi-Agent CAD（MAC）",
       "type": "entity",
-      "recency": "2026-08-31",
-      "source": "git",
-      "action": "added"
-    },
-    {
-      "path": "wiki/entities/deeptutor.md",
-      "detail_id": "entity-deeptutor",
-      "label": "DeepTutor（HKUDS）",
-      "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     },
     {
-      "path": "wiki/entities/coding-interview-university.md",
-      "detail_id": "entity-coding-interview-university",
-      "label": "Coding Interview University",
+      "path": "wiki/entities/project-quiver.md",
+      "detail_id": "entity-project-quiver",
+      "label": "Project Quiver",
       "type": "entity",
-      "recency": "2026-08-31",
+      "recency": "2026-09-05",
+      "source": "git",
+      "action": "added",
+      "has_repo": true,
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
+    },
+    {
+      "path": "wiki/entities/paper-dexholdem.md",
+      "detail_id": "entity-paper-dexholdem",
+      "label": "DexHoldem：德州扑克桌面上的灵巧具身基准",
+      "type": "entity",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true
     },
     {
-      "path": "wiki/entities/paper-bet4sim2real.md",
-      "detail_id": "entity-paper-bet4sim2real",
-      "label": "Bet4Sim2Real：用仿真下注收紧真机证书",
+      "path": "wiki/entities/tennis-vision.md",
+      "detail_id": "entity-tennis-vision",
+      "label": "Tennis-Vision",
       "type": "entity",
-      "recency": "2026-08-30",
-      "source": "git",
-      "action": "added",
-      "has_repo": true
-    },
-    {
-      "path": "wiki/entities/paper-imitator-game.md",
-      "detail_id": "entity-paper-imitator-game",
-      "label": "The Imitator Game：用目标等价衡量模仿",
-      "type": "entity",
-      "recency": "2026-08-30",
-      "source": "git",
-      "action": "added",
-      "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
-    },
-    {
-      "path": "wiki/entities/nvidia-learn-openusd.md",
-      "detail_id": "entity-nvidia-learn-openusd",
-      "label": "NVIDIA Learn OpenUSD",
-      "type": "entity",
-      "recency": "2026-08-30",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     },
     {
-      "path": "wiki/entities/nvidia-isaac-lab-spot-locomotion-sim2real.md",
-      "detail_id": "entity-nvidia-isaac-lab-spot-locomotion-sim2real",
-      "label": "NVIDIA Isaac Lab Spot locomotion Sim2Real",
+      "path": "wiki/entities/paper-4danyone.md",
+      "detail_id": "entity-paper-4danyone",
+      "label": "4DAnyone：单目随意视频做出 4D 人",
       "type": "entity",
-      "recency": "2026-08-30",
+      "recency": "2026-09-05",
       "source": "git",
       "action": "added",
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
-    },
-    {
-      "path": "wiki/entities/nvidia-isaac-lab-ur10e-industrial-assembly-sim2real.md",
-      "detail_id": "entity-nvidia-isaac-lab-ur10e-industrial-assembly-sim2real",
-      "label": "NVIDIA Isaac Lab UR10e 工业装配 Sim2Real",
-      "type": "entity",
-      "recency": "2026-08-30",
-      "source": "git",
-      "action": "added",
-      "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     }
   ],
   "latest_wiki_node": {
-    "path": "wiki/comparisons/wam-ttt-robottt-stellavla-zero-wam-embodied-icl.md",
-    "detail_id": "wiki-comparisons-wam-ttt-robottt-stellavla-zero-wam-embodied-icl",
-    "label": "WAM-TTT × RoboTTT × StellaVLA × Zero-WAM：具身 ICL 四路线对比",
-    "type": "comparison",
-    "recency": "2026-08-31",
+    "path": "wiki/entities/robotis-cyclo-mjlab.md",
+    "detail_id": "entity-robotis-cyclo-mjlab",
+    "label": "cyclo_mjlab（ROBOTIS）",
+    "type": "entity",
+    "recency": "2026-09-05",
     "source": "git",
     "action": "added",
-    "community_label": "视觉语言动作纵深路线（Vision-Language-Action Deep-Dive Roadmap, VLA） 社区"
+    "has_repo": true
   },
   "top_communities": [
     {
-      "label": "仿真到现实",
-      "size": 821
+      "label": "宇树 G1 人形机器人",
+      "size": 710
     },
     {
       "label": "操作",
-      "size": 581
+      "size": 679
     },
     {
       "label": "视觉-语言-动作",
-      "size": 260
+      "size": 251
     },
     {
       "label": "机器人学习论文笔记",
-      "size": 214
+      "size": 226
     },
     {
-      "label": "视觉语言动作纵深路线",
-      "size": 99
+      "label": "仿真到现实",
+      "size": 123
     },
     {
-      "label": "机器人视觉感知栈选型闭环",
-      "size": 90
+      "label": "移动操作",
+      "size": 77
     }
   ],
   "top_hubs": [
@@ -255,7 +260,7 @@
       "detail_id": "wiki-tasks-manipulation",
       "label": "Manipulation",
       "type": "task",
-      "degree": 1365,
+      "degree": 1419,
       "has_repo": true,
       "community_label": "操作（Manipulation） 社区"
     },
@@ -271,14 +276,14 @@
       "detail_id": "wiki-tasks-locomotion",
       "label": "Locomotion",
       "type": "task",
-      "degree": 903,
-      "community_label": "操作（Manipulation） 社区"
+      "degree": 904,
+      "community_label": "运动控制（Locomotion） 社区"
     },
     {
       "detail_id": "wiki-methods-vla",
       "label": "VLA（Vision-Language-Action）",
       "type": "method",
-      "degree": 842,
+      "degree": 900,
       "has_repo": true,
       "community_label": "视觉-语言-动作（Vision-Language-Action, VLA） 社区"
     },
@@ -286,9 +291,16 @@
       "detail_id": "wiki-methods-generative-world-models",
       "label": "Generative World Models (生成式世界模型)",
       "type": "method",
-      "degree": 788,
+      "degree": 830,
       "has_repo": true,
       "community_label": "操作（Manipulation） 社区"
+    },
+    {
+      "detail_id": "wiki-methods-imitation-learning",
+      "label": "Imitation Learning (IL, 模仿学习)",
+      "type": "method",
+      "degree": 575,
+      "has_repo": true
     },
     {
       "detail_id": "wiki-methods-model-based-rl",
@@ -299,27 +311,20 @@
       "community_label": "操作（Manipulation） 社区"
     },
     {
-      "detail_id": "wiki-methods-imitation-learning",
-      "label": "Imitation Learning (IL, 模仿学习)",
-      "type": "method",
-      "degree": 562,
-      "has_repo": true
+      "detail_id": "wiki-concepts-sim2real",
+      "label": "Sim2Real",
+      "type": "concept",
+      "degree": 530,
+      "has_repo": true,
+      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
     },
     {
       "detail_id": "entity-awesome-world-models",
       "label": "Awesome World Models（sun254667 精选集）",
       "type": "entity",
-      "degree": 513,
+      "degree": 517,
       "has_repo": true,
       "community_label": "操作（Manipulation） 社区"
-    },
-    {
-      "detail_id": "wiki-concepts-sim2real",
-      "label": "Sim2Real",
-      "type": "concept",
-      "degree": 500,
-      "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
     },
     {
       "detail_id": "wiki-overview-sun-awesome-ego-technology-map",
@@ -335,17 +340,17 @@
       "detail_id": "wiki-methods-sonic-motion-tracking",
       "label": "SONIC（规模化运动跟踪人形控制）",
       "type": "method",
-      "degree": 148,
+      "degree": 153,
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     },
     {
       "detail_id": "wiki-methods-beyondmimic",
       "label": "BeyondMimic",
       "type": "method",
-      "degree": 80,
+      "degree": 82,
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     },
     {
       "detail_id": "entity-paper-motionwam-humanoid-loco-manipulation-wam",
@@ -357,24 +362,23 @@
       "detail_id": "wiki-methods-deepmimic",
       "label": "DeepMimic: 示例引导的技能学习",
       "type": "method",
-      "degree": 57,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "degree": 60,
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     },
     {
       "detail_id": "entity-paper-hrl-stack-03-omniretarget",
       "label": "OmniRetarget",
       "type": "entity",
-      "degree": 55,
+      "degree": 57,
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
     },
     {
       "detail_id": "entity-paper-behavior-foundation-model-humanoid",
       "label": "BFM（Behavior Foundation Model for Humanoid Robots）",
       "type": "entity",
       "degree": 48,
-      "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "has_repo": true
     },
     {
       "detail_id": "entity-paper-twist2",
@@ -382,7 +386,13 @@
       "type": "entity",
       "degree": 48,
       "has_repo": true,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "宇树 G1 人形机器人（Unitree G1） 社区"
+    },
+    {
+      "detail_id": "entity-paper-legs-embodied-gaussian-splatting-vla",
+      "label": "LEGS（Loco-manipulation via Embodied Gaussian Splatting）",
+      "type": "entity",
+      "degree": 45
     },
     {
       "detail_id": "entity-paper-ctrl-world",
@@ -390,20 +400,14 @@
       "type": "entity",
       "degree": 44,
       "has_repo": true,
-      "community_label": "具身评测基准选型闭环（Embodied Eval Benchmark Selection Loop） 社区"
-    },
-    {
-      "detail_id": "entity-paper-legs-embodied-gaussian-splatting-vla",
-      "label": "LEGS（Loco-manipulation via Embodied Gaussian Splatting）",
-      "type": "entity",
-      "degree": 44,
-      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
+      "community_label": "操作（Manipulation） 社区"
     },
     {
       "detail_id": "entity-paper-hrl-stack-22-perceptive_humanoid_parkour",
       "label": "Perceptive Humanoid Parkour（PHP）",
       "type": "entity",
-      "degree": 41
+      "degree": 43,
+      "community_label": "仿真到现实（Simulation to Reality, Sim2Real） 社区"
     }
   ]
 }

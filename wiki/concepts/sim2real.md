@@ -2,7 +2,7 @@
 type: concept
 tags: [sim2real, rl, domain-randomization, deployment]
 status: complete
-updated: 2026-08-30
+updated: 2026-09-05
 related:
   - ../entities/paper-flatlab.md
   - ../overview/vla-predict-grasp-9-papers-technology-map.md
@@ -18,6 +18,7 @@ related:
   - ./system-identification.md
   - ../methods/sim2real-joint-sysid-experiment-design.md
   - ../entities/paper-spd.md
+  - ../entities/paper-robot-juggling-athenazero.md
   - ./implicit-explicit-actuator-modeling.md
   - ../methods/actuator-network.md
   - ./privileged-training.md
@@ -41,6 +42,7 @@ related:
   - ../entities/paper-simfoundry-real2sim-scene-generation.md
   - ../entities/paper-agentic-real2sim.md
   - ../entities/paper-r2s-ego.md
+  - ../entities/paper-lucida-r2s.md
   - ../entities/paper-online-mbrl-robot-control.md
   - ../entities/flexion-niantic-nvidia-rgb-sim2real-pipeline.md
   - ../entities/paper-slowrl-safe-lora-locomotion-sim2real.md
@@ -71,6 +73,8 @@ related:
   - ../queries/sim2real-closed-loop-engineering.md
   - ../entities/awesome-real2sim2real.md
   - ../entities/paper-humanoidvln.md
+  - ../entities/cosmos-transfer.md
+  - ../entities/cosmos-cookbook.md
 summary: "Sim2Real 关注如何把仿真中学到的策略稳定迁移到真实机器人，是机器人学习落地的核心鸿沟。"
 sources:
   - ../../sources/papers/agile_arxiv_2603_20147.md
@@ -82,6 +86,7 @@ sources:
   - ../../sources/papers/zonda_arxiv_2607_21025.md
   - ../../sources/papers/agentic_real2sim_arxiv_2607_19190.md
   - ../../sources/papers/r2s_ego_arxiv_2608_06827.md
+  - ../../sources/papers/lucida_r2s_arxiv_2608_30821.md
   - ../../sources/papers/online_mbrl_robot_control_arxiv_2510_18518.md
   - ../../sources/papers/aware_arxiv_2604_23761.md
   - ../../sources/blogs/wechat_shenlan_sim2real_sysid_to_adaptation.md
@@ -232,15 +237,17 @@ Sim2Real 应对 domain gap 的路线可按 **仿真端随机化（DR）**、**�
 
 讨论 Sim2Real 时常隐含「仿真里已有合理关卡与参考运动」；人形上下文技能还要解决如何把**单目视频**变成**接触动力学可信**的仿真资产。[CRISP](../methods/crisp-real2sim.md)（ICLR 2026）用**凸平面场景原语 + 人–场景接触补全 + RL 人形闭环**把视频推向可 rollout 的 Real2Sim，并与 VideoMimic 等管线在几何—控制接口上形成对照（见项目页交互对比区）。
 
-**操作场景与策略闭环：** [SimFoundry](../entities/paper-simfoundry-real2sim-scene-generation.md)（arXiv:2606.28276，NVIDIA GEAR）从**单段真机视频**模块化重建 **sim-ready 数字孪生**，并自动生成 **object/scene/task digital cousins**；同一环境支撑 **real-to-sim 策略评测**（均值 Pearson **0.911**）与 **sim-to-real 演示训练**（DROID / YAM，含多步、铰接与双手任务），把「资产—评测—训练」收进可替换 foundation model 组件的统一栈。
+**操作场景与策略闭环：** [SimFoundry](../entities/paper-simfoundry-real2sim-scene-generation.md)（arXiv:2606.28276，NVIDIA GEAR，[NVlabs/SimFoundry](https://github.com/NVlabs/SimFoundry) **部分开源**）从**单段真机视频**模块化重建 **sim-ready 数字孪生**，并自动生成 **object/scene/task digital cousins**；同一环境支撑 **real-to-sim 策略评测**（均值 Pearson **0.911**）与 **sim-to-real 演示训练**（DROID / YAM，含多步、铰接与双手任务）。开源默认导出 OmniGibson 场景；论文级 VLA 训练/评测协议未随仓。
 
 **Episode 级 agentic 转换：** [Agentic Real2Sim](../entities/paper-agentic-real2sim.md)（arXiv:2607.19190）用 **可替换 VLM 后端**编排视觉/物性/场景/仿真内修复，把 **DROID 交互 episode** 转为 **可回放 MuJoCo 孪生**（并演示可变形/人形适配器）；评测主线是 **回放成功** 而非策略 Pearson，代码截至入库日 **coming soon**。
 
 **稀疏捕获行为范围 ego 细化：** [R2S-EGO](../entities/paper-r2s-ego.md)（arXiv:2608.06827，XPENG Robotics × PolyU）针对 **人类稀疏采集 vs 机器人 ego 消费** 的 support gap，用 **robot proxy（可执行查询/赤字）+ geometry proxy（结构条件/碰撞面）** 做固定预算生成并同化进 3DGS；六视角外观 **19.062** dB PSNR，真机 G1 坐姿相对 GaussGym **10%→82.5%**（同 SONIC 栈）；截至入库日 **未开源**。
 
+**组合式室内物体场景：** [Lucida](../entities/paper-lucida-r2s.md)（arXiv:2608.30821，ByteDance Seed × PKU × ZJU）把带位姿室内 RGB(-D) 写成 **可编辑物体资产 + 9-DoF 布置 + 场景图**：Parse 只收多视角证据、Generate 做 amodal 补全、**GizmoAct** 在 3D 编辑器 GUI 上闭环对齐。R2S-Scene 场景 F-Score **0.924**（SAM 3D 0.794）；评测是几何对齐而非策略 Pearson。截至入库日 **未开源**。
+
 **旁路：难仿真平台直接 on-robot MBRL：** [Online MBRL via Online Optimization](../entities/paper-online-mbrl-robot-control.md)（arXiv:2510.18518，ETH×MPI-IS×EPFL）对液压挖掘机臂 / 缆驱软臂 **跳过 sim-to-real**，用真机缓冲学动力学并在真实轨迹上做一阶策略更新；HEAP 约 **2.5 h** 达 **2.7 cm** 跟踪。读法是「仿真不可用或不值得」时的对照路线，而非否定 DR/RMA；截至入库日 **确认未开源**。
 
-**场地专用 RGB 导航（产业管线）：** [Flexion × Niantic Spatial × NVIDIA RGB Sim2Real 管线](../entities/flexion-niantic-nvidia-rgb-sim2real-pipeline.md)（2026-07）用 **360° 扫描 → 3DGS+对齐碰撞 mesh 的 NuRec USDZ → Isaac Lab 大规模 RL** 训练 **纯 RGB 局部导航**，在两家办公室重建中仿真成功率 **达到或超过深度基线**（97.8% vs 93.8% / 75.0% vs 70.9%），并 **零样本** 部署真机——把「无纹理合成场景 + 深度」惯例推进到 **语义可见、部署点绑定** 的 RGB 策略，与 [LEGS](../entities/paper-legs-embodied-gaussian-splatting-vla.md)（3DGS 缩小 VLA **模仿**视觉 gap）、[GS-Playground](../entities/gs-playground.md)（高吞吐 3DGS **仿真渲染**）形成互补读法。
+**场地专用 RGB 导航（产业管线）：** [Flexion × Niantic Spatial × NVIDIA RGB Sim2Real 管线](../entities/flexion-niantic-nvidia-rgb-sim2real-pipeline.md)（2026-07）用 **360° 扫描 → 3DGS+对齐碰撞 mesh 的 NuRec USDZ → Isaac Lab 大规模 RL** 训练 **纯 RGB 局部导航**，在两家办公室重建中仿真成功率 **达到或超过深度基线**（97.8% vs 93.8% / 75.0% vs 70.9%），并 **零样本** 部署真机——把「无纹理合成场景 + 深度」惯例推进到 **语义可见、部署点绑定** 的 RGB 策略，与 [LEGS](../entities/paper-legs-embodied-gaussian-splatting-vla.md)（3DGS 缩小 VLA **模仿**视觉 gap）、[GS-Playground](../entities/gs-playground.md)（高吞吐 3DGS **仿真渲染**）形成互补读法。体积规范与 Isaac 导入见 [NVIDIA Omniverse NuRec](../entities/nvidia-nurec.md)；驾驶日志的 **秒级前向初始化** 见 [Instant NuRec](../entities/paper-instant-nurec.md)（arXiv:2607.14203，官方仓部分开源）。
 
 ## 参考来源
 - [KungFuAthleteBot](../entities/paper-kungfuathlete-humanoid-martial-arts-tracking.md) — G1 真机高动态武术 tracking（[source](../../sources/papers/kung_fu_athlete_bot.md)）
@@ -249,6 +256,7 @@ Sim2Real 应对 domain gap 的路线可按 **仿真端随机化（DR）**、**�
 - Peng et al. 2018, *Sim-to-Real Transfer of Robotic Control with Dynamics Randomization* — locomotion 控制迁移基线
 - [sources/papers/sim2real.md](../../sources/papers/sim2real.md) — DR / RMA / InEKF ingest 摘要
 - [SPD 论文归档](../../sources/papers/spd_corl_2026.md) — 仿真遥操作预训练 + 真机微调（非零样本）
+- [Robot Juggling 论文归档](../../sources/papers/robot_juggling_arxiv_2608_26800.md) — 不完美先验 + 真机记忆学习（非 zero-shot）
 - [sources/papers/rma_arxiv_2107_04034.md](../../sources/papers/rma_arxiv_2107_04034.md) — RMA 一手论文摘录（RSS 2021）
 - [sources/blogs/wechat_shenlan_sim2real_sysid_to_adaptation.md](../../sources/blogs/wechat_shenlan_sim2real_sysid_to_adaptation.md) — 「非训后一步」闭环叙事与误差分流（深蓝具身智能，2026-07-28）
 - [深蓝具身智能：人形 RL 策略训练体系](../../sources/blogs/wechat_shenlan_humanoid_rl_policy_training_system.md) — Teacher-Student 作为仿真→真机后置模块
@@ -276,6 +284,7 @@ Sim2Real 应对 domain gap 的路线可按 **仿真端随机化（DR）**、**�
 
 ## 关联页面
 
+- [Cosmos Transfer](../entities/cosmos-transfer.md) — 多控视频翻译：仿真/真机 → 照片级合成数据（Transfer1 / 2.5；配方见 [Cookbook](../entities/cosmos-cookbook.md)）
 - [具身智能高频面试题库](../entities/embodied-interview-qa.md) — 卷四世界模型 / Sim2Real 面试速查（DR、蒸馏、仿真栈）
 - [Bet4Sim2Real](../entities/paper-bet4sim2real.md) — 仿真库逐次下注收窄 anytime-valid 真机证书（arXiv:2608.21572；已开源）
 - [Space Mining with Robotics](../entities/paper-space-mining-with-robotics.md) — 地外任务数据、地球类比数据集与高保真仿真作为算法验证基础设施（arXiv:2608.21358）
@@ -300,6 +309,7 @@ Sim2Real 应对 domain gap 的路线可按 **仿真端随机化（DR）**、**�
 - [System Identification](./system-identification.md)（减少物理参数和执行器模型的 sim2real gap）
 - [关节动力学辨识实验设计](../methods/sim2real-joint-sysid-experiment-design.md) — 单关节把延迟/摩擦/惯量拆开，再写回仿真
 - [SPD](../entities/paper-spd.md) — 仿真遥操作预训练 + 真机 1–2 h 微调，不是零样本视觉策略（CoRL 2026）
+- [Robot Juggling / AthenaZero](../entities/paper-robot-juggling-athenazero.md) — 先验零样本失败仍用一阶正则；分钟级真机记忆学习 + MRS（arXiv:2608.26800）
 - [Sim2Real 闭环误差分层工程](../queries/sim2real-closed-loop-engineering.md) — 从辨识到适应的持续校准叙事与误差分流
 - [Awesome-Real2Sim2Real（精选集）](../entities/awesome-real2sim2real.md) — Sim2Real / Real2Sim / Real2Sim2Real 闭环文献索引
 - [Actuator Network 执行器网络](../methods/actuator-network.md) — 用神经网络拟合电机非线性特性
@@ -313,6 +323,7 @@ Sim2Real 应对 domain gap 的路线可按 **仿真端随机化（DR）**、**�
 - [NVIDIA Getting Started With Isaac Lab](../entities/nvidia-getting-started-isaac-lab.md) — 官方入门课模块 4：仿真增强 / Real2Sim / 策略鲁棒三类桥接
 - [Learning to Fold（LeHome 2026）](../entities/paper-lehome-learning-to-fold.md) — 廉价双臂叠衣：仿真 AWR/RECAP → 真机三桶 BC+DAgger（arXiv:2606.27163，全链路开源）
 - [GR00T-VisualSim2Real](../entities/gr00t-visual-sim2real.md) — NVIDIA 视觉 Sim2Real 框架，PPO Teacher + DAgger RGB Student，Unitree G1 零样本迁移（CVPR 2026）
+- [HydroGym](../entities/paper-hydrogym.md) — *Nature* 2026 **非机器人** 对照：湍流通道代理训练 → 三维翼型 **零样本** 减阻（~38% 局部 \(c_f\)）；与腿足/操作 sim2real 正交，但共享「代理环境训练→目标域部署」叙事（arXiv:2512.17534）
 - [LadderMan](../entities/paper-ladderman-humanoid-perceptive-ladder-climbing.md) — **深度** sim-to-real：真机用 **VFM（Fast-FoundationStereo）** 替代重度 depth randomization，配合 **RFM** 聚焦梯子踏棍（arXiv:2606.05873）
 - [DPL](../entities/paper-notebook-dpl-depth-only-perceptive-humanoid-locomotion-vi.md) — **深度** sim-to-real：自遮挡射线合成 + Kinect 风格噪声进 RL 环，再对重建延迟做端到端微调（arXiv:2510.07152）
 - [CReF](../entities/paper-cref.md) — **深度** 零样本对照：训练期 **不注入** 合成深度损坏，靠 raw-depth 融合 + 循环记忆过反射孔洞（arXiv:2603.29452；代码未开源）
@@ -324,9 +335,12 @@ Sim2Real 应对 domain gap 的路线可按 **仿真端随机化（DR）**、**�
 - [SimFoundry](../entities/paper-simfoundry-real2sim-scene-generation.md) — 真机视频 → 数字孪生 + cousins；real-to-sim 评测与 sim-to-real 操作训练闭环（arXiv:2606.28276）
 - [Agentic Real2Sim](../entities/paper-agentic-real2sim.md) — VLM agent 编排 DROID→MuJoCo episode twin；可变形/人形适配（arXiv:2607.19190，代码待开放）
 - [R2S-EGO](../entities/paper-r2s-ego.md) — 稀疏捕获双代理 ego 细化；六视角 3DGS + 真机 G1 坐姿（arXiv:2608.06827，未开源）
+- [Lucida](../entities/paper-lucida-r2s.md) — 室内多视角 → 可编辑物体资产 + GizmoAct 9-DoF 闭环放置（arXiv:2608.30821，未开源）
 - [Online MBRL via Online Optimization](../entities/paper-online-mbrl-robot-control.md) — 难仿真平台直接真机在线 MBRL（arXiv:2510.18518，确认未开源）
 - **ingest 档案：** [sources/papers/online_mbrl_robot_control_arxiv_2510_18518.md](../../sources/papers/online_mbrl_robot_control_arxiv_2510_18518.md)
 - [Flexion × Niantic × NVIDIA RGB Sim2Real 管线](../entities/flexion-niantic-nvidia-rgb-sim2real-pipeline.md) — 部署现场 3DGS 数字孪生 + 纯 RGB 导航 RL 零样本真机（2026-07 产业联合文）
+- [NVIDIA Omniverse NuRec](../entities/nvidia-nurec.md) — 相机/LiDAR → USDZ 体积；Isaac `OmniNuRecVolumeAPI` + AV Docker 精修
+- [Instant NuRec](../entities/paper-instant-nurec.md) — 驾驶日志单次前向 3DGS；~1.5 s vs 逐场景 75 min，AlpaSim 策略排序对齐（arXiv:2607.14203）
 - [DA-Nav](../entities/paper-da-nav.md) — CARLA 方向感知 VLN → Go2 / Kuavo-V 零样本户外导航（arXiv:2607.11638）
 - [Arcadia](../entities/paper-arcadia.md) — 自采 + 3DGS USD + 共享 VLN/VLA + 真机反馈写回；G1 46/27（arXiv:2512.00076；部分开源）
 - [HumanoidVLN](../entities/paper-humanoidvln.md) — 3DGS 室内场景与 G1 DualVLN 20 条 sim–real 相关（arXiv:2608.12860；待开源）

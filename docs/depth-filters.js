@@ -1,6 +1,6 @@
 /*
  * 路线视图（Depth Filters）单一事实源。
- * 包含主路线 roadmap/motion-control.md + 策展的 21 条 roadmap/depth-*.md 纵深路线；
+ * 包含主路线 roadmap/motion-control.md + 策展的 23 条 roadmap/depth-*.md 纵深路线；
  * 由 graph.html（路线筛选）、detail.html（「所属路线」）与 roadmap.html（「路线视图」徽标）共享。
  *
  * 命中优先级（与 graph.html nodeMatchesDepth 一致）：
@@ -19,7 +19,7 @@
 (function (global) {
   'use strict';
 
-  /* 主路线置顶，其后与首页 / roadmap/README 一致的纵深历史顺序（21 条）。 */
+  /* 主路线置顶，其后与首页 / roadmap/README 一致的纵深历史顺序（23 条）。 */
   var DEPTH_ORDER = [
     'motion-control',
     'teleoperation',
@@ -37,7 +37,9 @@
     'humanoid-swarm-performance',
     'sim2real',
     'humanoid-boxing',
+    'icl',
     'bfm',
+    'embodied-eval',
     'perceptive-locomotion',
     'motion-generation',
     'vla',
@@ -62,7 +64,9 @@
     'humanoid-swarm-performance': 'roadmap/depth-humanoid-swarm-performance.md',
     'sim2real': 'roadmap/depth-sim2real.md',
     'humanoid-boxing': 'roadmap/depth-humanoid-boxing.md',
+    'icl': 'roadmap/depth-icl.md',
     'bfm': 'roadmap/depth-bfm.md',
+    'embodied-eval': 'roadmap/depth-embodied-eval.md',
     'perceptive-locomotion': 'roadmap/depth-perceptive-locomotion.md',
     'motion-generation': 'roadmap/depth-motion-generation.md',
     'vla': 'roadmap/depth-vla.md',
@@ -412,6 +416,35 @@
         'wiki/queries/humanoid-motion-tracking-method-selection.md'
       ])
     },
+    'embodied-eval': {
+      segments: new Set([
+        'eval', 'evaluation', 'benchmark', 'bench', 'leaderboard', 'judge',
+        'ewmbench', 'worldscore', 'robodojo', 'dexbench', 'humantracker',
+        'trackerlab'
+      ]),
+      ids: mergeIds('embodied-eval', [
+        'wiki/overview/hub-embodied-eval-benchmark.md',
+        'wiki/queries/embodied-eval-benchmark-selection-loop.md',
+        'wiki/concepts/sim-vs-real-eval-gap.md',
+        'wiki/concepts/simulation-evaluation-infrastructure.md',
+        'wiki/entities/rlbench.md',
+        'wiki/entities/paper-daily-omni.md',
+        'wiki/entities/paper-mmhu.md',
+        'wiki/entities/paper-harnesseval-w.md',
+        'wiki/entities/paper-worldecho-worldsync.md',
+        'wiki/entities/paper-softvtbench.md',
+        'wiki/entities/paper-imitator-game.md',
+        'wiki/entities/paper-bet4sim2real.md',
+        'wiki/entities/paper-reflexvla.md',
+        'wiki/entities/paper-robosynchallenge.md',
+        'wiki/entities/paper-sa-2606-15032-how-should-world-models-be-evaluated-for-embodie.md',
+        'wiki/entities/xpolicylab.md',
+        'wiki/concepts/motion-control-policy-evaluation-metrics.md',
+        'wiki/tasks/locomotion.md',
+        'wiki/concepts/whole-body-tracking-pipeline.md',
+        'wiki/queries/humanoid-motion-tracking-method-selection.md'
+      ])
+    },
     'perceptive-locomotion': {
       segments: new Set([
         'perceptive', 'parkour', 'stair', 'terrain', 'elevation', 'obstacle',
@@ -482,6 +515,24 @@
         'wiki/entities/spark-3dgs-renderer.md',
         'wiki/comparisons/spark-vs-aholo-web-3dgs-renderers.md',
         'wiki/concepts/video-as-simulation.md'
+      ])
+    },
+    'icl': {
+      segments: new Set([
+        'icl', 'in-context', 'one-shot', 'test-time'
+      ]),
+      ids: mergeIds('icl', [
+        'wiki/concepts/foundation-policy.md',
+        'wiki/concepts/llm-robotics-control-interfaces.md',
+        'wiki/methods/imitation-learning.md',
+        'wiki/methods/pi07-policy.md',
+        'wiki/queries/embodied-fm-taxonomy-loop.md',
+        'wiki/entities/anthropic-embody.md',
+        'wiki/entities/paper-behavior-prompting-policy.md',
+        'wiki/entities/paper-imitator-game.md',
+        'wiki/entities/paper-zero-wam.md',
+        'wiki/entities/qwen-robot-manip.md',
+        'wiki/entities/skild-s1.md'
       ])
     },
     'wam': {
@@ -606,11 +657,23 @@
       wikiPath: DEPTH_HUB_IDS['humanoid-boxing'],
       description: '动作跟踪 → 潜空间技能 → 对抗自博弈的擂台对打。'
     },
+    'icl': {
+      emoji: '🧩',
+      label: 'ICL',
+      wikiPath: DEPTH_HUB_IDS.icl,
+      description: '具身上下文学习：读完一条示范就会做新任务，且不更新权重。'
+    },
     'bfm': {
       emoji: '🧠',
       label: 'BFM',
       wikiPath: DEPTH_HUB_IDS.bfm,
       description: '人形行为基础模型：一个 checkpoint 控住全身协调。'
+    },
+    'embodied-eval': {
+      emoji: '📊',
+      label: '具身测评',
+      wikiPath: DEPTH_HUB_IDS['embodied-eval'],
+      description: '认知 → 世界模型 → 策略成功率 → 运控指标 → sim↔real 校准的分层评测验收。'
     },
     'perceptive-locomotion': {
       emoji: '👁️',

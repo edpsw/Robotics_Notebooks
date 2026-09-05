@@ -2,7 +2,7 @@
 type: concept
 tags: [world-action-models, wam, vla, world-models, embodied-ai, survey]
 status: complete
-updated: 2026-08-31
+updated: 2026-09-05
 summary: "World Action Models（WAM）把环境前向预测与可执行动作生成耦合在同一具身策略里，以联合分布 p(o',a|o,l) 为对象，区别于纯反应式 VLA 与单独的世界模型；含 DreamWAM、FACT、Flex-π、LAWA、Dyna-2 与 Riemann-1.0（全因果动作优先）等实例。"
 related:
   - ../entities/paper-vgi-white-paper.md
@@ -11,6 +11,7 @@ related:
   - ../entities/dyna-2.md
   - ../../roadmap/depth-wam.md
   - ../queries/embodied-fm-taxonomy-loop.md
+  - ../entities/paper-unified-robot-learning-survey.md
   - ../overview/robot-world-models-action-consequence-technology-map.md
   - ../entities/rekacs2-10k-dataset.md
   - ../entities/lumo-2.md
@@ -21,6 +22,7 @@ related:
   - ../entities/paper-dreamwam.md
   - ../entities/paper-fact.md
   - ../entities/paper-flex-pi.md
+  - ../entities/paper-phi-wm-acteffect.md
   - ../entities/paper-motubrain.md
   - ../entities/paper-rift-wam.md
   - ../entities/paper-wam-realtime-async.md
@@ -37,6 +39,8 @@ related:
   - ../entities/paper-worldvln-aerial-vln-wam.md
   - ../entities/paper-navwam-goal-conditioned-visual-navigation-wam.md
   - ../entities/paper-egowam-egocentric-human-wam-co-training.md
+  - ../entities/paper-gift-intermediate-feature-training.md
+  - ../overview/open-source-reproducibility-9-papers-technology-map.md
   - ../entities/paper-ld4wam.md
   - ../entities/paper-dreammimic.md
   - ../entities/paper-glancewam.md
@@ -45,11 +49,13 @@ related:
   - ../entities/paper-embodiedvae.md
   - ../entities/paper-wam-ttt-human-video-test-time-steering.md
   - ../entities/paper-zero-wam.md
+  - ../entities/paper-host-one-shot-human-video.md
   - ../entities/paper-wall-ss.md
   - ../overview/wam-vla-cross-embodiment-9-papers-technology-map.md
   - ../entities/paper-x-foresight.md
   - ../entities/paper-x-mind.md
   - ../entities/paper-world-action-planner.md
+  - ../entities/paper-rise-adaptive-imagination-wam.md
   - ../entities/paper-worldscape-policy-2.md
   - ../tasks/vision-language-navigation.md
   - ../overview/robot-world-models-training-loop-taxonomy.md
@@ -57,6 +63,8 @@ related:
   - ./humanoid-policy-network-architecture.md
   - ../methods/vla.md
   - ../methods/generative-world-models.md
+  - ./functional-taxonomy-world-models.md
+  - ../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md
   - ../methods/model-based-rl.md
   - ../methods/being-h07.md
   - ../entities/paper-being-m07-humanoid-latent-wam.md
@@ -71,6 +79,8 @@ related:
   - ./ai-auto-research.md
 sources:
   - ../../sources/papers/world_action_models_survey_2605.md
+  - ../../sources/papers/world_model_definition_roadmap_arxiv_2607_06401.md
+  - ../../sources/blogs/worldlabs_functional_taxonomy_world_models.md
   - ../../sources/papers/data_pyramid_embodied_manipulation_arxiv_2607_24744.md
   - ../../sources/papers/dit4dit_arxiv_2603_10448.md
   - ../../sources/papers/motionwam_arxiv_2606_09215.md
@@ -86,6 +96,7 @@ sources:
   - ../../sources/papers/x_foresight_arxiv_2605_24892.md
   - ../../sources/papers/x_mind_arxiv_2606_28758.md
   - ../../sources/papers/world_action_planner_arxiv_2607_27599.md
+  - ../../sources/papers/rise_adaptive_imagination_arxiv_2608_20430.md
   - ../../sources/papers/worldscape_policy_2_arxiv_2607_18840.md
   - ../../sources/papers/wall_ss_x_square_2026.md
   - ../../sources/papers/dreamwam_arxiv_2608_04996.md
@@ -129,6 +140,7 @@ sources:
 - **VLA** 在多任务语义与语言条件上很强，但常见形态仍是 **当前观测 → 动作** 的反应式映射，对 **长程物理后果** 与 **反事实 rollout** 的显式表达有限。
 - **世界模型** 擅长 \(p(o' \mid o, a)\)，却 **不单独构成** 可部署策略：还需要 planner、策略头或二阶段系统。
 - **WAM** 试图把两条线收束到一个范式里：既是 **预测器** 又是 **控制器**，便于讨论 **耦合方式、数据混合、评测协议** 与 **安全部署** 上的共同问题。
+- 在 [Fei-Fei 功能分类](./functional-taxonomy-world-models.md) 里，WAM 落在 **Planner**，并通常横跨 Simulator。[上海人工智能实验室 2607.06401](../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md) 据此强调：WAM **不是** 与 observation / latent / 3D 并列的第四实现列，只是「预测状态 ↔ 生成动作」的跨架构功能范式。
 
 ## 核心结构：与相邻概念的分界
 
@@ -153,6 +165,8 @@ sources:
 
 **文献实例（Cascaded + 显式解耦预训练）**：[DeFI](../methods/defi-decoupled-dynamics-vla.md) 将 **GFDM（视频生成式前向动力学）** 与 **GIDM（自监督逆动力学潜动作）** 在 **不同数据源与目标** 上独立预训练，再在下游用扩散适配器耦合；论文强调弱化逆向模块（如 VPP）会成为整条链路的瓶颈（arXiv:2604.16391）。
 
+**文献实例（Cascaded + 驾驶测试时自适应想象）**：[RISE（酷哇）](../entities/paper-rise-adaptive-imagination-wam.md) 在 Encoder–Predictor–Planner 上插 **Roll/Stop Scheduler**：用 Future Planning Gain 对代价逐步决定是否再滚 latent，而不是全局固定 \(H\)；NAVSIM v1 PDMS **91.5** / v2 EPDMS **90.8**，平均 2.40 步。配套 CounterDrive 反事实集。**不是** OpenDriveLab 同名操作 RISE（arXiv:2602.11075）。
+
 ### Joint WAM
 
 `future + action`：在 **共享骨干** 下联合预测未来与动作（自回归统一词表、扩散/流匹配单引擎或多引擎等）。
@@ -168,7 +182,7 @@ sources:
 
 **开源实例（Joint 族 + Wan MoT 三专家 · Dexmal）**：[Dexmal DW05（OpenDW）](../entities/dexmal-dw05.md) 在 **Wan 骨干 + MoT** 上分出 **video / action / value** 专家，联合 **未来视频、32D 动作与状态–价值**；发布 **DW05-Base** 与 **RoboTwin 2.0 SFT** 权重及 **RobotWin-style JSONL** 训练/推理栈（2026-07 GitHub + Hugging Face）。
 
-**平台实例（Joint 族 + 全模态单栈 · NVIDIA）**：[Cosmos 3](../entities/cosmos-3.md) 在 **MoT** 内用 **Generator** 同时暴露 **policy、forward dynamics、inverse dynamics**，用 **Reasoner** 做具身 CoT 与 2D 轨迹规划，并支持 **Reasoning + Generation**（先文本轨迹再视频再生）；与 Cascaded「先完整视频计划再解码动作」相比，更强调 **同一 checkpoint 多任务 I/O 配置** 与 **开源 serving 栈**（arXiv:2606.02800）。
+**平台实例（Joint 族 + 全模态单栈 · NVIDIA）**：[Cosmos 3](../entities/cosmos-3.md) 在 **MoT** 内用 **Generator** 同时暴露 **policy、forward dynamics、inverse dynamics**，用 **Reasoner** 做具身 CoT 与 2D 轨迹规划，并支持 **Reasoning + Generation**（先文本轨迹再视频再生）；与 Cascaded「先完整视频计划再解码动作」相比，更强调 **同一 checkpoint 多任务 I/O 配置** 与 **开源 serving 栈**（arXiv:2606.02800）。代际与和 [Newton](../entities/newton-physics.md) 的分工见 [NVIDIA Cosmos](../entities/nvidia-cosmos.md)。
 
 **相邻（世界模型优先 + 共训动作专家 · 自变量）**：[WALL-SS](../entities/paper-wall-ss.md) 主对象是 \(p(o'\mid o,a)\) 的 **next-scale AR 世界模型**，再在已提交因果状态上共训 flow-matching 动作专家；真机 Task Progress **69.1**。它更接近 Cascaded「先世界后动作」，但共享同一因果状态，而不是先滚完整视频再 IDM。**训练推理代码待发布**。
 
@@ -212,6 +226,8 @@ sources:
 
 **文献实例（Joint 族 + 多流算力柔性 · RGB/DINO/pointmap）**：[Flex-π](../entities/paper-flex-pi.md) 以冻结 Wan VAE **共享编码 RGB 与 3D pointmap**（重建 PSNR 31.1 dB），并联合 DINOv3 语义流；MoT + 流 dropout / cross-modality forcing 使 **单 checkpoint** 覆盖 **56** 种流组合（action-only ~60 ms → full joint ~193 ms）。真机双臂 YAM 相对最强基线最高约 **2–7×**；LIBERO-Plus 80.9% 仍落后强 VLM 骨干；**代码待发布**（arXiv:2608.10860，UW / AI2）。
 
+**文献实例（Joint 族 · 生数产品线 · GWM 自进化）**：[Motus2](../entities/paper-motus2.md) 在 Motus 共享 video–action 上暴露 **policy / simulator / evaluator** 三接口，以 **~130K h ego 人数据金字塔**、机端 mid-training 与 **DiffusionNFT MBRL + Best-of-N** 闭环灵巧双手真机（五任务宏平均 **84%**，MBRL+Planning **75%**）；轻量 tactile expert 与 global AR 记忆在同页验证。截至 2026-09-01 **未开源**。
+
 **文献实例（Joint 族 · 生数产品线）**：[Motubrain](../entities/paper-motubrain.md) 在 Motus 的 UniDiffuser video–action 上做三流 MoT 与真机工程，RoboTwin 2.0 报 **95.8 / 96.1**；异步 chunk 怎么切见同团队 [WAM 实时异步部署](../entities/paper-wam-realtime-async.md)（仓均为占位）。
 
 **产业实例（Joint 族 + 百万小时人视频跨具身缩放 · 闭源）**：[Dyna-2](../entities/dyna-2.md)（Dyna Robotics，2026-08）在 **≥1M h** egocentric 人视频上预训练 MoT–DiT WAM（预训练 **零** 机器人数据），报告人 held-out 与 **人→机零样本** 离线幂律，并消融主张 **video co-training** 是跨具身缩放必要条件；推理可保持 reactive（动作塔不吃预测未来视频）。后训练少量机端数据上双臂 / 灵巧手 / 半人形；**未开源**——作缩放律与目标设计参照，不作可复现基线。
@@ -254,6 +270,8 @@ flowchart TB
 - [WAM 纵深路线](../../roadmap/depth-wam.md) — Stage 0–5 学习路径（边界族谱 → Cascaded / Joint → 部署职责三分）
 - [VLA](../methods/vla.md) — 语言条件视觉策略的主线；WAM 可视为在目标分布与训练接口上的延伸讨论。
 - [Generative World Models](../methods/generative-world-models.md) — 像素/潜空间动态预测工具箱；WAM 强调 **与控制头的耦合位置**。
+- [世界模型功能分类](./functional-taxonomy-world-models.md) — Renderer / Simulator / Planner；WAM 是 Planner 侧、常横跨 Simulator
+- [世界模型定义与路线图](../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md) — 把 WAM 写成跨架构功能范式，不新开第四列
 - [Model-Based RL](../methods/model-based-rl.md) — 经典 **模型 + 规划/策略** 分解；对照理解 Cascaded WAM 的历史渊源。
 - [World Action Planner](../entities/paper-world-action-planner.md) — pose-image WM + VLM 规划；相对 E2E WAM/VLA 的模型基对照。
 - [Loco-Manipulation](../tasks/loco-manipulation.md) — 高 DoF 任务上 **长程协调** 与 **sim2real** 压力最集中，是 WAM 论文重点引用的评测语境之一。
@@ -263,7 +281,10 @@ flowchart TB
 ## 参考来源
 
 - [sources/papers/world_action_models_survey_2605.md](../../sources/papers/world_action_models_survey_2605.md)
+- [sources/papers/world_model_definition_roadmap_arxiv_2607_06401.md](../../sources/papers/world_model_definition_roadmap_arxiv_2607_06401.md) — WAM 不是第四架构列
+- [sources/blogs/worldlabs_functional_taxonomy_world_models.md](../../sources/blogs/worldlabs_functional_taxonomy_world_models.md) — Planner 功能格
 - [sources/papers/world_action_planner_arxiv_2607_27599.md](../../sources/papers/world_action_planner_arxiv_2607_27599.md)
+- [sources/papers/rise_adaptive_imagination_arxiv_2608_20430.md](../../sources/papers/rise_adaptive_imagination_arxiv_2608_20430.md) — 驾驶 WAM 自适应 Roll/Stop（酷哇 RISE；非 OpenDriveLab）
 - [sources/papers/dit4dit_arxiv_2603_10448.md](../../sources/papers/dit4dit_arxiv_2603_10448.md)
 - [sources/papers/motionwam_arxiv_2606_09215.md](../../sources/papers/motionwam_arxiv_2606_09215.md)
 - [sources/papers/abot_m05_arxiv_2607_00678.md](../../sources/papers/abot_m05_arxiv_2607_00678.md)
@@ -284,6 +305,8 @@ flowchart TB
 
 ## 关联页面
 
+- [世界模型功能分类（Renderer / Simulator / Planner）](./functional-taxonomy-world-models.md)
+- [世界模型定义与路线图（上海人工智能实验室）](../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md)
 - [Visual General Intelligence 白皮书](../entities/paper-vgi-white-paper.md) — 具身闭环 + 生成世界模型作视觉计划；与 WAM「联合建模」同构的议程层坐标
 - [Awesome World Models（精选集）](../entities/awesome-world-models.md) — WM/WAM/MBRL/应用域全谱索引
 - [Dyna-2](../entities/dyna-2.md) — 百万小时人视频 Joint WAM 跨具身缩放（闭源）
@@ -292,6 +315,7 @@ flowchart TB
 - [WAM 纵深路线](../../roadmap/depth-wam.md)
 - [RekaCS2-10k](../entities/rekacs2-10k-dataset.md) — 职业 CS2 ego 视频 + 逐帧键鼠/轨迹，动作条件世界模型预训练语料
 - [VLA](../methods/vla.md)
+- [统一机器人学习综述](../entities/paper-unified-robot-learning-survey.md) — WAM 是其世界模型轴下的联合建模行
 - [Generative World Models](../methods/generative-world-models.md)
 - [WALL-SS](../entities/paper-wall-ss.md) — next-scale AR WM + 共训动作专家（自变量；训练代码待发布）
 - [Being-H0.7](../methods/being-h07.md)
@@ -303,11 +327,13 @@ flowchart TB
 - [ABot-M0.5（移动操作 · latent action + Dream Forcing）](../entities/paper-abot-m05-mobile-manipulation-wam.md)
 - [动作后果技术地图（2026-07 策展）](../overview/robot-world-models-action-consequence-technology-map.md)
 - [DSWAM（双系统 WAM 执行）](../entities/paper-dswam-dual-system-wam.md)
+- [ActEffect / Phi-WM 1.0](../entities/paper-phi-wm-acteffect.md) — 训练时受控 WM 反馈，部署一次前向（LIBERO 98.8%；确认未开源）
 - [Motubrain](../entities/paper-motubrain.md) — 生数 Joint WAM（RoboTwin 95.8/96.1；仓占位）
 - [WAM 实时异步部署](../entities/paper-wam-realtime-async.md) — Motubrain 平台六策略实证
 - [Rift（免视频 rollout 的未来 cache）](../entities/paper-rift-wam.md) — anticipation token 一次写 K/V；LIBERO 98.8% / 1.1× 延迟（未开源）
 - [LAWA（潜动作作未来意图）](../entities/paper-lawa.md) — 测试时去噪 latent 意图而非像素；RoboCasa 65.6/80.8%；代码待发布（arXiv:2608.24882）
 - [Zero-WAM](../entities/paper-zero-wam.md) — 人类视频 in-context 任务规格；RoboTwin 未见 46.95%；真机放置/长程/插入 53.3/33.3/16.7%；代码待发布
+- [HOST](../entities/paper-host-one-shot-human-video.md) — 自接地：先预测机器人未来观测再出动作；单视频 one-shot；代码+权重已开（arXiv:2607.20033）
 - [WAM / VLA / 跨本体 9 篇技术地图](../overview/wam-vla-cross-embodiment-9-papers-technology-map.md)
 - [DynaWM（VLA 在线修正）](../entities/paper-dynawm-vla-online-correction.md)
 - [DreamSteer（部署时 VLA steering）](../entities/paper-dreamsteer-vla-deployment-steering.md)
@@ -324,6 +350,7 @@ flowchart TB
 - [JoyAI-RA 0.5（双动作对齐 VLWA）](../entities/paper-joyai-ra-05.md) — LAC-WM + 130-D 显式对齐；人视频缩放未见饱和（未开源）
 - [WAM-TTT（人视频 · 测试时训练 steering）](../entities/paper-wam-ttt-human-video-test-time-steering.md)
 - [World Action Planner（VLM + pose-image WM 规划）](../entities/paper-world-action-planner.md)
+- [RISE（酷哇 · 驾驶 WAM 自适应想象）](../entities/paper-rise-adaptive-imagination-wam.md) — 测试时 Roll/Stop；勿与 OpenDriveLab 同名 RISE 混淆
 - [τ₀-World Model（τ0-WM）](../entities/tau0-world-model.md)
 - [HiFi-UMI](../entities/paper-hifi-umi.md) — UMI-only 后训练覆盖 VLA/WAM（LingBot-VA）骨干；2000 h 公开数据
 - [INTACT](../entities/paper-intact.md) — 意图→动作无搜索 JEPA（相对 CEM 搜索的延迟对照）
@@ -336,6 +363,8 @@ flowchart TB
 - [具身大模型分类学选型闭环（知识链枢纽）](../overview/hub-embodied-foundation-model.md) — WAM 对应五层闭环的世界模型推演层
 - [Query：具身大模型分类学选型闭环知识链](../queries/embodied-fm-taxonomy-loop.md) — WAM 是五层选型闭环 **⑤ 世界模型推演层** 的 **联合建模** 范式（`p(o',a|o,l)` 前向预测与动作生成耦合），与生成式世界模型的「级联预演」范式并列
 - [EmbodiedVAE](../entities/paper-embodiedvae.md) — 操作世界模型的解耦 video VAE tokenizer（arXiv:2608.02990）
+- [GIFT](../entities/paper-gift-intermediate-feature-training.md) — 把几何/可供性/目标区域监督接到 VLA 与 WAM-Fast/IDM（arXiv:2609.04193；待发布）
+- [开源可复现性 9 篇技术地图](../overview/open-source-reproducibility-9-papers-technology-map.md)
 
 ## 推荐继续阅读
 

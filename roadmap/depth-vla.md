@@ -113,8 +113,9 @@ flowchart LR
 
 ### 推荐读什么
 - [VLA](../wiki/methods/vla.md) 与 [VLA 知识链汇总](../wiki/overview/hub-vla.md)（本仓库）— 主线索引页
-- [Robotics Transformer（RT 系列）](../wiki/methods/robotics-transformer-rt-series.md)、[OpenVLA](../wiki/entities/openvla.md)、[Octo](../wiki/methods/octo-model.md)（本仓库）
-- [π0](../wiki/methods/π0-policy.md) 与 [π0.7](../wiki/methods/pi07-policy.md)（本仓库）
+- [VLA / 世界模型 14 篇阅读路线](../wiki/overview/vla-wm-reading-roadmap-14-papers-technology-map.md)（本仓库）— CLIP→RT→OpenVLA→π₀ + 四篇 WM，每篇独立 `paper-*`
+- [Robotics Transformer（RT 系列）](../wiki/methods/robotics-transformer-rt-series.md)、[RT-1](../wiki/entities/paper-rt-1.md)、[RT-2](../wiki/entities/paper-rt-2.md)、[OpenVLA](../wiki/entities/paper-openvla.md)、[Octo](../wiki/entities/paper-octo.md)（本仓库）
+- [π0](../wiki/entities/paper-pi0.md) 与 [π0.7](../wiki/methods/pi07-policy.md)（本仓库）
 - [SayCan](../wiki/methods/saycan.md) 与 [DIAL 指令增强](../wiki/methods/dial-instruction-augmentation.md)（本仓库）
 - [InternVLA-A1.5](../wiki/entities/paper-internvla-a15-unified-vla.md)（本仓库）— 2026 主线前沿对照：统一理解 + 潜式前瞻 + flow matching 动作的单一 MoT 框架，组合泛化与长程执行显著超 π₀.₅
 - [LingBot-VLA](../wiki/entities/lingbot-vla.md)（本仓库）— Qwen2.5-VL-3B + flow 动作头，2 万小时双臂真机预训练；开源 4B 权重与 LeRobot v3.0 后训练栈，RoboTwin 仿真领先 π₀.₅
@@ -241,6 +242,7 @@ flowchart LR
 - 其它纵深路径：
   - [遥操作（人形全身遥操作 + 手指遥操作 → 示范数据/实时接管）](depth-teleoperation.md)
   - [BFM（人形行为基础模型）](depth-bfm.md) — 姊妹路线：VLA 管任务级语义，BFM 管身体级协调
+  - [具身模型测评（认知 → 世界模型保真 → 策略成功率 → sim↔real 校准）](depth-embodied-eval.md) — 验收环节：VLA 成功率/泛化怎么测才不骗人
   - [WAM（世界–动作模型）](depth-wam.md) — 姊妹路线：VLA 管反应式语义策略，WAM 管前向后果耦合
   - [模仿学习与技能迁移](depth-imitation-learning.md) — 本路线 Stage 1 的展开版
   - [Loco-Manipulation（移动操作）](depth-loco-manipulation.md) — Stage 5 方向 C 的展开版
@@ -259,6 +261,7 @@ flowchart LR
   - [人形拳击（动作跟踪 → 潜空间技能 → 对抗自博弈）](depth-humanoid-boxing.md)
   - [Sim2Real（域差画像 → 执行器对齐 → 鲁棒训练 → 真机部署）](depth-sim2real.md)
   - [Real2Sim（真实世界 → 可仿真资产/场景/孪生）](depth-real2sim.md)
+  - [ICL（具身上下文学习）](depth-icl.md) — 部署期适应旋钮：不动权重、读一条示范就换映射
 - 人形控制全景图：[Humanoid Control Roadmap](../wiki/roadmaps/humanoid-control-roadmap.md)
 - 技术栈地图：[tech-map/dependency-graph.md](../tech-map/dependency-graph.md)
 

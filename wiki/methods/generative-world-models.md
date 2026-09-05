@@ -2,8 +2,12 @@
 type: method
 tags: [world-models, generative-ai, simulation, video-generation, driving]
 status: complete
-updated: 2026-08-31
+updated: 2026-09-05
 related:
+  - ../entities/paper-lejepa.md
+  - ../entities/paper-lewm.md
+  - ../entities/paper-lpwm.md
+  - ../entities/paper-phi-wm-acteffect.md
   - ../entities/paper-vgi-white-paper.md
   - ../entities/current-robotics-currentworld.md
   - ../entities/paper-odeworld.md
@@ -18,6 +22,9 @@ related:
   - ../concepts/humanoid-policy-network-architecture.md
   - ../concepts/latent-imagination.md
   - ../concepts/world-action-models.md
+  - ../concepts/functional-taxonomy-world-models.md
+  - ../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md
+  - ../entities/paper-unified-robot-learning-survey.md
   - ../methods/model-based-rl.md
   - ../methods/being-h07.md
   - ../entities/nvidia-omniverse.md
@@ -31,6 +38,12 @@ related:
   - ../entities/tau0-world-model.md
   - ../entities/xiaomi-robotics-u0.md
   - ../entities/cosmos-3.md
+  - ../entities/nvidia-cosmos.md
+  - ../entities/cosmos-transfer.md
+  - ../entities/cosmos-cookbook.md
+  - ../entities/paper-instant-nurec.md
+  - ../entities/nvidia-nurec.md
+  - ../entities/newton-physics.md
   - ../entities/paper-kairos-native-world-model-stack.md
   - ../entities/paper-physmani-dynamic-manipulation-world-model.md
   - ../entities/paper-embodiedvae.md
@@ -59,12 +72,14 @@ related:
   - ../entities/paper-x-world.md
   - ../entities/paper-x-cache.md
   - ../entities/paper-x-foresight.md
+  - ../entities/paper-rise-adaptive-imagination-wam.md
   - ../entities/paper-x-mind.md
   - ../entities/paper-m4world.md
   - ../entities/paper-abot-world-0.md
   - ../entities/open-dreamer.md
   - ./dwm.md
   - ./mimic-video.md
+  - ../entities/paper-levjepa.md
 sources:
   - ../../sources/papers/wm_robot_survey_arxiv_2605_00080.md
   - ../../sources/papers/diffusion_and_gen.md
@@ -98,6 +113,8 @@ sources:
   - ../../sources/papers/m4world_arxiv_2607_14005.md
   - ../../sources/papers/abot_world_0_arxiv_2607_19191.md
   - ../../sources/sites/worldlabs-ai.md
+  - ../../sources/blogs/worldlabs_functional_taxonomy_world_models.md
+  - ../../sources/papers/world_model_definition_roadmap_arxiv_2607_06401.md
   - ../../sources/repos/abot-world.md
   - ../../sources/sites/abot-world.md
   - ../../sources/blogs/allenai_molmo_motion.md
@@ -122,6 +139,8 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 ## 核心理念：以生成代替计算
 
 在传统仿真中，我们需要手动编写复杂的接触力方程；而在生成式世界模型中，模型学会了“如果机器人向左打方向盘，画面应该如何平滑变化”。
+
+选型时先标功能格：本页大多数系统在 [Fei-Fei 功能分类](../concepts/functional-taxonomy-world-models.md) 里是 **Renderer**（吐像素），只有动作条件、可查询几何或闭环规划时才跨到 Simulator / Planner。[上海人工智能实验室定义文](../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md) 再加一列架构（observation / latent / 3D）：好看视频不等于有可干预的压缩物理状态。
 
 ### 主要架构
 1. **视频生成器 (Video Diffusion/Autoregressive)**：如 GAIA-1 或 UniSim。给定当前画面和动作序列，生成一段长达数秒甚至数分钟的未来预测视频。
@@ -165,7 +184,7 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 
 **image-goal 导航 WAM 实例**：[NavWAM](../entities/paper-navwam-goal-conditioned-visual-navigation-wam.md) 在 **Cosmos Predict 2（2B）** 上构建 **九帧 latent canvas**，联合去噪未来 egocentric 观测、goal-progress value 与 action chunk；**policy 模式** 单次扩散即可闭环导航，**无需 CEM**（arXiv:2606.13494）。
 
-[NVIDIA Cosmos 3](../entities/cosmos-3.md)（arXiv:2606.02800）把 **语言、图像、视频、音频与动作** 收进单一 **Mixture-of-Transformers**：**Reasoner** 路径（因果 AR）承担 VLM 式物理推理与 2D 轨迹 CoT，**Generator** 路径（扩散 DM）承担 T2I/T2V/I2V、带声视频、**policy** 与 **正/逆动力学** rollout。与 [mimic-video](./mimic-video.md) 依赖 **Cosmos-Predict2 冻结骨干** 或 [Cosmos Policy](../entities/paper-shenlan-wm-11-cosmos-policy.md) 微调 Predict2 的 **单论文实例** 不同，Cosmos 3 是 **开源平台级母栈**（16B Nano / 64B Super、Diffusers / vLLM-Omni / NIM、OpenMDW-1.1 权重与合成数据）。在 [Sim2Real](../concepts/sim2real.md) 课程语境中，亦常作为 **演示视频增广** 的世界基础模型（见 [NVIDIA SO-101 Sim2Real](../entities/nvidia-so101-sim2real-lab-workflow.md) Strategy 3）。
+[NVIDIA Cosmos](../entities/nvidia-cosmos.md) 是该路线的 **厂商平台**：[1.0](../entities/paper-sa-2501-03575-cosmos-world-foundation-model-platform-for-physi.md) 定义 WFM 与五类用法，[Predict2.5](../entities/paper-sa-2511-00062-world-simulation-with-video-foundation-models-fo.md) 用 flow matching 统一 T2W/I2W/V2W（PAI-Bench I2W Overall **0.810**），[Cosmos Transfer](../entities/cosmos-transfer.md) 用多 ControlNet 做仿真/真机 **world-to-world** 翻译（Transfer1 自适应时空加权，Transfer2.5-2B 更小；配方见 [Cookbook](../entities/cosmos-cookbook.md)），[Cosmos 3](../entities/cosmos-3.md)（arXiv:2606.02800）再把 **语言、图像、视频、音频与动作** 收进单一 **Mixture-of-Transformers**。与 [mimic-video](./mimic-video.md) 依赖 **Cosmos-Predict2 冻结骨干** 或 [Cosmos Policy](../entities/paper-shenlan-wm-11-cosmos-policy.md) 微调 Predict2 的 **单论文实例** 不同，Cosmos 3 是 **开源平台级母栈**（4B Edge / 16B Nano / 64B Super、Diffusers / vLLM-Omni / SGLang / NIM、cosmos-framework SFT）。它与 [Newton](../entities/newton-physics.md) 互补：后者做解析接触，前者做像素世界与合成数据。在 [Sim2Real](../concepts/sim2real.md) 课程语境中，亦常作为 **演示视频增广** 的世界基础模型（见 [NVIDIA SO-101 Sim2Real](../entities/nvidia-so101-sim2real-lab-workflow.md) Strategy 3）。
 
 ### Action flow 跨具身 WM + RoboLab 开环评估（示例：Hydra-0）
 
@@ -271,7 +290,7 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 
 ### 产业驾驶栈：多摄仿真 → 加速 → VLA 内嵌（示例：小鹏 X-World 系列）
 
-[X-World](../entities/paper-x-world.md)（arXiv:2603.19979）给出 **动作条件 7 摄** 自车中心视频世界模型，服务端到端智驾可扩展评测；[X-Cache](../entities/paper-x-cache.md)（arXiv:2604.20289）在少步蒸馏后改沿 **跨 chunk** 缓存 DiT block，约 **2.7×** 加速近无损。策略侧 [X-Foresight](../entities/paper-x-foresight.md) 把预测式世界模型嵌进 VLA（chunk-wise 因果 + Renderer），[X-Mind](../entities/paper-x-mind.md) 则把 PWM 压成 **Visual CoT 抽象 sketch** 以上车。整条链偏 **级联仿真底座 + 联合策略变体**；截至入库日项目页均 **未开源**，适合读设计对照而非复现。
+[X-World](../entities/paper-x-world.md)（arXiv:2603.19979）给出 **动作条件 7 摄** 自车中心视频世界模型，服务端到端智驾可扩展评测；[X-Cache](../entities/paper-x-cache.md)（arXiv:2604.20289）在少步蒸馏后改沿 **跨 chunk** 缓存 DiT block，约 **2.7×** 加速近无损。策略侧 [X-Foresight](../entities/paper-x-foresight.md) 把预测式世界模型嵌进 VLA（chunk-wise 因果 + Renderer），[X-Mind](../entities/paper-x-mind.md) 则把 PWM 压成 **Visual CoT 抽象 sketch** 以上车。规划调度侧 [RISE（酷哇）](../entities/paper-rise-adaptive-imagination-wam.md) 在 Encoder–Predictor–Planner 上按 Future Planning Gain 逐步停想象（NAVSIM；代码+CounterDrive 已开、权重未发）。整条链偏 **级联仿真底座 + 联合策略变体**；小鹏系列截至入库日项目页均 **未开源**，适合读设计对照而非复现。
 
 ### 多视角多模态驾驶仿真（示例：M⁴World）
 
@@ -283,7 +302,7 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 
 ### 相邻方向：三维世界生成与流式 3DGS（产业样本）
 
-部分团队将「世界模型」叙事延伸到 **持久 3D 世界** 的生成与编辑，并以 **3D Gaussian Splatting** 在 Web 或工具链中交付可漫游场景；这与上文以 **像素视频 rollout** 为中心的讨论共享「生成式环境」动机，但 **评测对象与训练目标** 往往更接近内容管线而非机器人控制回路。产业侧公开样本见 [World Labs](../entities/world-labs.md)（Marble + [Spark](../entities/spark-3dgs-renderer.md)）；同类 Web 渲染可对照 [Aholo Viewer](../entities/aholo-viewer.md)（见 [Spark vs Aholo](../comparisons/spark-vs-aholo-web-3dgs-renderers.md)）。
+部分团队将「世界模型」叙事延伸到 **持久 3D 世界** 的生成与编辑，并以 **3D Gaussian Splatting** 在 Web 或工具链中交付可漫游场景；这与上文以 **像素视频 rollout** 为中心的讨论共享「生成式环境」动机，但 **评测对象与训练目标** 往往更接近内容管线而非机器人控制回路。产业侧公开样本见 [World Labs](../entities/world-labs.md)：**[Marble](../entities/marble-world-model.md)**（2025-11 GA：文/图/视频/Chisel → 可导出 splat/mesh，模型闭源 + World API；[文档](https://docs.worldlabs.ai/)）+ **[Atlas](../entities/atlas-world-model.md)**（2026-09 omni 底座：相机可控长视频、稀疏重建、Real-to-Sim 传感器 rollout；早期访问未开源）+ [Spark](../entities/spark-3dgs-renderer.md)；同类 Web 渲染可对照 [Aholo Viewer](../entities/aholo-viewer.md)（见 [Spark vs Aholo](../comparisons/spark-vs-aholo-web-3dgs-renderers.md)）。驾驶侧的对照是 [Instant NuRec](../entities/paper-instant-nurec.md)：它 **不发明像素**，而是一次前向给出可重姿态的分层 3DGS，再交给 [NuRec](../entities/nvidia-nurec.md) / AlpaSim——论文把它放在「重建骨干」，与生成修复 / 联合世界模型互补。
 
 ### 术语对照：状态动力学「世界模型」（RWM）
 
@@ -300,9 +319,20 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 - [Query：具身大模型分类学选型闭环知识链](../queries/embodied-fm-taxonomy-loop.md) — 生成式世界模型是五层选型闭环 **⑤ 世界模型推演层** 的 **级联预演** 范式（VLA 出候选 → WM 逐帧推演择优 → 真机执行），与 WAM 的「联合建模」范式并列，注意推演步长↑累积误差↑
 - [Latent Imagination (潜空间想象)](../concepts/latent-imagination.md)
 - [WCM](../entities/paper-wcm-world-critic-model.md) — JEPA 隐空间预测路线：不生成像素，只用预测目标监督 critic 表征（靠 SIGReg 防坍塌）
+- [LeJEPA](../entities/paper-lejepa.md) — SIGReg 图像配方；后续规划/视频 JEPA 的防坍塌起点
+- [LeWM](../entities/paper-lewm.md) — 像素端到端动作条件 JEPA，规划至 48× 快于 DINO-WM
+- [LpWM](../entities/paper-lpwm.md) — 稀疏非负码；PushT 中等预测器相对稠密 LeWM 最高 +57 pp
+- [LeVJEPA](../entities/paper-levjepa.md) — 把 LeJEPA+SIGReg 接到视频编码器：不要 EMA teacher / predictor / 像素重建；因果表征免费，但本文不做规划 WM
+- [ActEffect](../entities/paper-phi-wm-acteffect.md) — 训练时后果反馈，部署卸 WM（光象技术报告；未开源）
 - [Model-Based RL](../methods/model-based-rl.md)
 - [Being-H0.7](./being-h07.md) — 潜空间世界–动作模型，测试时不滚未来像素。
 - [World Action Models（WAM）](../concepts/world-action-models.md) — 世界预测与动作生成的联合范式与文献taxonomy
+- [NVIDIA Cosmos](../entities/nvidia-cosmos.md) — 1.0 / Predict2.5 / Cosmos 3 平台与 Newton 分工
+- [Cosmos Transfer](../entities/cosmos-transfer.md) — 多控 world-to-world；Sim2Real 合成数据
+- [Cosmos Cookbook](../entities/cosmos-cookbook.md) — 2.x 可运行配方
+- [Instant NuRec](../entities/paper-instant-nurec.md) — 驾驶日志前向 3DGS（显式世界，不是像素 WM）
+- [NVIDIA Omniverse NuRec](../entities/nvidia-nurec.md) — 神经体积 USDZ 与 Instant 初始化
+- [统一机器人学习综述](../entities/paper-unified-robot-learning-survey.md) — 把 WM 写成三轴之一，用耦合类型诊断长程/不确定失败（TMLR 2026）
 - [GaussianDream++](../entities/paper-gaussiandream-plusplus.md) — 训练期高斯世界、部署 20 令牌
 - [ConfAL-WM](../entities/paper-confal-wm.md) — 稠密置信度主动后训练
 - [EmbodiedVAE](../entities/paper-embodiedvae.md) — 为操作视频世界模型解耦臂/背景的 video VAE
@@ -343,7 +373,11 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 - [HomeWorld](../entities/paper-homeworld-whole-home-scene-generation.md) — **静态 sim-ready 全屋 3D** 场景生成与中文住宅平面图数据（arXiv:2606.06390）。
 - [InfiniteDiffusion / Terrain Diffusion](../entities/paper-infinite-diffusion-terrain-diffusion.md) — **学习式无限户外地形**（惰性扩散 + 分层高程/气候场；Minecraft mod 集成，SIGGRAPH 2026）。
 - [Robotic World Model（ETH RSL）](../entities/robotic-world-model-eth-rsl.md) — 状态空间神经动力学 + 想象 rollout（与像素生成式 WBM 对照）。
-- [World Labs](../entities/world-labs.md) — 空间智能与 3D 世界生成产品侧样本（Marble / Spark）。
+- [世界模型功能分类（Renderer / Simulator / Planner）](../concepts/functional-taxonomy-world-models.md) — 先问输出是观测、状态还是动作
+- [世界模型定义与路线图](../entities/paper-sa-2607-06401-a-definition-and-roadmap-for-world-models.md) — 压缩定义 + 功能×架构二维表（arXiv:2607.06401）
+- [World Labs](../entities/world-labs.md) — 空间智能与 3D 世界生成产品侧样本（Atlas / Marble / Spark）。
+- [Marble（World Labs 多模态世界模型）](../entities/marble-world-model.md) — 可注册产品 + 文档/API；生成闭源，Spark 开源。
+- [Atlas（World Labs omni 世界模型）](../entities/atlas-world-model.md) — 相机可控生成、稀疏 3D 重建、Real-to-Sim；早期访问。
 - [Spark（Web 3DGS）](../entities/spark-3dgs-renderer.md) — LoD splat 树、.RAD 流式与 splat 分页（Spark 2.0）。
 - [Aholo Viewer](../entities/aholo-viewer.md) — Chunked Streaming LoD + 3DGS/Mesh 混渲。
 - [DWM（Dexterous World Models）](./dwm.md) — 已知静态 3D 场景上的场景–手条件视频扩散与残差动力学学习。
@@ -353,6 +387,7 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 - [X-World](../entities/paper-x-world.md) — 小鹏 **7 摄动作条件** 驾驶世界模型（arXiv:2603.19979）。
 - [X-Cache](../entities/paper-x-cache.md) — 少步 AR 世界模型 **跨 chunk** 推理加速（arXiv:2604.20289）。
 - [X-Foresight](../entities/paper-x-foresight.md) — 驾驶 VLA **内嵌** 长视界预测式世界建模（arXiv:2605.24892）。
+- [RISE（酷哇 · 驾驶 WAM 自适应想象）](../entities/paper-rise-adaptive-imagination-wam.md) — 测试时按规划增益停 latent rollout（arXiv:2608.20430；代码+CounterDrive 已开，权重未发）。
 - [X-Mind](../entities/paper-x-mind.md) — Visual CoT + 压缩 sketch / RBD 的车载高效变体（arXiv:2606.28758）。
 - [M⁴World](../entities/paper-m4world.md) — 美团等 **多视角多模态** 驾驶 WM：物体外观控制 + 分钟级流式（arXiv:2607.14005）。
 - [ABot-World-0](../entities/paper-abot-world-0.md) — 高德 **单卡桌面** 键盘交互视频 WM：LongForcing + 720P 实时流式（arXiv:2607.19191；部分开源）。
@@ -366,7 +401,11 @@ summary: "生成式世界模型（Generative World Models）利用扩散模型�
 - Wang, S., et al. (2026). *World Action Models: The Next Frontier in Embodied AI* — 见 [sources/papers/world_action_models_survey_2605.md](../../sources/papers/world_action_models_survey_2605.md)。
 - Hu, Y., et al. (2025). *EWMBench: Evaluating Scene, Motion, and Semantic Quality in Embodied World Models* — 见 [sources/papers/ewmbench.md](../../sources/papers/ewmbench.md)。
 - Duan, H., et al. (2025). *WorldScore: A Unified Evaluation Benchmark for World Generation* — 见 [sources/papers/worldscore_arxiv_2504_00983.md](../../sources/papers/worldscore_arxiv_2504_00983.md)。
+- Fei-Fei Li / World Labs (2026). *A Functional Taxonomy of World Models* — 见 [worldlabs_functional_taxonomy_world_models.md](../../sources/blogs/worldlabs_functional_taxonomy_world_models.md)。
+- Physical Intelligence Team, Shanghai AI Lab (2026). *A Definition and Roadmap for World Models* — 见 [world_model_definition_roadmap_arxiv_2607_06401.md](../../sources/papers/world_model_definition_roadmap_arxiv_2607_06401.md)。
 - World Labs 官方站点与 Spark/Marble 关联归档 — 见 [sources/sites/worldlabs-ai.md](../../sources/sites/worldlabs-ai.md)。
+- Marble 文档与 GA 博客 — 见 [worldlabs-docs.md](../../sources/sites/worldlabs-docs.md)、[worldlabs_marble_world_model.md](../../sources/blogs/worldlabs_marble_world_model.md)。
+- Atlas 技术博客归档 — 见 [sources/blogs/worldlabs_atlas_omni_world_model.md](../../sources/blogs/worldlabs_atlas_omni_world_model.md)。
 - Spark 2.0 技术博客归档 — 见 [sources/blogs/worldlabs_spark_2_0_streaming_3dgs.md](../../sources/blogs/worldlabs_spark_2_0_streaming_3dgs.md)。
 - Kim, B., et al. (2026). *Dexterous World Models* — 见 [sources/papers/dwm_arxiv_2512_17907.md](../../sources/papers/dwm_arxiv_2512_17907.md)。
 - Pai, J., et al. (2025). *mimic-video: Video-Action Models for Generalizable Robot Control Beyond VLAs* — 见 [sources/papers/mimic_video_arxiv_2512_15692.md](../../sources/papers/mimic_video_arxiv_2512_15692.md)。
